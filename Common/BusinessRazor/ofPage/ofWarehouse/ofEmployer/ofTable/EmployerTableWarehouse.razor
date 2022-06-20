@@ -1,0 +1,77 @@
+﻿@*@using BusinessView.ofDTO.ofWarehouseDTO.ofEmployee.ofWarehouse
+<h3>EmployeeTableForWarehouse</h3>
+
+<MudTable Items="@employeeWarehouseDTOs" Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Filter="new Func<EmployeeWarehouseDTO,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Periodic EmployeeWarehouseDTOs</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Nr</MudTh>
+        <MudTh>Sign</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Position</MudTh>
+        <MudTh>Molar mass</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Nr">@context.Number</MudTd>
+        <MudTd DataLabel="Sign">@context.Sign</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Position">@context.Position</MudTd>
+        <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+<div class="d-flex flex-wrap mt-4">
+    <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+    <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+    <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+    <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+    <MudSpacer />
+    <div style="min-width:200px;">
+        <MudText Inline="true" Class="align-self-center">Selected1: @selectedItem1?.Name</MudText>
+    </div>
+</div>
+@code {
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+    private EmployeeWarehouseDTO selectedItem1 = null;
+    private HashSet<EmployeeWarehouseDTO> selectedItems = new HashSet<EmployeeWarehouseDTO>();
+
+    private IEnumerable<EmployeeWarehouseDTO> employeeWarehouseDTOs = new List<EmployeeWarehouseDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        employeeWarehouseDTOs = await httpClient.GetFromJsonAsync<List<EmployeeWarehouseDTO>>("webapi/periodictable");
+    }
+
+    private bool FilterFunc1(EmployeeWarehouseDTO EmployeeWarehouseDTO) => FilterFunc(EmployeeWarehouseDTO, searchString1);
+
+    private bool FilterFunc(EmployeeWarehouseDTO EmployeeWarehouseDTO, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (EmployeeWarehouseDTO.Sign.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (EmployeeWarehouseDTO.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{EmployeeWarehouseDTO.Number} {EmployeeWarehouseDTO.Position} {EmployeeWarehouseDTO.Molar}".Contains(searchString))
+            return true;
+        return false;
+    }
+}
+
+@code {
+    [Parameter] public List<EmployeeWarehouseDTO> EmployeeWarehouseDTOs { get; set; }
+    [Parameter] public bool IsManagerModel { get; set; }
+    public EmployeeWarehouseDTO? EmployeeWarehouseDTO { get; set; }
+    
+}
+*@

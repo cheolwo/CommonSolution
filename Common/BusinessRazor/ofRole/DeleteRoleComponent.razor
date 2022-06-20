@@ -1,0 +1,52 @@
+﻿@*@using BusinessView.ofViewModels.ofWebApp.ofCommon
+@using Microsoft.AspNetCore.Components.Forms
+
+<h3>Delete</h3>
+@if(@_deleteRoleViewmodel ==  null || _getsRoleViewModel == null)
+{
+    <h3>Await....</h3>
+}
+else
+{
+    <EditForm Model="@_deleteRoleViewmodel">
+    <MudCard>
+        <MudCardContent>
+            <MudTextField Label="Id"
+                          @bind-Value="_deleteRoleViewmodel.IdentityRoleDTO.Id" />
+            <MudTextField Label="UserName"
+                          @bind-Value="_deleteRoleViewmodel.IdentityRoleDTO.Name" />
+            <MudTextField Label="NormalizedName" Class="mt-3"
+                          @bind-Value="_deleteRoleViewmodel.IdentityRoleDTO.NormalizedName" />
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton OnClick="()=>DeleteAsync(_deleteRoleViewmodel.IdentityRoleDTO.Id)" Variant="Variant.Text" Color="Color.Primary">Delete</MudButton>
+            <MudButton OnClick=Back Variant="Variant.Text" Color="Color.Primary">Back</MudButton>
+    </MudCardActions>
+    </MudCard>
+</EditForm>
+}
+
+@code {
+    [CascadingParameter] public NavigationManager navigationManager { get; set; }
+    [Parameter] public DeleteRoleViewModel _deleteRoleViewmodel {get; set;}
+    [Parameter] public GetsRoleViewModel? _getsRoleViewModel { get; set; }
+    [Parameter] public string? Id {get; set;}
+    protected override async Task OnInitializedAsync()
+    {
+        await _deleteRoleViewmodel.GetByIdAsync(Id);
+    }
+    public async Task DeleteAsync(string id)
+    {
+        await _deleteRoleViewmodel.DeleteAsync(id);
+        if(_getsRoleViewModel != null)
+        {
+             _getsRoleViewModel.Delte(id);
+        }
+        Back();
+    }
+    public void Back()
+    {
+        navigationManager.NavigateTo("/Page/Role");   
+    }
+}
+*@

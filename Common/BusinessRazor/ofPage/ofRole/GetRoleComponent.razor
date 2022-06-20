@@ -1,0 +1,26 @@
+﻿@*@using BusinessView.ofViewModels.ofWebApp.ofCommon
+@using Microsoft.AspNetCore.Components.Forms
+
+<h3>GetRoleComponent</h3>
+<EditForm Model="@model">
+    <MudCard>
+        <MudCardContent>
+            <MudTextField Label="Id"
+                          @bind-Value="model.IdentityRoleDTO.Id" />
+            <MudTextField Label="UserName"
+                          @bind-Value="model.IdentityRoleDTO.Name" />
+            <MudTextField Label="NormalizedName" Class="mt-3"
+                          @bind-Value="model.IdentityRoleDTO.NormalizedName" />
+        </MudCardContent>
+    </MudCard>
+</EditForm>
+
+@code {
+    [Parameter] public BaseRoleViewModel model { get; set; }
+    [Parameter] public string id { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await model.GetByIdAsync(id);
+    }
+}
+*@

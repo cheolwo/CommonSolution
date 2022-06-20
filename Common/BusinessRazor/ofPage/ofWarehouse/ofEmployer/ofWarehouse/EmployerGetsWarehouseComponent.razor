@@ -1,0 +1,68 @@
+﻿@using BusinessData.ofPresentationLayer.ofDTO.ofCommon
+@using BusinessView.ofViewModels.ofWebApp.ofCommon
+<h3>GetsEmployerWarehouseComponent</h3>
+// Routing Page 에서 GetMode를 조정할 수 있다.
+// GetMode로 테이블, 카드, Dashboard를 포함할 수 있다.
+
+// Table 및 카드의 경우
+// 간단한 Get 조회를 시작한다.
+// 유저가 Get 의 항목을 클릭한다. 카드의 경우 Detail 버튼을 클릭하는 것으로 볼 수 있다.
+// 항목에 대한 Detail Page로 이동한다.
+// Detail Page에서 관련 사진을 볼 수 있다. 사진이 없는 경우 기본 사진으로 대체될 수 있다.
+// Post 창과 Detail Page는 서로 대응된다.
+// 시간, 숫자, 문자열, 파일업로드 별로 필드를 구분한다.
+// Detail Page는 관련 데이터 로드가 가능하다.
+// 상기 로드 데이터 항목 클릭 시 관련 페이지로 이동한다.
+
+@if(ModeView==ModeView.Table)
+{
+
+}
+@if(ModeView==ModeView.Card)
+{
+
+}
+@if(ModeView==ModeView.Dashboard)
+{
+
+}
+@*@using MudBlazor
+    @if (_GetsEmployerWarehouseViewModel == null || _GetUserViewModel == null)
+    {
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
+    else
+    {
+    <MudTable Items=_GetsEmployerWarehouseViewModel._EmployerWarehouses Hover="true">
+    <HeaderContent>
+    <MudTh>Nr</MudTh>
+    <MudTh>Sign</MudTh>
+    <MudTh>Name</MudTh>
+    <MudTh>Position</MudTh>
+    <MudTh>Molar mass</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+    <MudTd DataLabel="Nr">@context.Number</MudTd>
+    <MudTd DataLabel="Sign">@context.Sign</MudTd>
+    <MudTd DataLabel="Name">@context.Name</MudTd>
+    <MudTd DataLabel="Position" HideSmall="_hidePosition">@context.Position</MudTd>
+    <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+    </RowTemplate>
+    </MudTable>
+    }*@
+
+@code {
+    [CascadingParameter(Name = "IdentityUserDTO")] public IdentityUserDTO User { get; set; }
+    [Parameter] public ModeView ModeView {get; set;}
+    [Parameter] public EventCallback<string> EventPut { get; set; }
+    [Parameter] public EventCallback EventPost { get; set; }
+    [Parameter] public EventCallback<string> EventDelete { get; set; }
+    [Parameter] public EventCallback<string> EventDetail { get; set; }
+    [Parameter] public EmployerGetsWarehouseViewModel ViewModel { get; set; }
+    public Dictionary<string, List<PropertyInfo>> DicClassifiedByRelationAttribute = new();
+    // String is TableMetaInfo.Get, GetMany, Detail, DetailMany, GetOne, DetailOne...
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+}

@@ -1,0 +1,22 @@
+﻿@using BusinessView.ofViewModels.ofWebApp.ofCommon
+@using Microsoft.AspNetCore.Components.Forms
+<EditForm Model="@newUserViewModel">
+    <MudCard>
+        <MudCardContent>
+            <MudTextField Label="Id"
+                          @bind-Value="newUserViewModel.IdentityUserDTO.Id" />
+            <MudTextField Label="User Name"
+                          @bind-Value="newUserViewModel.IdentityUserDTO.UserName" />
+            <MudTextField Label="Email" Class="mt-3"
+                          @bind-Value="newUserViewModel.IdentityUserDTO.Email" />
+        </MudCardContent>
+    </MudCard>
+</EditForm>
+@code {
+    [Parameter] public PostUserViewModel newUserViewModel { get; set; }
+    protected override Task OnInitializedAsync()
+    {
+
+        return base.OnInitializedAsync();
+    }
+}

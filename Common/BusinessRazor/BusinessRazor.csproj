@@ -1,0 +1,125 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.2" />
+    <PackageReference Include="MudBlazor" Version="6.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ofCommon\ofRole\" />
+    <Folder Include="ofCommon\ofUser\" />
+    <Folder Include="ofGroupOrder\ofEGOC\" />
+    <Folder Include="ofGroupOrder\ofGOCC\" />
+    <Folder Include="ofGroupOrder\ofGOC\" />
+    <Folder Include="ofGroupOrder\ofMGOC\" />
+    <Folder Include="ofGroupOrder\ofSGOC\" />
+    <Folder Include="ofHR\ofHRBusinessPart\" />
+    <Folder Include="ofHR\ofHRCenter\" />
+    <Folder Include="ofHR\ofHREmployee\" />
+    <Folder Include="ofHR\ofHRRole\" />
+    <Folder Include="ofJournal\ofJCommodity\" />
+    <Folder Include="ofJournal\ofJournalCenter\" />
+    <Folder Include="ofJournal\ofJournal\" />
+    <Folder Include="ofMarket\ofEMCommodity\" />
+    <Folder Include="ofMarket\ofMarket\" />
+    <Folder Include="ofMarket\ofMCommodity\" />
+    <Folder Include="ofMarket\ofMMCommodtiy\" />
+    <Folder Include="ofMarket\ofPlatMarket\" />
+    <Folder Include="ofMarket\ofSMCommodity\" />
+    <Folder Include="ofOrder\ofEOCommodity\" />
+    <Folder Include="ofOrder\ofMOCommodity\" />
+    <Folder Include="ofOrder\ofOCommodity\" />
+    <Folder Include="ofOrder\ofOrderCenter\" />
+    <Folder Include="ofOrder\ofSOCommodity\" />
+    <Folder Include="ofProduct\ofEPCommodity\" />
+    <Folder Include="ofProduct\ofMPCommodity\" />
+    <Folder Include="ofProduct\ofPCommodity\" />
+    <Folder Include="ofProduct\ofProductCenter\" />
+    <Folder Include="ofProduct\ofProducter\" />
+    <Folder Include="ofProduct\ofProductLand\" />
+    <Folder Include="ofProduct\ofSPCommodity\" />
+    <Folder Include="ofTrade\ofETCommodity\" />
+    <Folder Include="ofTrade\ofMTCommodity\" />
+    <Folder Include="ofTrade\ofSTCommodity\" />
+    <Folder Include="ofTrade\ofTCommodity\" />
+    <Folder Include="ofTrade\ofTradeCenter\" />
+    <Folder Include="ofWarehouse\ofDividedTag\" />
+    <Folder Include="ofWarehouse\ofDotBarcode\" />
+    <Folder Include="ofWarehouse\ofEWCommodity\" />
+    <Folder Include="ofWarehouse\ofIncomingTag\" />
+    <Folder Include="ofWarehouse\ofLoadFrame\" />
+    <Folder Include="ofWarehouse\ofMWCommodity\" />
+    <Folder Include="ofWarehouse\ofSWCommodity\" />
+    <Folder Include="ofWarehouse\ofWarehouse\" />
+    <Folder Include="ofWarehouse\ofWCommodity\" />
+    <Folder Include="ofWarehouse\ofWorkingdesk\" />
+    <Folder Include="ofPlatform\ofForwarder\ofPage\" />
+    <Folder Include="ofPlatform\ofForwarder\ofPage\ofJournal\" />
+    <Folder Include="ofPlatform\ofForwarder\ofPage\ofHR\" />
+    <Folder Include="ofPlatform\ofForwarder\ofPage\ofTrade\" />
+    <Folder Include="ofPlatform\ofForwarder\ofPage\ofWarehouse\" />
+    <Folder Include="ofPlatform\ofForwarder\ofShared\" />
+    <Folder Include="ofPlatform\ofForwarder\wwwroot\" />
+    <Folder Include="ofPlatform\ofLogister\ofPage\" />
+    <Folder Include="ofPlatform\ofLogister\ofPage\ofHR\" />
+    <Folder Include="ofPlatform\ofLogister\ofPage\ofJournal\" />
+    <Folder Include="ofPlatform\ofLogister\ofPage\ofTrade\" />
+    <Folder Include="ofPlatform\ofLogister\ofPage\ofWarehouse\" />
+    <Folder Include="ofPlatform\ofLogister\ofShared\" />
+    <Folder Include="ofPlatform\ofLogister\wwwroot\" />
+    <Folder Include="ofPlatform\ofMarketer\ofPage\" />
+    <Folder Include="ofPlatform\ofMarketer\ofPage\ofHR\" />
+    <Folder Include="ofPlatform\ofMarketer\ofPage\ofJournal\" />
+    <Folder Include="ofPlatform\ofMarketer\ofPage\ofMarket\" />
+    <Folder Include="ofPlatform\ofMarketer\ofPage\ofTrade\" />
+    <Folder Include="ofPlatform\ofMarketer\ofPage\ofWarehouse\" />
+    <Folder Include="ofPlatform\ofMarketer\ofShared\" />
+    <Folder Include="ofPlatform\ofMarketer\wwwroot\" />
+    <Folder Include="ofPlatform\ofOrderer\ofPage\" />
+    <Folder Include="ofPlatform\ofOrderer\ofPage\ofGroupOrder\" />
+    <Folder Include="ofPlatform\ofOrderer\ofPage\ofOrder\" />
+    <Folder Include="ofPlatform\ofOrderer\ofPage\ofTrade\" />
+    <Folder Include="ofPlatform\ofOrderer\ofPage\ofWarehouse\" />
+    <Folder Include="ofPlatform\ofOrderer\ofShared\" />
+    <Folder Include="ofPlatform\ofOrderer\wwwroot\" />
+    <Folder Include="ofPlatform\ofProducter\wwwroot\" />
+    <Folder Include="ofPlatform\ofProducter\ofPage\" />
+    <Folder Include="ofPlatform\ofProducter\ofPage\ofHR\" />
+    <Folder Include="ofPlatform\ofProducter\ofPage\ofJournal\" />
+    <Folder Include="ofPlatform\ofProducter\ofPage\ofProduct\" />
+    <Folder Include="ofPlatform\ofProducter\ofPage\ofTrade\" />
+    <Folder Include="ofPlatform\ofProducter\ofPage\ofWarehouse\" />
+    <Folder Include="ofPlatform\ofProducter\ofShared\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="ofRole\DeleteRoleComponent.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="ofRole\GetRoleComponent.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="ofRole\GetsRoleComponent.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="ofRole\PostRoleComponent.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="ofRole\PutRoleComponent.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
+</Project>

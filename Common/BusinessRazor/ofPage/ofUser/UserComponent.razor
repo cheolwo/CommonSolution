@@ -1,0 +1,35 @@
+﻿@using BusinessData.ofPresentationLayer.ofCommon
+@using BusinessData.ofPresentationLayer.ofDTO.ofCommon
+@using BusinessView.ofDTO.ofCommon
+@using BusinessView.ofViewModels.ofWebApp.ofCommon
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Identity
+@if (model == null || _userManager == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+}
+
+@code {
+    [Parameter] public GetUserViewModel? model { get; set; }
+    [CascadingParameter(Name = "NavigationManager")] public NavigationManager _navigationManager { get; set; }
+    [CascadingParameter(Name = "UserManager")] public UserManager<IdentityUser>? _userManager { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (_userManager == null)
+        {
+            await Task.Delay(1000);
+        }
+        var CurrentUser = await model.GetCurrentIdentityUserAsync(_userManager);
+        if (CurrentUser != null)
+        {
+            model.IdentityUserDTO = ModelToDTO<IdentityUser, IdentityUserDTO>.ConvertToDTO(CurrentUser, new IdentityUserDTO());
+        }
+        else
+        {
+            _navigationManager.NavigateTo("Identity/Account/Login", true);
+        }
+    }
+}
