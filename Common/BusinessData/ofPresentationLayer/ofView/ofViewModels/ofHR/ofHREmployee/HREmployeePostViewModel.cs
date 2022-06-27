@@ -5,7 +5,7 @@ using System;
 
 namespace BusinessData.ofViewModels.ofWebApp.ofHR.ofHREmployee
 {
-    public class HREmployeePostViewModel<TCommodity> : CommodityPostViewModel<TCommodity>, IObservable<TCommodity> where TCommodity : HREmployeeDTO, new()
+    public class HREmployeePostViewModel<TCommodity> : EntityPostViewModel<TCommodity>, IObservable<TCommodity> where TCommodity : HREmployeeDTO, new()
     {
         public HREmployeePostViewModel(ActorContext actorContext)
             : base(actorContext)
@@ -22,7 +22,7 @@ namespace BusinessData.ofViewModels.ofWebApp.ofHR.ofHREmployee
             throw new NotImplementedException();
         }
     }
-    public class HREmployeePutViewModel<TCommodity> : CommodityPutViewModel<TCommodity>, IObservable<TCommodity> where TCommodity : HREmployeeDTO, new()
+    public class HREmployeePutViewModel<TCommodity> : EntityPutViewModel<TCommodity>, IObservable<TCommodity> where TCommodity : HREmployeeDTO, new()
     {
         public HREmployeePutViewModel(ActorContext actorContext)
             : base(actorContext)
@@ -39,7 +39,7 @@ namespace BusinessData.ofViewModels.ofWebApp.ofHR.ofHREmployee
             throw new NotImplementedException();
         }
     }
-    public class HREmployeeDeleteViewModel<TCommodity> : CommodityDeleteViewModel<TCommodity>, IObservable<TCommodity> where TCommodity : HREmployeeDTO, new()
+    public class HREmployeeDeleteViewModel<TCommodity> : EntityDeleteViewModel<TCommodity>, IObservable<TCommodity> where TCommodity : HREmployeeDTO, new()
     {
         public HREmployeeDeleteViewModel(ActorContext actorContext)
             : base(actorContext)
@@ -56,7 +56,7 @@ namespace BusinessData.ofViewModels.ofWebApp.ofHR.ofHREmployee
             throw new NotImplementedException();
         }
     }
-    public class HREmployeeGetsViewModel<TCommodity> : CommodityGetsViewModel<TCommodity>, IObserver<TCommodity> where TCommodity : HREmployeeDTO, new()
+    public class HREmployeeGetsViewModel<TCommodity> : EntityGetsViewModel<TCommodity>, IObserver<TCommodity> where TCommodity : HREmployeeDTO, new()
     {
         public HREmployeeGetsViewModel(ActorContext actorContext)
             : base(actorContext)

@@ -28,7 +28,7 @@ namespace BusinessData.ofPresentationLayer.ofCommon
     }
     public class ModelToDTO<Model, DTO> where Model : class where DTO : class
     {
-        public static PropertyInfo? GetDTOPropertyByModelProp(PropertyInfo modepProp)
+        public static PropertyInfo GetDTOPropertyByModelProp(PropertyInfo modepProp)
         {
             var DTOProps = typeof(DTO).GetProperties();
             foreach (var prop in DTOProps)
@@ -96,7 +96,7 @@ namespace BusinessData.ofPresentationLayer.ofCommon
     }
     public class DTOToModel<DTO, Model> where DTO : class where Model : class
     {
-        public static PropertyInfo? GetModelPropByDTOProp(PropertyInfo dtoProp)
+        public static PropertyInfo GetModelPropByDTOProp(PropertyInfo dtoProp)
         {
             var modelProp = typeof(Model).GetProperties();
             foreach (var prop in modelProp)
@@ -171,19 +171,19 @@ namespace BusinessData.ofPresentationLayer.ofCommon
                             {
                                 if(Generic is not null)
                                 {
-                                    var DeserialObject = JsonConvert.DeserializeObject((string?)dtovalue, Generic._t);
+                                    var DeserialObject = JsonConvert.DeserializeObject((string)dtovalue, Generic._t);
                                     modelprop.SetValue(model, DeserialObject);
                                     break;
                                 }
                                 if(One is not null)
                                 {
-                                    var DesirialObject = JsonConvert.DeserializeObject((string?)dtovalue, One._t);
+                                    var DesirialObject = JsonConvert.DeserializeObject((string)dtovalue, One._t);
                                     modelprop.SetValue(model, DesirialObject);
                                     break;
                                 }
                                 if(Many is not null)
                                 {
-                                    var DesirialObject = JsonConvert.DeserializeObject((string?)dtovalue, Many._t);
+                                    var DesirialObject = JsonConvert.DeserializeObject((string)dtovalue, Many._t);
                                     modelprop.SetValue(model, DesirialObject);
                                     break;
                                 }

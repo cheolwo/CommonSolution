@@ -5,7 +5,7 @@ using System.Reflection;
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessData.ofPresentationLayer.ofDTO.ofCommon;
 using BusinessData.ofDataAccessLayer.ofCommon;
-using BusienssData.ofPresentationLayer.ofController.ofCommon;
+using BusinessData.ofPresentationLayer.ofCommon;
 
 namespace BusienssData.ofDataAccessLayer.ofEntityDTORepository.ofGeneric
 {

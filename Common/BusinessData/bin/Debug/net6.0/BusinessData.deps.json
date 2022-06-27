@@ -10,6 +10,7 @@
         "dependencies": {
           "AutoMapper": "11.0.1",
           "Azure.Storage.Blobs": "12.10.0",
+          "FluentValidation": "11.0.1",
           "Microsoft.AspNetCore.Authorization": "6.0.2",
           "Microsoft.AspNetCore.Components.Web": "6.0.2",
           "Microsoft.AspNetCore.Http": "2.2.2",
@@ -78,6 +79,14 @@
           "lib/netstandard2.0/Azure.Storage.Common.dll": {
             "assemblyVersion": "12.9.0.0",
             "fileVersion": "12.900.21.45803"
+          }
+        }
+      },
+      "FluentValidation/11.0.1": {
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.0.1.0"
           }
         }
       },
@@ -1193,6 +1202,13 @@
       "sha512": "sha512-GuoigTmzz9HrCGdcdu7LyjD4pDr2XPt72LlWWTDyno+nYrjyuNwpwRFBvK/brxJvQFRHofQcBskf8vOxVxnI8g==",
       "path": "azure.storage.common/12.9.0",
       "hashPath": "azure.storage.common.12.9.0.nupkg.sha512"
+    },
+    "FluentValidation/11.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fcL5zF/glDwskUtpL0IfBupVWTChxOOvVs+dAA7Gme5NjIeJBiFKWq3eZV1O+AigucnBTr8SWG7wRRn+PgFnTw==",
+      "path": "fluentvalidation/11.0.1",
+      "hashPath": "fluentvalidation.11.0.1.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",

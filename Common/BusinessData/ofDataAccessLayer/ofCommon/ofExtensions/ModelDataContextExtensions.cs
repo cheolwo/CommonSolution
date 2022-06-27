@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BusinessData.ofDataAccessLayer.ofCommon.ofInterface;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace BusinessData.ofDataAccessLayer.ofCommon.ofExtensions
 {
@@ -11,9 +9,9 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofExtensions
     {
         public static DbContext CreateRelatedDbContext<TEntity>(this TEntity entity) where TEntity : IRelationable
         {
-            var dbContextType = entity.GetDbContextType(typeof(TEntity));
-            var dbConnectionString = entity.GetDbConnectionString(typeof(TEntity));
-            var DbContext = (DbContext)Activator.CreateInstance<DbContext>(dbContextType, dbConnectionString);
+            var dbContextType = entity.GetDbContextType();
+            var dbConnectionString = entity.GetDbConnetionString();
+            var DbContext = (DbContext)Activator.CreateInstance(dbContextType, dbConnectionString);
             if(DbContext != null)
             {
                 return DbContext;

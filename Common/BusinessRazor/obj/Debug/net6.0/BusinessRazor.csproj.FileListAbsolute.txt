@@ -37,3 +37,11 @@ C:\Users\user\Desktop\EveryoneManagesMerchandise\EveryoneManagesMerchandise\Busi
 C:\Users\user\Desktop\EveryoneManagesMerchandise\EveryoneManagesMerchandise\BusinessRazor\bin\Debug\net6.0\BusinessView.pdb
 C:\Users\user\Desktop\EveryoneManagesMerchandise\EveryoneManagesMerchandise\BusinessRazor\bin\Debug\net6.0\BusinessData.pdb
 C:\Users\user\Desktop\EveryoneManagesMerchandise\EveryoneManagesMerchandise\BusinessRazor\obj\Debug\net6.0\BusinessRazor.csproj.CopyComplete
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessRazor\obj\Debug\net6.0\BusinessRazor.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessRazor\obj\Debug\net6.0\BusinessRazor.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessRazor\obj\Debug\net6.0\BusinessRazor.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessRazor\obj\Debug\net6.0\BusinessRazor.AssemblyInfo.cs
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessRazor\obj\Debug\net6.0\BusinessRazor.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessRazor\obj\Debug\net6.0\BusinessRazor.dll
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessRazor\obj\Debug\net6.0\refint\BusinessRazor.dll
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessRazor\obj\Debug\net6.0\BusinessRazor.pdb

@@ -1,5 +1,5 @@
 using BusinessData.ofPresendationLayer.ofActorContext.ofCommon;
-using BusinessData.ofPresentationLayer.ofDTO.ofEMCommodity;
+using BusinessData.ofPresentationLayer.ofDTO.ofMarket;
 using BusinessData.ofViewModels.ofGeneric.ofCommon;
 using System;
 

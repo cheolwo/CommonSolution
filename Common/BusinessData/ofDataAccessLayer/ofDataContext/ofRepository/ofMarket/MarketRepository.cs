@@ -1,8 +1,5 @@
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessData.ofDataAccessLayer.ofMarket.ofDbContext;
-using BusinessData.ofDataAccessLayer.ofMarket.ofInterface.ofEmployee;
-using BusinessData.ofDataAccessLayer.ofMarket.ofInterface.ofEmployer;
-using BusinessData.ofDataAccessLayer.ofMarket.ofInterface.ofPlatform;
 using BusinessData.ofDataAccessLayer.ofMarket.ofModel;
 using System;
 
@@ -32,7 +29,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofRepository
     {
 
     }
-    public class MarketRepository : CenterDataRepository<Market>, IMarketRepository, IEmployeeMarketRepository, IEmployerMarketRepository, IPlatformMarketRepository
+    public class MarketRepository : CenterDataRepository<Market>, IMarketRepository
     {
         public MarketRepository(MarketDbContext MarketDbContext)
                 : base(MarketDbContext)
@@ -45,7 +42,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofRepository
 
         }
     }
-    public class MCommodityRepository : CommodityDataRepository<MCommodity>, IMCommodityRepository, IEmployeeMCommodityRepository, IEmployerMCommodityRepository, IPlatformMCommodityRepository
+    public class MCommodityRepository : CommodityDataRepository<MCommodity>, IMCommodityRepository
     {
         public MCommodityRepository(MarketDbContext MarketDbContext)
                 : base(MarketDbContext)
@@ -58,7 +55,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofRepository
 
         }
     }
-    public class SMCommodityRepository : StatusDataRepository<SMCommodity>, ISMCommodityRepository, IEmployeeSMCommodityRepository, IEmployerSMCommodityRepository, IPlatformSMCommodityRepository
+    public class SMCommodityRepository : StatusDataRepository<SMCommodity>, ISMCommodityRepository
     {
         public SMCommodityRepository(MarketDbContext MarketDbContext)
                 : base(MarketDbContext)
@@ -71,7 +68,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofRepository
 
         }
     }
-    public class MMCommodityRepository : StatusDataRepository<MMCommodity>, IMMCommodityRepository, IEmployeeMMCommodityRepository, IEmployerMMCommodityRepository, IPlatformMMCommodityRepository
+    public class MMCommodityRepository : StatusDataRepository<MMCommodity>, IMMCommodityRepository
     {
         public MMCommodityRepository(MarketDbContext MarketDbContext)
                 : base(MarketDbContext)
@@ -84,7 +81,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofRepository
 
         }
     }
-    public class EMCommodityRepository : StatusDataRepository<EMCommodity>, IEMCommodityRepository, IEmployeeEMCommodityRepository, IEmployerEMCommodityRepository, IPlatformEMCommodityRepository
+    public class EMCommodityRepository : StatusDataRepository<EMCommodity>, IEMCommodityRepository
     {
         public EMCommodityRepository(MarketDbContext MarketDbContext)
                 : base(MarketDbContext)

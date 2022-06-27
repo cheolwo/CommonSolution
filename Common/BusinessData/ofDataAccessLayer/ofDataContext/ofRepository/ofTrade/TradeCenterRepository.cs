@@ -1,8 +1,5 @@
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessData.ofDataAccessLayer.ofTrade.ofDbContext;
-using BusinessData.ofDataAccessLayer.ofTrade.ofinterface.ofEmployee;
-using BusinessData.ofDataAccessLayer.ofTrade.ofinterface.ofEmployer;
-using BusinessData.ofDataAccessLayer.ofTrade.ofinterface.ofPlatform;
 using BusinessData.ofDataAccessLayer.ofTrade.ofModel;
 using System;
 
@@ -28,7 +25,7 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofRepository
     {
 
     }   
-    public class TradeCenterRepository : CenterDataRepository<TradeCenter>, ITradeCenterRepository, IEmployeeTradeCenterRepository, IEmployerTradeCenterRepository, IPlatformTradeCenterRepository
+    public class TradeCenterRepository : CenterDataRepository<TradeCenter>, ITradeCenterRepository
     {
         public TradeCenterRepository(TradeDbContext TradeDbContext)
                 : base(TradeDbContext)
@@ -41,7 +38,7 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofRepository
 
         }
     }
-    public class TCommodityRepository : CommodityDataRepository<TCommodity>, ITCommodityRepository, IEmployeeTCommodityRepository, IEmployerTCommodityRepository, IPlatformTCommodityRepository
+    public class TCommodityRepository : CommodityDataRepository<TCommodity>, ITCommodityRepository
     {
         public TCommodityRepository(TradeDbContext TradeDbContext)
                 : base(TradeDbContext)
@@ -54,7 +51,7 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofRepository
 
         }
     }
-    public class STCommodityRepository : StatusDataRepository<STCommodity>, ISTCommodityRepository, IEmployeeSTCommodityRepository, IEmployerSTCommodityRepository, IPlatformSTCommodityRepository
+    public class STCommodityRepository : StatusDataRepository<STCommodity>, ISTCommodityRepository
     {
         public STCommodityRepository(TradeDbContext TradeDbContext)
                 : base(TradeDbContext)
@@ -67,7 +64,7 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofRepository
 
         }
     }
-    public class MTCommodityRepository : StatusDataRepository<MTCommodity>, IMTCommodityRepository, IEmployeeMTCommodityRepository, IEmployerMTCommodityRepository, IPlatformMTCommodityRepository
+    public class MTCommodityRepository : StatusDataRepository<MTCommodity>, IMTCommodityRepository
     {
         public MTCommodityRepository(TradeDbContext TradeDbContext)
                 : base(TradeDbContext)
@@ -80,7 +77,7 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofRepository
 
         }
     }
-    public class ETCommodityRepository : StatusDataRepository<ETCommodity>, IETCommodityRepository, IEmployeeETCommodityRepository, IEmployerETCommodityRepository, IPlatformETCommodityRepository
+    public class ETCommodityRepository : StatusDataRepository<ETCommodity>, IETCommodityRepository
     {
         public ETCommodityRepository(TradeDbContext TradeDbContext)
                 : base(TradeDbContext)

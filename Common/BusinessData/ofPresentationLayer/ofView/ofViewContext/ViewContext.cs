@@ -1,4 +1,5 @@
 ﻿using BusinessData.ofPresentationLayer.ofDTOServices;
+using BusinessData.ofViewModels.ofGeneric;
 using BusinessData.ofViewModels.ofWebApp.ofCommon;
 using System;
 using System.Collections.Generic;
@@ -144,7 +145,7 @@ namespace BusinessView.ofViewContext
             DicEntityPageViewModel.Add(nameofDTO.GetHashCode(), entityPageViewModel);
         }
 
-        public DTOService Get(string nameofDTO)
+        public IEntityPageViewModel Get(string nameofDTO)
         {
             return DicEntityPageViewModel[nameofDTO.GetHashCode()]
                    ?? throw new ArgumentNullException("Not Include ViewModel");

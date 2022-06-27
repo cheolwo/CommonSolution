@@ -5,7 +5,6 @@ using BusinessData.ofDataAccessLayer.ofCommon;
 using BusinessData.ofDataAccessLayer.ofCommon.ofAttribute;
 using BusinessData.ofDataAccessLayer.ofCommon.ofInterface;
 using BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness;
-using BusinessData.ofDataAccessLayer.ofWarehouse.ofCommon;
 using BusinessData.ofDataAccessLayer.ofWarehouse.ofDbContext;
 using Microsoft.AspNetCore.Authorization;
 
@@ -31,7 +30,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
     [DataContext(typeof(WarehouseDataContext))]
     [Authorize(Roles ="Admin_Warehouse")]
     [Relation(typeof(Warehouse), "W")] 
-    public class Warehouse : Center, IRelatedCenter, IBarcodable
+    public class Warehouse : Center, IRelatedCenter
     {
         public List<WCommodity> WCommodities { get; set; }
         public List<EWCommodity> EWCommodities { get; set; }

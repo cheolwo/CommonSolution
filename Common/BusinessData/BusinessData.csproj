@@ -111,13 +111,6 @@
     <Folder Include="ofDataAccessLayer\ofEntityDTORepository\ofProduct\" />
     <Folder Include="ofDataAccessLayer\ofEntityDTORepository\ofTrade\" />
     <Folder Include="ofDataAccessLayer\ofEntityDTORepository\ofWarehouse\" />
-    <Folder Include="ofEntityDTOManager\ofHR\" />
-    <Folder Include="ofEntityDTOManager\ofJournal\" />
-    <Folder Include="ofEntityDTOManager\ofMarket\" />
-    <Folder Include="ofEntityDTOManager\ofOrder\" />
-    <Folder Include="ofEntityDTOManager\ofProduct\" />
-    <Folder Include="ofEntityDTOManager\ofTrade\" />
-    <Folder Include="ofEntityDTOManager\ofWarehouse\" />
     <Folder Include="ofExternalLayer\ofGroupOrder\" />
     <Folder Include="ofExternalLayer\ofHR\" />
     <Folder Include="ofExternalLayer\ofJournal\" />
@@ -126,9 +119,9 @@
     <Folder Include="ofExternalLayer\ofProduct\" />
     <Folder Include="ofExternalLayer\ofTrade\" />
     <Folder Include="ofExternalLayer\ofWarehouse\" />
-    <Folder Include="ofPresentationLayer\ofActorContext\ofBusiness\ofExtensions\" />
     <Folder Include="ofPresentationLayer\ofActorContext\ofExtensions\" />
     <Folder Include="ofPresentationLayer\ofActorContext\ofViewModel\" />
+    <Folder Include="ofPresentationLayer\ofStorage\" />
     <Folder Include="ofPresentationLayer\ofView\ofViewContext\ofBusinessRelationUser\" />
     <Folder Include="ofPresentationLayer\ofView\ofViewContext\ofBusinessUser\" />
     <Folder Include="ofPresentationLayer\ofView\ofViewContext\ofUser\" />
@@ -287,7 +280,6 @@
     <Folder Include="ofPresentationLayer\ofView\ofViewModels\ofBusinessUser\ofSeller\ofJournal\" />
     <Folder Include="ofPresentationLayer\ofView\ofViewModels\ofBusinessUser\ofSeller\ofHR\" />
     <Folder Include="ofPresentationLayer\ofView\ofViewModels\ofBusinessUser\ofSeller\ofGroupOrder\" />
-    <Folder Include="ofPresentationLayer\ofView\ofViewModels\ofWarehouse\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

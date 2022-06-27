@@ -31,8 +31,8 @@ namespace BusinessData.ofViewModels.ofWebApp.ofCommon
     public class UploadResult
     {
         public bool Uploaded { get; set; }
-        public string? FileName { get; set; }
-        public string? StoredFileName { get; set; }
+        public string FileName { get; set; }
+        public string StoredFileName { get; set; }
         public int ErrorCode { get; set; }
     }
     // IsBusy 같은 경우에는 Post 하는 동안 화면을 제어하지 못하도록
@@ -52,7 +52,7 @@ namespace BusinessData.ofViewModels.ofWebApp.ofCommon
         }
         private class File
         {
-            public string? Name { get; set; }
+            public string Name { get; set; }
         }
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

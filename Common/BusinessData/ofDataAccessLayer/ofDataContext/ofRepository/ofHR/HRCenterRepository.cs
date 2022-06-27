@@ -1,8 +1,5 @@
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessData.ofDataAccessLayer.ofHR.ofDbContext;
-using BusinessData.ofDataAccessLayer.ofHumanResource.ofInterface.ofEmployee;
-using BusinessData.ofDataAccessLayer.ofHumanResource.ofInterface.ofEmployer;
-using BusinessData.ofDataAccessLayer.ofHumanResource.ofInterface.ofPlatform;
 using BusinessData.ofDataAccessLayer.ofHumanResource.ofModel;
 using System;
 
@@ -12,7 +9,7 @@ namespace BusinessData.ofDataAccessLayer.ofHRCenter.ofRepository
     {
     }
 
-    public class HRCenterRepository : CenterDataRepository<HRCenter>, IHRCenterRepository, IEmployeeHRCenterRepository, IEmployerHRCenterRepository, IPlatformHRCenterRepository
+    public class HRCenterRepository : CenterDataRepository<HRCenter>, IHRCenterRepository
     {
         public HRCenterRepository(HRDbContext HRDbContext)
             :base(HRDbContext)
@@ -28,7 +25,7 @@ namespace BusinessData.ofDataAccessLayer.ofHRCenter.ofRepository
     {
     }
 
-    public class HREmployeeRepository : EntityDataRepository<HREmployee>, IHREmployeeRepository, IEmployeeHREmployeeRepository, IEmployerHREmployeeRepository, IPlatformHREmployeeRepository
+    public class HREmployeeRepository : EntityDataRepository<HREmployee>, IHREmployeeRepository
     {
         public HREmployeeRepository(HRDbContext HRDbContext)
             :base(HRDbContext)
@@ -44,7 +41,7 @@ namespace BusinessData.ofDataAccessLayer.ofHRCenter.ofRepository
     {
     }
 
-    public class HRRoleRepository : EntityDataRepository<HRRole>, IHRRoleRepository, IEmployeeHRRoleRepository, IEmployerHRRoleRepository, IPlatformHRRoleRepository
+    public class HRRoleRepository : EntityDataRepository<HRRole>, IHRRoleRepository
     {
         public HRRoleRepository(HRDbContext HRDbContext)
             :base(HRDbContext)
@@ -60,7 +57,7 @@ namespace BusinessData.ofDataAccessLayer.ofHRCenter.ofRepository
     {
     }
 
-    public class EmployeeRoleRepository : EntityDataRepository<EmployeeRole>, IEmployeeRoleRepository, IEmployeeEmployeeRoleRepository, IEmployerEmployeeRoleRepository, IPlatformEmployeeRoleRepository
+    public class EmployeeRoleRepository : EntityDataRepository<EmployeeRole>, IEmployeeRoleRepository
     {
         public EmployeeRoleRepository(HRDbContext HRDbContext)
             :base(HRDbContext)
@@ -76,7 +73,7 @@ namespace BusinessData.ofDataAccessLayer.ofHRCenter.ofRepository
     {
     }
 
-    public class HRBusinessPartRepository : EntityDataRepository<HRBusinessPart>, IHRBusinessPartRepository, IEmployeeHRBusinessPartRepository, IEmployerHRBusinessPartRepository, IPlatformHRBusinessPartRepository
+    public class HRBusinessPartRepository : EntityDataRepository<HRBusinessPart>, IHRBusinessPartRepository
     {
         public HRBusinessPartRepository(HRDbContext HRDbContext)
             :base(HRDbContext)

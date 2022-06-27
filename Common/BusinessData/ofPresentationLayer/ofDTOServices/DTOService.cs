@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessData.ofPresentationLayer.ofCommon;
 using BusinessData.ofPresentationLayer.ofDTO.ofCommon;
 using System;
 using System.Collections.Generic;
@@ -37,11 +38,11 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
     }
     public interface IDTOService<T> where T : class
     {
-        Task<IEnumerable<T>?> GetsAsync();
-        Task<T?> GetByIdAsync(string id);
-        Task<T?> PostAsync(T entity);
+        Task<IEnumerable<T>> GetsAsync();
+        Task<T> GetByIdAsync(string id);
+        Task<T> PostAsync(T entity);
         Task DeleteAsync(string id);
-        Task<T?> PutAsync(T entity);
+        Task<T> PutAsync(T entity);
     }
     public class DTOServiceOptions
     {
@@ -56,7 +57,7 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
             _DTOServiceOptions = options;
             
         }
-        public virtual async Task<T?> PostAsync<T>(T t, MultipartFormDataContent content) where T : new()
+        public virtual async Task<T> PostAsync<T>(T t, MultipartFormDataContent content) where T : new()
         {
             var entityJson = new StringContent(
                             JsonSerializer.Serialize(t),
@@ -80,12 +81,12 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
             }
 
             string JsonIdentityUserDTO = await httpResponseMessage.Content.ReadAsStringAsync();
-            T? dto = JsonSerializer.Deserialize<T>(JsonIdentityUserDTO);
+            T dto = JsonSerializer.Deserialize<T>(JsonIdentityUserDTO);
             return dto;
         }
-        public virtual async Task<T?> PostAsync<T>(T t) where T :  class, new()
+        public virtual async Task<T> PostAsync<T>(T t) where T :  class, new()
         {
-            AutoMapAttribute? autoMapAttribute = (AutoMapAttribute?)Attribute.GetCustomAttribute(typeof(T), typeof(AutoMapAttribute));
+            AutoMapAttribute autoMapAttribute = (AutoMapAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(AutoMapAttribute));
             if(autoMapAttribute == null ) { throw new ArgumentException("NOT_INCLUDE_ORIGINATTRIBUTE"); }
             var entityJson = new StringContent(
                             JsonSerializer.Serialize(t),
@@ -101,7 +102,7 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
             var value = await httpResponseMessage.Content.ReadFromJsonAsync<T>();
             return value;
         }
-        public virtual async Task<T?> PutAsync<T>(T t) where T : new()
+        public virtual async Task<T> PutAsync<T>(T t) where T : new()
         {
             var entityJson = new StringContent(
             JsonSerializer.Serialize(t),
@@ -112,7 +113,7 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
             httpResponseMessage.EnsureSuccessStatusCode();
 
             string jsonDto = await httpResponseMessage.Content.ReadAsStringAsync();
-            T? dto = JsonSerializer.Deserialize<T>(jsonDto);
+            T dto = JsonSerializer.Deserialize<T>(jsonDto);
             return dto;
         }
         public virtual async Task DeleteAsync<T>(string id) where T : new()
@@ -120,13 +121,13 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
             var Response = await _httpClient.DeleteAsync($"api/{typeof(T).Name}/{id}");
             Response.EnsureSuccessStatusCode();
         }
-        public virtual async Task<T?> GetByIdAsync<T>(string id) where T : new()
+        public virtual async Task<T> GetByIdAsync<T>(string id) where T : new()
         {
             return await _httpClient.GetFromJsonAsync<T>($"/api/{typeof(T).Name}/{id}");
         }
-        public virtual async Task<IEnumerable<T>?> GetsAsync<T>() where T : new()
+        public virtual async Task<IEnumerable<T>> GetsAsync<T>() where T : new()
         {
-            return await _httpClient.GetFromJsonAsync<IEnumerable<T>?>($"/api/{typeof(T).Name}");
+            return await _httpClient.GetFromJsonAsync<IEnumerable<T>>($"/api/{typeof(T).Name}");
         }
         public virtual async Task<IEnumerable<T>> GetsAsync<T>(T t) where T : new()
         {
@@ -137,7 +138,7 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
             using var httpResponseMessage = await _httpClient.PostAsync($"/api/{typeof(T).Name}/Alls", entityJson);
             httpResponseMessage.EnsureSuccessStatusCode();
             string jsonDto = await httpResponseMessage.Content.ReadAsStringAsync();
-            List<T>? dto = JsonSerializer.Deserialize<List<T>>(jsonDto);
+            List<T> dto = JsonSerializer.Deserialize<List<T>>(jsonDto);
             return dto;
         }
         public virtual async Task<IEnumerable<T>> GetAsynByQuery<T>(EntityQuery<T> entityQuery) where T : EntityDTO, new()
@@ -149,12 +150,12 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
             using var httpResponseMessage = await _httpClient.PostAsync($"/api/{typeof(T).Name}/Searching", entityJson);
             httpResponseMessage.EnsureSuccessStatusCode();
             string jsonDto = await httpResponseMessage.Content.ReadAsStringAsync();
-            List<T>? dto = JsonSerializer.Deserialize<List<T>>(jsonDto);
+            List<T> dto = JsonSerializer.Deserialize<List<T>>(jsonDto);
             return dto;
         }
-        public virtual async Task<IEnumerable<T>?> GetsAsyncByUserId<T>(string userid) where T : new()
+        public virtual async Task<IEnumerable<T>> GetsAsyncByUserId<T>(string userid) where T : new()
         {
-            return await _httpClient.GetFromJsonAsync<IEnumerable<T>?>($"/api/{typeof(T).Name}/User?{userid}");
+            return await _httpClient.GetFromJsonAsync<IEnumerable<T>>($"/api/{typeof(T).Name}/User?{userid}");
         }
     }
     //public class DTOService

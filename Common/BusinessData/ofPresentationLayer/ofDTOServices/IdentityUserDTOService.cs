@@ -41,17 +41,17 @@ namespace BusinessView.ofCommon.ofServices
             Response.EnsureSuccessStatusCode();
         }
 
-        public async Task<IdentityUserDTO?> GetByIdAsync(string id)
+        public async Task<IdentityUserDTO> GetByIdAsync(string id)
         {
             return await _httpClient.GetFromJsonAsync<IdentityUserDTO>($"/api/IdentityUserDTO/{id}");
         }
 
-        public async Task<IEnumerable<IdentityUserDTO>?> GetsAsync()
+        public async Task<IEnumerable<IdentityUserDTO>> GetsAsync()
         {
             return await _httpClient.GetFromJsonAsync<IEnumerable<IdentityUserDTO>>("/api/IdentityUserDTO");
         }
 
-        public async Task<IdentityUserDTO?> PostAsync(IdentityUserDTO entity)
+        public async Task<IdentityUserDTO> PostAsync(IdentityUserDTO entity)
         {
             var entityJson = new StringContent(
             JsonSerializer.Serialize(entity),
@@ -63,11 +63,11 @@ namespace BusinessView.ofCommon.ofServices
             httpResponseMessage.EnsureSuccessStatusCode();
 
             string JsonIdentityUserDTO = await httpResponseMessage.Content.ReadAsStringAsync();
-            IdentityUserDTO? IdentityUserDTO = JsonSerializer.Deserialize<IdentityUserDTO>(JsonIdentityUserDTO);
+            IdentityUserDTO IdentityUserDTO = JsonSerializer.Deserialize<IdentityUserDTO>(JsonIdentityUserDTO);
             return IdentityUserDTO;
         }
 
-        public async Task<IdentityUserDTO?> PutAsync(IdentityUserDTO entity)
+        public async Task<IdentityUserDTO> PutAsync(IdentityUserDTO entity)
         {
             var entityJson = new StringContent(
             JsonSerializer.Serialize(entity),
@@ -80,7 +80,7 @@ namespace BusinessView.ofCommon.ofServices
 
             string JsonIdentityUserDTO = await httpResponseMessage.Content.ReadAsStringAsync();
 
-            IdentityUserDTO? IdentityUserDTO = JsonSerializer.Deserialize<IdentityUserDTO>(JsonIdentityUserDTO);
+            IdentityUserDTO IdentityUserDTO = JsonSerializer.Deserialize<IdentityUserDTO>(JsonIdentityUserDTO);
 
             return IdentityUserDTO;
         }

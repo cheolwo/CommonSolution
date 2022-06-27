@@ -6,8 +6,8 @@ namespace BusinessData.ofPresentationLayer.ofDTO.ofCommon
 {
     public class IdentityUserDTO : EntityDTO
     {
-        public string? Email { get; set; }
-        public string? UserName { get; set; }
+        public string Email { get; set; }
+        public string UserName { get; set; }
 
         public Dictionary<string, List<PropertyInfo>> DictionaryforClassifiedPropertyByAttribute(Type t)
         {

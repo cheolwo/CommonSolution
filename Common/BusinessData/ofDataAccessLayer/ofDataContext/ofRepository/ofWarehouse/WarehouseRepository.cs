@@ -10,7 +10,7 @@ using BusinessData.ofDataAccessLayer.ofWarehouse.ofDbContext;
 
 namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
 {
-    public class WarehouseRepository : CenterDataRepository<Warehouse>, IWarehouseRepository, IEmployeeWarehouseRepository, IEmployerWarehouseRepository, IPlatformWarehouseRepository 
+    public class WarehouseRepository : CenterDataRepository<Warehouse>, IWarehouseRepository
     {
         public WarehouseRepository(WarehouseDbContext WarehouseDbContext)
                 : base(WarehouseDbContext)
@@ -57,7 +57,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
         }
     }
 
-    public class SWCommodityRepository : StatusDataRepository<SWCommodity>, ISWCommodityRepository, IEmployeeSWCommodityRepository, IEmployerSWCommodityRepository, IPlatformSWCommodityRepository
+    public class SWCommodityRepository : StatusDataRepository<SWCommodity>, ISWCommodityRepository
     {
         public SWCommodityRepository(WarehouseDbContext WarehouseDbContext)
                 : base(WarehouseDbContext)
@@ -85,7 +85,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
 
     }
 
-    public class MWCommodityRepository : StatusDataRepository<MWCommodity>, IMWCommodityRepository, IEmployeeMWCommodityRepository, IEmployerMWCommodityRepository, IPlatformMWCommodityRepository
+    public class MWCommodityRepository : StatusDataRepository<MWCommodity>, IMWCommodityRepository
     {
         public MWCommodityRepository(WarehouseDbContext WarehouseDbContext)
                 : base(WarehouseDbContext)
@@ -104,7 +104,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
 
     }
 
-    public class EWCommodityRepository : StatusDataRepository<EWCommodity>, IEWCommodityRepository, IEmployeeEWCommodityRepository, IEmployerEWCommodityRepository, IPlatformEWCommodityRepository
+    public class EWCommodityRepository : StatusDataRepository<EWCommodity>, IEWCommodityRepository
     {
         public EWCommodityRepository(WarehouseDbContext WarehouseDbContext)
                 : base(WarehouseDbContext)
@@ -125,7 +125,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
     {
 
     }
-    public class WorkingDeskRepository : EntityDataRepository<WorkingDesk>, IWorkingDeskRepository, IEmployeeWorkingDeskRepository, IEmployerWorkingDeskRepository, IPlatformWorkingDeskRepository
+    public class WorkingDeskRepository : EntityDataRepository<WorkingDesk>, IWorkingDeskRepository
     {
         public WorkingDeskRepository(WarehouseDbContext warehouseDbContext)
             : base(warehouseDbContext)
@@ -142,7 +142,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
     {
 
     }
-    public class DotBarcodeRepository : EntityDataRepository<DotBarcode>, IDotBarcodeRepository, IEmployeeDotBarcodeRepository, IEmployerDotBarcodeRepository, IPlatformDotBarcodeRepository
+    public class DotBarcodeRepository : EntityDataRepository<DotBarcode>, IDotBarcodeRepository
     {
         public DotBarcodeRepository(WarehouseDbContext warehouseDbContext)
             : base(warehouseDbContext)
@@ -159,7 +159,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
     {
 
     }
-    public class IncomingTagRepository : EntityDataRepository<IncomingTag>, IIncomingTagRepository, IEmployeeIncomingTagRepository, IEmployerIncomingTagRepository, IPlatformIncomingTagRepository
+    public class IncomingTagRepository : EntityDataRepository<IncomingTag>, IIncomingTagRepository
     {
         public IncomingTagRepository(WarehouseDbContext warehouseDbContext)
             : base(warehouseDbContext)
@@ -176,7 +176,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
     {
 
     }
-    public class DividedTagRepository : EntityDataRepository<DividedTag>, IDividedTagRepository, IEmployeeDividedTagRepository, IEmployerDividedTagRepository, IPlatformDividedTagRepository
+    public class DividedTagRepository : EntityDataRepository<DividedTag>, IDividedTagRepository
     {
         public DividedTagRepository(WarehouseDbContext warehouseDbContext)
             : base(warehouseDbContext)
@@ -193,7 +193,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
     {
 
     }
-    public class LoadFrameRepository : EntityDataRepository<LoadFrame>, ILoadFrameRepository, IEmployeeLoadFrameRepository, IEmployerLoadFrameRepository, IPlatformLoadFrameRepository
+    public class LoadFrameRepository : EntityDataRepository<LoadFrame>, ILoadFrameRepository
     {
         public LoadFrameRepository(WarehouseDbContext warehouseDbContext)
             : base(warehouseDbContext)

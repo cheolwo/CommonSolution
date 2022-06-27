@@ -1,6 +1,4 @@
-﻿using BusinessData.ofPresendationLayer.ofDTOServices;
-using BusinessData.ofPresentationLayer.ofDTOServices;
-using BusinessView.ofCommon.ofServices;
+﻿using BusinessData.ofPresentationLayer.ofDTOServices;
 using System;
 using System.Collections.Generic;
 

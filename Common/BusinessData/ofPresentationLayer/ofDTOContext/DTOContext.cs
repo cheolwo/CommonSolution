@@ -27,7 +27,6 @@ namespace BusinessData.ofPresentationLayer.ofDTOContext
         protected ServiceBuilder ServiceBuilder = new();
         protected StorageBuilder StorageBuilder = new();
         protected ValidatorBuilder ValidatorBuilder = new();
-        protected DTOFileBuilder DTOFileBuilder = new();
         public DTOContext()
         {
             OnServiceBuilder(ServiceBuilder);

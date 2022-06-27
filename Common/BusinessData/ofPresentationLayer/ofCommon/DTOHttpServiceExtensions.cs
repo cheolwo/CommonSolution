@@ -8,24 +8,24 @@ namespace BusinessData.ofPresendationLayer.ofCommon
     {
         public static DTOService GetHttpDTOService<T>(this T t) where T : class
         {
-            var httpDTOServiceAttribute = t.GetCustormAttribute<HttpDTOServiceAttribute>();
+            var httpDTOServiceAttribute = typeof(T).GetCustomAttribute<HttpDTOServiceAttribute>();
             if(httpDTOServiceAttribute != null)
             {
                 var ServiceOptions = new DTOServiceOptions();
-                var dtoservice = (DTOService)Activator.CreateInstance<DTOService>(ServiceOptions);
+                var dtoservice = (DTOService)Activator.CreateInstance(httpDTOServiceAttribute.GetType(), ServiceOptions);
                 return dtoservice;
             }
             throw new ArgumentException("HttpDTOService Attribute Is Null");
         }
-        public static DTOService GetHttpDTOService<T>(this T t, ISeviceProvider seviceProvider) where T : class
+        public static DTOService GetHttpDTOService<T>(this T t, IServiceProvider seviceProvider) where T : class
         {
-            var httpDTOServiceAttribute = t.GetCustomAttribute<HttpDTOServiceAttribute>();
+            var httpDTOServiceAttribute = typeof(T).GetCustomAttribute<HttpDTOServiceAttribute>();
             if(httpDTOServiceAttribute != null)
             {
-                var ServiceOptions = (DTOServiceOptions)serviceProvider.GetService(typeof(DTOServiceOptions));
+                var ServiceOptions = (DTOServiceOptions)seviceProvider.GetService(typeof(DTOServiceOptions));
                 if(ServiceOptions != null)
                 {
-                    var dtoservice = (DTOService)Activator.CreateInstance<DTOService>(ServiceOptions);
+                    var dtoservice = (DTOService)Activator.CreateInstance(t.GetType(), ServiceOptions);
                     return dtoservice;
                 }
                 throw new ArgumentException("Not Register Options To ServiceContainer");
@@ -34,8 +34,7 @@ namespace BusinessData.ofPresendationLayer.ofCommon
         }
         public static T Post<T>(this T t) where T : class
         {
-            var dtoservice = t.GetHttpDTOService();
-            
+            throw new NotImplementedException();
         }
         public static int Add(this int value)
         {

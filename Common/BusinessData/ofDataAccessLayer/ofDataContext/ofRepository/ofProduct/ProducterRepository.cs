@@ -1,9 +1,6 @@
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessData.ofDataAccessLayer.ofProduct.ofModel;
 using BusinessData.ofProduct.ofDbContext;
-using BusinessData.ofProduct.ofInterface.ofEmployee;
-using BusinessData.ofProduct.ofInterface.ofEmployer;
-using BusinessData.ofProduct.ofInterface.ofPlatform;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -37,7 +34,7 @@ namespace BusinessData.ofProduct.ofRepository
     {
         
     }
-    public class ProductCenterRepository : CenterDataRepository<ProductCenter>, IProductCenterRepository, IEmployeeProductCenterRepository, IEmployerProductCenterRepository, IPlatformProductCenterRepository
+    public class ProductCenterRepository : CenterDataRepository<ProductCenter>, IProductCenterRepository
     {
         public ProductCenterRepository(ProductDbContext ProductDbContext)
                 : base(ProductDbContext)
@@ -70,7 +67,7 @@ namespace BusinessData.ofProduct.ofRepository
             return await _DbContext.Set<ProductCenter>().Where(e => e.CountryCode.Equals(CountryCode)).Include(entity => entity.SPCommodities).ToListAsync();
         }
     }
-    public class PCommodityRepository : CommodityDataRepository<PCommodity>, IPCommodityRepository, IEmployeePCommodityRepository, IEmployerPCommodityRepository, IPlatformPCommodityRepository
+    public class PCommodityRepository : CommodityDataRepository<PCommodity>, IPCommodityRepository
     {
         public PCommodityRepository(ProductDbContext ProductDbContext)
                 : base(ProductDbContext)
@@ -83,7 +80,7 @@ namespace BusinessData.ofProduct.ofRepository
 
         }
     }
-    public class SPCommodityRepository : StatusDataRepository<SPCommodity>, ISPCommodityRepository, IEmployeeSPCommodityRepository, IEmployerSPCommodityRepository, IPlatformSPCommodityRepository
+    public class SPCommodityRepository : StatusDataRepository<SPCommodity>, ISPCommodityRepository
     {
         public SPCommodityRepository(ProductDbContext ProductDbContext)
                 : base(ProductDbContext)
@@ -110,7 +107,7 @@ namespace BusinessData.ofProduct.ofRepository
             return await _DbContext.Set<SPCommodity>().Where(e=>e.IsTablable.Equals(true)).Include(e => e.PCommodity).Include(e =>  e.Producter).Include(e => e.ProductCenter).ToListAsync();
         }
     }
-    public class MPCommodityRepository : StatusDataRepository<MPCommodity>, IMPCommodityRepository, IEmployeeMPCommodityRepository, IEmployerMPCommodityRepository, IPlatformMPCommodityRepository
+    public class MPCommodityRepository : StatusDataRepository<MPCommodity>, IMPCommodityRepository
     {
         public MPCommodityRepository(ProductDbContext ProductDbContext)
                 : base( ProductDbContext)
@@ -123,7 +120,7 @@ namespace BusinessData.ofProduct.ofRepository
 
         }
     }
-    public class EPCommodityRepository : StatusDataRepository<EPCommodity>, IEPCommodityRepository, IEmployeeEPCommodityRepository, IEmployerEPCommodityRepository, IPlatformEPCommodityRepository
+    public class EPCommodityRepository : StatusDataRepository<EPCommodity>, IEPCommodityRepository
     {
         public EPCommodityRepository(ProductDbContext ProductDbContext)
                 : base(ProductDbContext)

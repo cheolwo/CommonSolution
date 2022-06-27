@@ -130,7 +130,7 @@ namespace BusinessData.ofViewModels.ofGeneric.ofCommon
     */
     public class EntityPostViewModel<TEntity> : BaseEntityViewModel<TEntity>, IEntityPostViewModel where TEntity : EntityDTO, new()
     {
-        public PostPageToGets? postPageToGets { get; set; }
+        public PostPageToGets postPageToGets { get; set; }
         public EntityPostViewModel(ActorContext actorContext)
             : base(actorContext)
         {
@@ -194,7 +194,7 @@ namespace BusinessData.ofViewModels.ofGeneric.ofCommon
     }
     public class EntityPutViewModel<TEntity> : BaseEntityViewModel<TEntity>, IEntityPutViewModel where TEntity : EntityDTO, new()
     {
-        public PutPageToGets? putPageToGets { get; set; }
+        public PutPageToGets putPageToGets { get; set; }
         public EntityPutViewModel(ActorContext actorContext)
             : base(actorContext)
         {
@@ -214,8 +214,8 @@ namespace BusinessData.ofViewModels.ofGeneric.ofCommon
                 OnPropertyChanged();
             }
         }
-        private TEntity? _putTEntity = new();
-        public TEntity? PutTEntity
+        private TEntity _putTEntity = new();
+        public TEntity PutTEntity
         {
             get => _putTEntity;
             set
@@ -254,7 +254,7 @@ namespace BusinessData.ofViewModels.ofGeneric.ofCommon
     }
     public class EntityDeleteViewModel<TEntity> : BaseEntityViewModel<TEntity>, IEntityDeleteViewModel where TEntity : EntityDTO, new()
     {
-        public DeletePageToGets? deletePageToGets { get; set; }
+        public DeletePageToGets deletePageToGets { get; set; }
         public EntityDeleteViewModel(ActorContext actorContext)
             : base(actorContext)
         {
@@ -283,9 +283,9 @@ namespace BusinessData.ofViewModels.ofGeneric.ofCommon
     public enum ViewMode { Table, Card, DashBoard }
     public class EntityGetsViewModel<TEntity> : BaseEntityViewModel<TEntity>, IEntityGetsViewModel where TEntity : EntityDTO, new()
     {
-        public GetsPageToPost? getsPageToPost { get; set; }
-        public GetsPageToPut? getsPageToPut { get; set; }
-        public GetsPageToDelete? getsPageToDelete { get; set; }
+        public GetsPageToPost getsPageToPost { get; set; }
+        public GetsPageToPut getsPageToPut { get; set; }
+        public GetsPageToDelete getsPageToDelete { get; set; }
 
 
         public EntityGetsViewModel(ActorContext actorContext)
@@ -345,7 +345,7 @@ namespace BusinessData.ofViewModels.ofGeneric.ofCommon
         }
         public async Task GetsAsync()
         {
-            IEnumerable<TEntity>? dtos = await _ActorContext.GetsAsync<TEntity>();
+            IEnumerable<TEntity> dtos = await _ActorContext.GetsAsync<TEntity>();
             if (dtos != null)
             {
                 foreach (var dto in dtos)
@@ -357,7 +357,7 @@ namespace BusinessData.ofViewModels.ofGeneric.ofCommon
         }
         public async Task GetsAsyncByUserId(string userid)
         {
-            IEnumerable<TEntity>? dtos = await _ActorContext.GetsAsyncByUserId<TEntity>(userid);
+            IEnumerable<TEntity> dtos = await _ActorContext.GetsAsyncByUserId<TEntity>(userid);
             if (dtos != null)
             {
                 foreach (var dto in dtos)

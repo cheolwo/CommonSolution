@@ -1,3 +1,5 @@
+using BusinessData.ofDataAccessLayer.ofCommon;
+
 namespace BusinessData.ofDataAccessLayer.ofExtensions
 {
     // Model 에 의해 결정이 나는 부분이라.

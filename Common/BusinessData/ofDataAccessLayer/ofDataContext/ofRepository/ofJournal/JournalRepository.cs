@@ -2,9 +2,6 @@
 using System.Threading.Tasks;
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessData.ofDataAccessLayer.ofJournal.Model;
-using BusinessData.ofDataAccessLayer.ofJournal.ofInterface.ofEmployee;
-using BusinessData.ofDataAccessLayer.ofJournal.ofInterface.ofEmployer;
-using BusinessData.ofJournal.ofInterface.ofPlatform;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessData.ofDataAccessLayer.ofJournal.ofRepository
@@ -25,7 +22,7 @@ namespace BusinessData.ofDataAccessLayer.ofJournal.ofRepository
     {
 
     }
-    public class JournalCenterRepository : CenterDataRepository<JournalCenter>, IJournalCenterRepository, IEmployeeJournalCenterRepository, IEmployerJournalCenterRepository, IPlatformJournalCenterRepository
+    public class JournalCenterRepository : CenterDataRepository<JournalCenter>, IJournalCenterRepository
     {
         public JournalCenterRepository(JournalDbContext JournalDbContext)
             :base(JournalDbContext)
@@ -38,7 +35,7 @@ namespace BusinessData.ofDataAccessLayer.ofJournal.ofRepository
 
         }
     }
-    public class JCommodityRepository : CommodityDataRepository<JCommodity>, IJCommodityRepository, IEmployerJCommodityRepository, IEmployeeJCommodityRepository, IPlatformJCommodityRepository
+    public class JCommodityRepository : CommodityDataRepository<JCommodity>, IJCommodityRepository
     {
         public JCommodityRepository(JournalDbContext JournalDbContext)
             :base(JournalDbContext)
@@ -68,7 +65,7 @@ namespace BusinessData.ofDataAccessLayer.ofJournal.ofRepository
             return await _DbContext.Set<UserSettingJournal>().FirstOrDefaultAsync(e=>e.EntityTypeName.Equals(entityTypeName));
         }
     }
-    public class JournalRepository : EntityDataRepository<Journal>, IJournalRepository, IEmployeeJournalRepository, IEmployerJournalRepository, IPlatformJournalRepository
+    public class JournalRepository : EntityDataRepository<Journal>, IJournalRepository
     {
         public JournalRepository(JournalDbContext JournalDbContext)
             :base(JournalDbContext)

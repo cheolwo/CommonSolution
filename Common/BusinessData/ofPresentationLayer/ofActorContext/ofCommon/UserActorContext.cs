@@ -78,7 +78,7 @@ namespace BusinessData.ofPresendationLayer.ofActorContext.ofCommon
             var validateResult = validator.Validate(t);
             if(validateResult.IsValid)
             {
-                T? Value = await service.PostAsync(t);
+                T Value = await service.PostAsync(t);
                 if (Value != null) { storage.Insert(Value); return Value; }
                 else { throw new NullReferenceException("POST_RETURN_VALUE_NULL"); }
             }
@@ -92,7 +92,7 @@ namespace BusinessData.ofPresendationLayer.ofActorContext.ofCommon
             ITable<T> storage = GetMemoryTable<T>();
             IValidator<T> validator = GetValidator<T>();
 
-            T? Value = await service.PostAsync<T>(t, content);
+            T Value = await service.PostAsync<T>(t, content);
             if (Value != null) { storage.Insert(Value); return Value; }
             else { throw new NullReferenceException("PostService Value Is Null"); }
         }
@@ -118,7 +118,7 @@ namespace BusinessData.ofPresendationLayer.ofActorContext.ofCommon
             {
                 var StorageValue = storage.FirstOrDefault(e => e.Equals(t));
                 if (StorageValue != null) { storage.Delete(StorageValue); }
-                T? Value = await service.PutAsync<T>(t);
+                T Value = await service.PutAsync<T>(t);
                 if (Value != null)
                 {
                     storage.Insert(Value);

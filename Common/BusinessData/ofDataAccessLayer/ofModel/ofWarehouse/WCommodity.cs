@@ -5,7 +5,6 @@ using BusinessData.ofDataAccessLayer.ofCommon;
 using BusinessData.ofDataAccessLayer.ofCommon.ofAttribute;
 using BusinessData.ofDataAccessLayer.ofCommon.ofInterface;
 using BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness;
-using BusinessData.ofDataAccessLayer.ofWarehouse.ofCommon;
 using BusinessData.ofDataAccessLayer.ofWarehouse.ofDbContext;
 using Microsoft.AspNetCore.Authorization;
 
@@ -17,7 +16,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
     [DataContext(typeof(WarehouseDataContext))]
     [Authorize(Roles ="Admin_Warehouse, Employee_Warehouse")]
     [Relation(typeof(Warehouse), "WW")] 
-    public class WCommodity : Commodity, IRelatedCenter, IRelatedRoles, IBarcodable
+    public class WCommodity : Commodity, IRelatedCenter, IRelatedRoles
     {
         public string Type {get; set;}
         [NotMapped]public string PakcingBarcode {get; set;}
@@ -49,7 +48,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
     [DataContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection)]
     [Authorize(Roles ="Admin_Warehouse, Employee_Warehouse")]
     [Relation(typeof(Warehouse), "WWS")] 
-    public class SWCommodity : SStatus, IRelatedCenter, IRelatedRoles, IBarcodable
+    public class SWCommodity : SStatus, IRelatedCenter, IRelatedRoles
     {
         public int IncomingQuantity { get; set; }
         public string IncomingTagId {get; set;}
@@ -74,7 +73,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
     [DataContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection)]
     [Authorize(Roles ="Admin_Warehouse, Employee_Warehouse")]
     [Relation(typeof(Warehouse), "WWM")] 
-    public class MWCommodity : MStatus, IRelatedCenter, IRelatedRoles, IBarcodable
+    public class MWCommodity : MStatus, IRelatedCenter, IRelatedRoles
     {
         public List<EWCommodity> EWCommodities {get; set;}
         public LoadFrame LoadFrame {get; set;}
@@ -98,7 +97,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
     [DataContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection)]
     [Authorize(Roles ="Admin_Warehouse, Employee_Warehouse")]
     [Relation(typeof(Warehouse), "WWE")] 
-    public class EWCommodity : EStatus, IRelatedCenter, IRelatedRoles, IBarcodable
+    public class EWCommodity : EStatus, IRelatedCenter, IRelatedRoles
     {
         public int OutgoingQuantity {get; set;} // 출고수량
         public WCommodity WCommodity {get; set;}

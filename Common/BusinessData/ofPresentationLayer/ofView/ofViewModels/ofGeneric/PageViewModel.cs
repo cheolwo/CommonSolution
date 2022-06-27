@@ -10,8 +10,8 @@ namespace BusinessData.ofViewModels.ofGeneric
     public abstract class BaseEntityViewModel<TEntity> : BaseViewModel where TEntity : EntityDTO, new()
     {
         protected readonly ActorContext _ActorContext;
-        protected TEntity? _TEntity = new();
-        public TEntity? Entity
+        protected TEntity _TEntity = new();
+        public TEntity Entity
         {
             get=>_TEntity;
             set
@@ -45,8 +45,8 @@ namespace BusinessData.ofViewModels.ofGeneric
                 OnPropertyChanged();
             }
         }
-        private TEntity? _postTEntity = new();
-        public TEntity? PostTEntity
+        private TEntity _postTEntity = new();
+        public TEntity PostTEntity
         {
             get => _postTEntity;
             set
@@ -88,8 +88,8 @@ namespace BusinessData.ofViewModels.ofGeneric
                 OnPropertyChanged();
             }
         }
-        private TEntity? _putTEntity = new();
-        public TEntity? PutTEntity
+        private TEntity _putTEntity = new();
+        public TEntity PutTEntity
         {
             get => _putTEntity;
             set
@@ -99,7 +99,7 @@ namespace BusinessData.ofViewModels.ofGeneric
         }
         public async Task PutAsync(TEntity TEntity)
         {
-            var PutValue = await _ActorContext.PutAsync<TEntity>(TEntity);
+            var PutValue = await _ActorContext.PutAsync(TEntity);
             if(PutValue != null)
             {
                 _isPut = true;
@@ -148,7 +148,7 @@ namespace BusinessData.ofViewModels.ofGeneric
         }
         public async Task GetsAsync()
         {
-            IEnumerable<TEntity>? dtos = await _ActorContext.GetsAsync<TEntity>();
+            IEnumerable<TEntity> dtos = await _ActorContext.GetsAsync<TEntity>();
             if(dtos != null)
             {
                 foreach(var dto in dtos)
@@ -160,7 +160,7 @@ namespace BusinessData.ofViewModels.ofGeneric
         }
         public async Task GetsAsyncByUserId(string userid)
         {
-            IEnumerable<TEntity>? dtos = await _ActorContext.GetsAsyncByUserId<TEntity>(userid);
+            IEnumerable<TEntity> dtos = await _ActorContext.GetsAsyncByUserId<TEntity>(userid);
             if(dtos != null)
             {
                 foreach(var dto in dtos)

@@ -10,7 +10,7 @@ using System;
 
 namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
 {
-    public class WCommodityRepository : CommodityDataRepository<WCommodity>, IWCommodityRepository, IEmployeeWCommodityRepository, IEmployerWCommodityRepository, IPlatformWCommodityRepository
+    public class WCommodityRepository : CommodityDataRepository<WCommodity>, IWCommodityRepository
     {
         public WCommodityRepository(WarehouseDbContext BusinessDataContext)
                 : base(BusinessDataContext)

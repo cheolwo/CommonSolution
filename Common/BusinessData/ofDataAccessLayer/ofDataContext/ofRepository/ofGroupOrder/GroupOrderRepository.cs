@@ -2,9 +2,6 @@ using System;
 using System.Threading.Tasks;
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessData.ofDataAccessLayer.ofGroupOrder.ofDbContext;
-using BusinessData.ofDataAccessLayer.ofGroupOrder.ofInterface.ofEmployee;
-using BusinessData.ofDataAccessLayer.ofGroupOrder.ofInterface.ofEmployer;
-using BusinessData.ofDataAccessLayer.ofGroupOrder.ofInterface.ofPlatform;
 using BusinessData.ofDataAccessLayer.ofGroupOrder.ofModel;
 
 namespace BusinessData.ofDataAccessLayer.ofGroupOrder.ofRepository
@@ -29,7 +26,7 @@ namespace BusinessData.ofDataAccessLayer.ofGroupOrder.ofRepository
     {
 
     }
-    public class GOCRepository : CenterDataRepository<GOC>, IGOCRepository, IEmployeeGOCRepository, IEmployerGOCRepository, IPlatformGOCRepository
+    public class GOCRepository : CenterDataRepository<GOC>, IGOCRepository
     {
         public GOCRepository(GroupOrderDbContext GODbContext)
             :base(GODbContext)
@@ -47,7 +44,7 @@ namespace BusinessData.ofDataAccessLayer.ofGroupOrder.ofRepository
         }
         
     }
-    public class GOCCRepository : CommodityDataRepository<GOCC>, IGOCCRepository, IEmployeeGOCCRepository, IEmployerGOCCRepository, IPlatformGOCCRepository
+    public class GOCCRepository : CommodityDataRepository<GOCC>, IGOCCRepository
     {
         public GOCCRepository(GroupOrderDbContext GODbContext)
             :base(GODbContext)
@@ -60,7 +57,7 @@ namespace BusinessData.ofDataAccessLayer.ofGroupOrder.ofRepository
 
         }
     }
-    public class SGOCRepository : StatusDataRepository<SGOC>, ISGOCRepository, IEmployeeSGOCRepository, IEmployerSGOCRepository, IPlatformSGOCRepository
+    public class SGOCRepository : StatusDataRepository<SGOC>, ISGOCRepository
     {
         public SGOCRepository(GroupOrderDbContext GODbContext)
             :base(GODbContext)
@@ -73,7 +70,7 @@ namespace BusinessData.ofDataAccessLayer.ofGroupOrder.ofRepository
 
         }
     }
-    public class MGOCRepository : StatusDataRepository<MGOC>, IMGOCRepository, IEmployeeMGOCRepository, IEmployerMGOCRepository, IPlatformMGOCRepository
+    public class MGOCRepository : StatusDataRepository<MGOC>, IMGOCRepository
     {
         public MGOCRepository(GroupOrderDbContext GODbContext)
             :base(GODbContext)
@@ -86,7 +83,7 @@ namespace BusinessData.ofDataAccessLayer.ofGroupOrder.ofRepository
 
         }
     }
-    public class EGOCRepository : StatusDataRepository<EGOC>, IEGOCRepository, IEmployeeEGOCRepository, IEmployerEGOCRepository, IPlatformEGOCRepository
+    public class EGOCRepository : StatusDataRepository<EGOC>, IEGOCRepository
     {
         public EGOCRepository(GroupOrderDbContext GODbContext)
             :base(GODbContext)
