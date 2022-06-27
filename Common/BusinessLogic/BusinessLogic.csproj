@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ofController\" />
+    <Folder Include="ofLogicComponent\" />
+  </ItemGroup>
+
 </Project>

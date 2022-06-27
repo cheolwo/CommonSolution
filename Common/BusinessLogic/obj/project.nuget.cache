@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "egca3P5t1u1vBQbRR9BZdODxJtNwymRcuTGRfTOq6ayI6uzoasenSaFBYvIJ/ahxtACVgs85ymNXtsRNPOkSJw==",
+  "dgSpecHash": "E6SHd8H0rbKuMNsLEHnwkHyTExHUxEPXJZMjEVGCoUHSIB4K4O1PWujGmvNh6Y5CoVnynnMRH8sdEHVG4i6eUA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\CommonSolution\\BusinessLogic\\BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\Common\\BusinessLogic\\BusinessLogic.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

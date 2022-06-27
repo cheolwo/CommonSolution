@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\CommonSolution\\BusinessLogic\\BusinessLogic.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\Common\\BusinessLogic\\BusinessLogic.csproj",
       "projectName": "BusinessLogic",
-      "projectPath": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\CommonSolution\\BusinessLogic\\BusinessLogic.csproj",
+      "projectPath": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\Common\\BusinessLogic\\BusinessLogic.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\CommonSolution\\BusinessLogic\\obj\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\Common\\BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

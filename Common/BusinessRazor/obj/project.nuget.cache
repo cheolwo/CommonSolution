@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nRbZKOWjYq71UZNB2aRKVXdyG9SNmqA/8c2dZAJUQlvBsKN10V4JmVTUnC5EYti/ufsPOTxUs/RfjNrHFVjdqQ==",
+  "dgSpecHash": "Rw1docpLmITuNiWWWKXz1c/UpQYR5Jx9JEsyqx+3tQdNEuqi30MYLObF7ERc2QH6bakOKka3dUbYyj5nCx8nZA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\Common\\BusinessRazor\\BusinessRazor.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\CommonSolution\\CommonSolution\\Common\\BusinessRazor\\BusinessRazor.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.3\\microsoft.aspnetcore.authorization.6.0.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.components\\6.0.3\\microsoft.aspnetcore.components.6.0.3.nupkg.sha512",
