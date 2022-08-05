@@ -16,7 +16,6 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
         {
 
         }
-
         public override Task DeleteByIdAsync<T>(string id)
         {
             throw new NotImplementedException();
@@ -32,9 +31,32 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             throw new NotImplementedException();
         }
 
-        public override Task<T> PostAsync<T>(T t)
+        public override async Task<T> PostAsync<T>(T t)
         {
-            throw new NotImplementedException();
+            using(var scope = _ServiceScopeFactory.CreateScope())
+            {
+                // Post를 할 때마다 이런 식으로 만들기가 좀 그래가지고...
+                // 생성자에서 등록한 모듈들 간 구성을 결정시켜줄 필요가 있어.
+                // ViewContext에서 하려고 했던 것 마냥.
+
+                // Setting
+                var db = scope.ServiceProvider.GetRequiredService(t.GetDbContextType());
+                var repository = entityManagerBuilder.GetEntityDataRepository(typeof(t).Name);
+                repository.SetDbContext(db);
+                var IdFactory = entityManagerBuilder.GetEntityIdFactory(typeof(t).Name);
+                IdFactory.SetRepository(repository);
+                var blobContanerFactory = entityManagerBuilder.GetBlobContainerFactory(typeof(t).Name);
+                blobContanerFactory.SetRepository(repository);
+                var blobStorage = entityManagerBuilder.GetEntityBlobStorage(typeof(t).Name);
+                blobStorage.SetBlobContainerFactory(blobContanerFactory);
+            
+                // Chain of Reponsibilty
+                var Result = await t.CreateIdAsync(IdFactory).CreateBlobStorageAsync(blobStorage).PostToDbContextAsync(repository);                
+                // InMemory 에 저장하는 단계
+                Result.PostToInMemory(_MemoryCache);
+                // 분산캐싱에 저장하는 단계    
+                Result.PostToDistributedMemory(_MemoryCache);          
+            }
         }
 
         public override Task<T> PutAsync<T>(T t)
@@ -42,17 +64,17 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityBlobStorage(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityFile(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityFileBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityId(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             entityManagerBuilder.ApplyEntityIdFactory(nameof(Warehouse), new WarehouseIdFactory());
             entityManagerBuilder.ApplyEntityIdFactory(nameof(WCommodity), new EntityIdFactory<WCommodity>());
@@ -66,7 +88,7 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             entityManagerBuilder.ApplyEntityIdFactory(nameof(DotBarcode), new EntityIdFactory<DotBarcode>());
         }
 
-        protected override void OnConfigureEntityRepository(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             entityManagerBuilder.ApplyEntityDataRepository(nameof(Warehouse), new WarehouseRepository(e =>
             {

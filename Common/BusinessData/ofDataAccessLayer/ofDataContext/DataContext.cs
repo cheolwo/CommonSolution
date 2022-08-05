@@ -59,46 +59,68 @@ namespace BusinessData.ofDataContext
         // 이 위에 DataContext 가 업무단위별로 달라지는 면이 있으니까 Warehouse, GroupOrder
         등으로 나눠 논 것이지.
     */
+    // 사용자 Db 의 Options 을 저장하는 경우 그 데이터와 Mapping 하는 논리가 필요하다.
     public class DataContextOptions
     {
-        private readonly IMemoryCache _MemoryCache;
-        private readonly IDistributedCache _DistributedCache;
-        private readonly IServiceScopeFactory _ServiceScopeFactory;
-        public DataContextOptions(IMemoryCache memoryCache, IDistributedCache distributedCache, IServiceScopeFactory serviceScopeFactory)
+        private bool _IsUseInMemory;
+        private bool _IsDistributeCache;
+        private bool _IsSnsAlarm;
+        private bool _IsKakaoAlarm;
+        private bool _IsEamliAlarm;
+        public bool IsUseInMemory
         {
-            _MemoryCache = memoryCache;
-            _DistributedCache = distributedCache;
-            _ServiceScopeFactory = serviceScopeFactory;
+            get => _IsUseInMemory;
+            set => value;
         }
-        public IMemoryCache MemoryCache
+        public bool IsDistributeCache
         {
-            get => _MemoryCache;
+            get => _IsDistributeCache;
+            set => value;
         }
-        public IDistributedCache DistributedCache
+        public bool IsSnsAlarm
         {
-            get => _DistributedCache;
+            get => _IsSnsAlarm;
+            set => value;
         }
-        public IServiceScopeFactory ServiceScopeFactory
+        public bool IsKaKaoAlarm
         {
-            get => _ServiceScopeFactory;
+            get => _IsKakaoAlarm;
+            set => value;
+        }
+        public bool IsEmaliAlarm
+        {
+            get => _IsEamliAlarm;
+            set => value;
+        }
+        public DataContextOptions(Func<DataContextOptions> options)
+        {
+            options.Invoke(this);
         }
     }
     public abstract class DataContext
     {
         protected EntityManagerBuilder entityManagerBuilder = new();
-        protected readonly DataContextOptions _options;
-        public DataContext(DataContextOptions options)
+        protected readonly IMemoryCache _MemoryCache;
+        protected readonly IDistributedCache _DistributedCache;
+        protected readonly IServiceScopeFactory _ServiceScopeFactory;
+        protected readonly IServiceProvicer _ServiceProvider;
+        public DataContext(IMemoryCache memoryCache, IDistributedCache distributedCache, 
+        IServiceScopeFactory serviceScopeFactory, IServiceProvider serviceProvider)
         {
-            _options = options;
+            _MemoryCache = memoryCache;
+            _DistributedCache = distributedCache;
+            _ServiceScopeFactory = serviceScopeFactory;
+            _ServiceProvider = serviceProvider;
             OnConfigureEntityBlobStorage(entityManagerBuilder);
             OnConfigureEntityFile(entityManagerBuilder);
             OnConfigureEntityId(entityManagerBuilder);
             OnConfigureEntityRepository(entityManagerBuilder);
         }
-        protected abstract void OnConfigureEntityId(EntityManagerBuilder entityManagerBuilder);
-        protected abstract void OnConfigureEntityFile(EntityManagerBuilder entityManagerBuilder);
-        protected abstract void OnConfigureEntityBlobStorage(EntityManagerBuilder entityManagerBuilder);
-        protected abstract void OnConfigureEntityRepository(EntityManagerBuilder entityManagerBuilder);
+        protected abstract void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder);
+        protected abstract void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder);
+        protected abstract void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder);
+        protected abstract void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder);
+        protected abstract void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder);
 
         public abstract Task<T> PostAsync<T>(T t) where T : Entity;
         public abstract Task<T> PutAsync<T>(T t) where T : Entity;

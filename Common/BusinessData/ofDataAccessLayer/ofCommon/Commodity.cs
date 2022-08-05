@@ -8,7 +8,6 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
     public class Commodity : Entity, IRelatedCenter
     {
         public string HsCode {get; set;}
-        public string OpponentBusinessUserId { get; set; }
         public string Barcode {get; set;}
         public string CenterId {get; set;}
         public Center Center { get; set; }
