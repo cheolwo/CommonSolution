@@ -26,7 +26,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         public abstract Task<Entity> UpdateAsync(Entity tentity, DbContext dbContext);
         public abstract Task<Entity> GetByContainerAsync(string containerName, DbContext dbContext);
     }
-    
+
     public interface IEntityDataRepository<TEntity> : IEntityDataRepository where TEntity : Entity
     {
         // 기본
@@ -269,7 +269,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         {
             var list = await dbContext.Set<TEntity>().ToListAsync();
             List<Entity> entities = new();
-            foreach(var entity in list)
+            foreach (var entity in list)
             {
                 entities.Add(entity);
             }

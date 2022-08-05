@@ -223,7 +223,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
             return T;
         }
     }
-    public abstract class Entity : IComparable<Entity>, IComparable, IEquatable<Entity>, IComparer
+    public class Entity : IComparable<Entity>, IComparable, IEquatable<Entity>, IComparer
     {
         [Key] public string Id { get; set; }
         public string Code { get; set; }

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLogic", "BusinessLo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessData", "BusinessData\BusinessData.csproj", "{60FE5AEF-1F3A-4580-AB63-A2D4129F12C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessRazor", "BusinessRazor\BusinessRazor.csproj", "{76EDFB72-1762-4884-8063-1AC0F1753EDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModuleTest", "..\..\DataStructrue\자료구조\ModuleTest\ModuleTest\ModuleTest.csproj", "{43699447-8099-418F-9284-A4B5D1F2283C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{60FE5AEF-1F3A-4580-AB63-A2D4129F12C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60FE5AEF-1F3A-4580-AB63-A2D4129F12C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60FE5AEF-1F3A-4580-AB63-A2D4129F12C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76EDFB72-1762-4884-8063-1AC0F1753EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76EDFB72-1762-4884-8063-1AC0F1753EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76EDFB72-1762-4884-8063-1AC0F1753EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76EDFB72-1762-4884-8063-1AC0F1753EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43699447-8099-418F-9284-A4B5D1F2283C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43699447-8099-418F-9284-A4B5D1F2283C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43699447-8099-418F-9284-A4B5D1F2283C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43699447-8099-418F-9284-A4B5D1F2283C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
