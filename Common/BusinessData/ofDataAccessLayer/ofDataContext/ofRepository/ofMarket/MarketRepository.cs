@@ -1,95 +1,67 @@
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessData.ofDataAccessLayer.ofMarket.ofDbContext;
 using BusinessData.ofDataAccessLayer.ofMarket.ofModel;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace BusinessData.ofDataAccessLayer.ofMarket.ofRepository
 {
-    public interface IMarketRepository : ICenterDataRepository<Market>
+    public interface IMarketRepository<TMarket> : ICenterDataRepository<TMarket> where TMarket : Market, new()
     {
 
     }
-    public interface IMCommodityRepository : ICommodityDataRepository<MCommodity>
+    public interface IMCommodityRepository<TMCommodity> : ICommodityDataRepository<TMCommodity> where TMCommodity : MCommodity, new()
     {
 
     }
-    public interface ISMCommodityRepository : IStatusDataRepository<SMCommodity>
+    public interface ISMCommodityRepository<TSMCommodity> : ISStatusDataRepository<TSMCommodity> where TSMCommodity : SMCommodity, new()
     {
 
     }
-    public interface IMMCommodityRepository : IStatusDataRepository<MMCommodity>
+    public interface IMMCommodityRepository<TMMCommodity> : IMStatusDataRepository<TMMCommodity> where TMMCommodity : MMCommodity, new()
     {
 
     }
-    public interface IEMCommodityRepository : IStatusDataRepository<EMCommodity>
+    public interface IEMCommodityRepository<TEMCommodity> : IEStatusDataRepository<TEMCommodity> where TEMCommodity : EMCommodity, new()
     {
 
     }
-    public interface IPlatMarketRepository : ICenterDataRepository<PlatMarket>
+    public class MarketRepository<TMarket> : CenterDataRepository<TMarket>, IMarketRepository<TMarket> where TMarket : Market, new()
     {
-
-    }
-    public class MarketRepository : CenterDataRepository<Market>, IMarketRepository
-    {
-        public MarketRepository(MarketDbContext MarketDbContext)
-                : base(MarketDbContext)
-        {
-
-        }
-        public MarketRepository(Action<RepositoryOptions> options)
-                : base(options)
+        public MarketRepository(DbContext DbContext)
+                : base(DbContext)
         {
 
         }
     }
-    public class MCommodityRepository : CommodityDataRepository<MCommodity>, IMCommodityRepository
+    public class MCommodityRepository<TMCommodity> : CommodityDataRepository<TMCommodity>, IMCommodityRepository<TMCommodity> where TMCommodity : MCommodity, new()
     {
-        public MCommodityRepository(MarketDbContext MarketDbContext)
-                : base(MarketDbContext)
-        {
-
-        }
-        public MCommodityRepository(Action<RepositoryOptions> options)
-                : base(options)
+        public MCommodityRepository(DbContext DbContext)
+                : base(DbContext)
         {
 
         }
     }
-    public class SMCommodityRepository : StatusDataRepository<SMCommodity>, ISMCommodityRepository
+    public class SMCommodityRepository<TSMCommodity> : SStatusDataRepository<TSMCommodity>, ISMCommodityRepository<TSMCommodity> where TSMCommodity : SMCommodity, new()
     {
-        public SMCommodityRepository(MarketDbContext MarketDbContext)
-                : base(MarketDbContext)
-        {
-
-        }
-        public SMCommodityRepository(Action<RepositoryOptions> options)
-                : base(options)
+        public SMCommodityRepository(DbContext DbContext)
+                : base(DbContext)
         {
 
         }
     }
-    public class MMCommodityRepository : StatusDataRepository<MMCommodity>, IMMCommodityRepository
+    public class MMCommodityRepository<TMMCommodity> : MStatusDataRepository<TMMCommodity>, IMMCommodityRepository<TMMCommodity> where TMMCommodity : MMCommodity, new()
     {
-        public MMCommodityRepository(MarketDbContext MarketDbContext)
-                : base(MarketDbContext)
-        {
-
-        }
-        public MMCommodityRepository(Action<RepositoryOptions> options)
-                : base(options)
+        public MMCommodityRepository(DbContext DbContext)
+                : base(DbContext)
         {
 
         }
     }
-    public class EMCommodityRepository : StatusDataRepository<EMCommodity>, IEMCommodityRepository
+    public class EMCommodityRepository<TEMCommodity> : EStatusDataRepository<TEMCommodity>, IEMCommodityRepository<TEMCommodity> where TEMCommodity : EMCommodity, new()
     {
-        public EMCommodityRepository(MarketDbContext MarketDbContext)
-                : base(MarketDbContext)
-        {
-
-        }
-        public EMCommodityRepository(Action<RepositoryOptions> options)
-                : base(options)
+        public EMCommodityRepository(DbContext DbContext)
+                : base(DbContext)
         {
 
         }

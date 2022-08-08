@@ -67,34 +67,9 @@ namespace BusinessData.ofDataContext
         private bool _IsSnsAlarm;
         private bool _IsKakaoAlarm;
         private bool _IsEamliAlarm;
-        public bool IsUseInMemory
-        {
-            get => _IsUseInMemory;
-            set => value;
-        }
-        public bool IsDistributeCache
-        {
-            get => _IsDistributeCache;
-            set => value;
-        }
-        public bool IsSnsAlarm
-        {
-            get => _IsSnsAlarm;
-            set => value;
-        }
-        public bool IsKaKaoAlarm
-        {
-            get => _IsKakaoAlarm;
-            set => value;
-        }
-        public bool IsEmaliAlarm
-        {
-            get => _IsEamliAlarm;
-            set => value;
-        }
         public DataContextOptions(Func<DataContextOptions> options)
         {
-            options.Invoke(this);
+
         }
     }
     public abstract class DataContext
@@ -103,18 +78,9 @@ namespace BusinessData.ofDataContext
         protected readonly IMemoryCache _MemoryCache;
         protected readonly IDistributedCache _DistributedCache;
         protected readonly IServiceScopeFactory _ServiceScopeFactory;
-        protected readonly IServiceProvicer _ServiceProvider;
-        public DataContext(IMemoryCache memoryCache, IDistributedCache distributedCache, 
-        IServiceScopeFactory serviceScopeFactory, IServiceProvider serviceProvider)
-        {
-            _MemoryCache = memoryCache;
-            _DistributedCache = distributedCache;
-            _ServiceScopeFactory = serviceScopeFactory;
-            _ServiceProvider = serviceProvider;
-            OnConfigureEntityBlobStorage(entityManagerBuilder);
-            OnConfigureEntityFile(entityManagerBuilder);
-            OnConfigureEntityId(entityManagerBuilder);
-            OnConfigureEntityRepository(entityManagerBuilder);
+        public DataContext(DataContextOptions options)
+        { 
+
         }
         protected abstract void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder);
         protected abstract void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder);

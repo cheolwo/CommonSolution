@@ -1,7 +1,4 @@
-﻿using BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory;
-using BusinessData.ofDataAccessLayer.ofMarket.ofModel;
-using BusinessData.ofDataAccessLayer.ofMarket.ofRepository;
-using BusinessData.ofDataContext;
+﻿using BusinessData.ofDataContext;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +8,7 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
     public class MarketDataContext : DataContext
     {
         public MarketDataContext(DataContextOptions dataContextOptions)
-            :base(dataContextOptions)
+            : base(dataContextOptions)
         {
         }
 
@@ -40,57 +37,29 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityBlobStorage(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityFile(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityId(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(Market), new EntityIdFactory<Market>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(MCommodity), new EntityIdFactory<MCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(SMCommodity), new EntityIdFactory<SMCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(MMCommodity), new EntityIdFactory<MMCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(EMCommodity), new EntityIdFactory<EMCommodity>());
+            throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityRepository(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(Market), new MarketRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(MCommodity), new MCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(SMCommodity), new SMCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(MMCommodity), new MMCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(EMCommodity), new EMCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
+            throw new NotImplementedException();
+        }
+
+        protected override void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder)
+        {
+            throw new NotImplementedException();
         }
     }
 }

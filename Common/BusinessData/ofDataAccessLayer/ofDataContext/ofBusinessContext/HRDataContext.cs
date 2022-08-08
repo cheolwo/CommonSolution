@@ -1,7 +1,4 @@
-﻿using BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory;
-using BusinessData.ofDataAccessLayer.ofHumanResource.ofModel;
-using BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository;
-using BusinessData.ofDataContext;
+﻿using BusinessData.ofDataContext;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +8,7 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
     public class HRDataContext : DataContext
     {
         public HRDataContext(DataContextOptions dataContextOptions)
-            :base(dataContextOptions)
+            : base(dataContextOptions)
         {
         }
 
@@ -40,57 +37,29 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityBlobStorage(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityFile(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityId(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(HRCenter), new EntityIdFactory<HRCenter>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(HREmployee), new EntityIdFactory<HREmployee>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(HRRole), new EntityIdFactory<HRRole>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(HRBusinessPart), new EntityIdFactory<HRBusinessPart>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(EmployeeRole), new EntityIdFactory<EmployeeRole>());
+            throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityRepository(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(HRCenter), new WarehouseRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(HREmployee), new WCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(HRRole), new SWCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(HRBusinessPart), new MWCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(EmployeeRole), new EWCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
+            throw new NotImplementedException();
+        }
+
+        protected override void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder)
+        {
+            throw new NotImplementedException();
         }
     }
 }

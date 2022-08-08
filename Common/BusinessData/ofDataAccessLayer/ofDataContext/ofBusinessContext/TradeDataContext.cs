@@ -40,57 +40,31 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityBlobStorage(EntityManagerBuilder entityManagerBuilder)
+
+      
+        protected override void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityFile(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityId(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(TradeCenter), new EntityIdFactory<TradeCenter>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(TCommodity), new EntityIdFactory<TCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(STCommodity), new EntityIdFactory<STCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(MTCommodity), new EntityIdFactory<MTCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(ETCommodity), new EntityIdFactory<ETCommodity>());
+            throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityRepository(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(TradeCenter), new TradeCenterRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(TCommodity), new TCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(STCommodity), new STCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(MTCommodity), new MTCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(ETCommodity), new ETCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
+            throw new NotImplementedException();
+        }
+
+        protected override void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder)
+        {
+            throw new NotImplementedException();
         }
     }
 }

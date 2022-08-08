@@ -93,7 +93,11 @@ namespace BusinessData.ofPresentationLayer.ofDTO.ofCommon
     public class CommodityDTO : EntityDTO
     {
         [Query(QueryCode.String)]public string HsCode {get; set;}
-        public string OpponentBusinessUserId { get; set; }
+        public string Producter { get; set; }
+        public string Keywords { get; set; }
+        public string Tags { get; set; }
+        public string Options { get; set; }
+        public string Category { get; set; }
         [Query(QueryCode.String)][View(ViewMode.Detail)]public string Barcode {get; set;}
         [Query(QueryCode.ForeignKey)]public string CenterId {get; set;}
         [Query(QueryCode.With)][One(typeof(Center))][View(ViewMode.Get)]public string Center { get; set; }

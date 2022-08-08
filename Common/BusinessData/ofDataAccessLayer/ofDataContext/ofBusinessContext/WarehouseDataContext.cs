@@ -33,30 +33,31 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
 
         public override async Task<T> PostAsync<T>(T t)
         {
-            using(var scope = _ServiceScopeFactory.CreateScope())
-            {
-                // Post를 할 때마다 이런 식으로 만들기가 좀 그래가지고...
-                // 생성자에서 등록한 모듈들 간 구성을 결정시켜줄 필요가 있어.
-                // ViewContext에서 하려고 했던 것 마냥.
+            //using(var scope = _ServiceScopeFactory.CreateScope())
+            //{
+            //    //// Post를 할 때마다 이런 식으로 만들기가 좀 그래가지고...
+            //    //// 생성자에서 등록한 모듈들 간 구성을 결정시켜줄 필요가 있어.
+            //    //// ViewContext에서 하려고 했던 것 마냥.
 
-                // Setting
-                var db = scope.ServiceProvider.GetRequiredService(t.GetDbContextType());
-                var repository = entityManagerBuilder.GetEntityDataRepository(typeof(t).Name);
-                repository.SetDbContext(db);
-                var IdFactory = entityManagerBuilder.GetEntityIdFactory(typeof(t).Name);
-                IdFactory.SetRepository(repository);
-                var blobContanerFactory = entityManagerBuilder.GetBlobContainerFactory(typeof(t).Name);
-                blobContanerFactory.SetRepository(repository);
-                var blobStorage = entityManagerBuilder.GetEntityBlobStorage(typeof(t).Name);
-                blobStorage.SetBlobContainerFactory(blobContanerFactory);
-            
-                // Chain of Reponsibilty
-                var Result = await t.CreateIdAsync(IdFactory).CreateBlobStorageAsync(blobStorage).PostToDbContextAsync(repository);                
-                // InMemory 에 저장하는 단계
-                Result.PostToInMemory(_MemoryCache);
-                // 분산캐싱에 저장하는 단계    
-                Result.PostToDistributedMemory(_MemoryCache);          
-            }
+            //    //// Setting
+            //    //var db = scope.ServiceProvider.GetRequiredService(t.GetDbContextType());
+            //    //var repository = entityManagerBuilder.GetEntityDataRepository(typeof(t).Name);
+            //    //repository.SetDbContext(db);
+            //    //var IdFactory = entityManagerBuilder.GetEntityIdFactory(typeof(t).Name);
+            //    //IdFactory.SetRepository(repository);
+            //    //var blobContanerFactory = entityManagerBuilder.GetBlobContainerFactory(typeof(t).Name);
+            //    //blobContanerFactory.SetRepository(repository);
+            //    //var blobStorage = entityManagerBuilder.GetEntityBlobStorage(typeof(t).Name);
+            //    //blobStorage.SetBlobContainerFactory(blobContanerFactory);
+
+            //    //// Chain of Reponsibilty
+            //    //var Result = await t.CreateIdAsync(IdFactory).CreateBlobStorageAsync(blobStorage).PostToDbContextAsync(repository);                
+            //    //// InMemory 에 저장하는 단계
+            //    //Result.PostToInMemory(_MemoryCache);
+            //    //// 분산캐싱에 저장하는 단계    
+            //    //Result.PostToDistributedMemory(_MemoryCache);          
+            //}
+            throw new NotImplementedException();
         }
 
         public override Task<T> PutAsync<T>(T t)
@@ -69,7 +70,7 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             throw new NotImplementedException();
         }
 
-        protected override void OnEntityFileBuilder(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
@@ -86,6 +87,11 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             entityManagerBuilder.ApplyEntityIdFactory(nameof(LoadFrame), new EntityIdFactory<LoadFrame>());
             entityManagerBuilder.ApplyEntityIdFactory(nameof(WorkingDesk), new EntityIdFactory<WorkingDesk>());
             entityManagerBuilder.ApplyEntityIdFactory(nameof(DotBarcode), new EntityIdFactory<DotBarcode>());
+        }
+
+        protected override void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder)
+        {
+            throw new NotImplementedException();
         }
 
         protected override void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder)

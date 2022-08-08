@@ -1,7 +1,4 @@
-﻿using BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory;
-using BusinessData.ofDataAccessLayer.ofJournal.Model;
-using BusinessData.ofDataAccessLayer.ofJournal.ofRepository;
-using BusinessData.ofDataContext;
+﻿using BusinessData.ofDataContext;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +8,7 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
     public class JournalDataContext : DataContext
     {
         public JournalDataContext(DataContextOptions dataContextOptions)
-            :base(dataContextOptions)
+            : base(dataContextOptions)
         {
         }
 
@@ -40,43 +37,29 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityBlobStorage(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityFile(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityId(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(JournalCenter), new EntityIdFactory<JournalCenter>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(JCommodity), new EntityIdFactory<JCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(Journal), new EntityIdFactory<Journal>());
+            throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityRepository(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(JournalCenter), new JournalCenterRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(Journal), new JournalRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(JCommodity), new JCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
+            throw new NotImplementedException();
+        }
+
+        protected override void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder)
+        {
+            throw new NotImplementedException();
         }
     }
 }

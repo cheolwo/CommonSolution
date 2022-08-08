@@ -1,7 +1,4 @@
-﻿using BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory;
-using BusinessData.ofDataAccessLayer.ofProduct.ofModel;
-using BusinessData.ofDataContext;
-using BusinessData.ofProduct.ofRepository;
+﻿using BusinessData.ofDataContext;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -35,74 +32,35 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
             throw new NotImplementedException();
         }
 
+
         public override Task<T> PutAsync<T>(T t)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityBlobStorage(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityFile(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityId(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(ProductCenter), new EntityIdFactory<ProductCenter>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(PCommodity), new EntityIdFactory<PCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(SPCommodity), new EntityIdFactory<SPCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(MPCommodity), new EntityIdFactory<MPCommodity>());
-            entityManagerBuilder.ApplyEntityIdFactory(nameof(EPCommodity), new EntityIdFactory<EPCommodity>());
+            throw new NotImplementedException();
         }
 
-        protected override void OnConfigureEntityRepository(EntityManagerBuilder entityManagerBuilder)
+        protected override void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder)
         {
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(ProductCenter), new ProductCenterRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(PCommodity), new PCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = false;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(SPCommodity), new SPCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(MPCommodity), new MPCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            entityManagerBuilder.ApplyEntityDataRepository(nameof(EPCommodity), new EPCommodityRepository(e =>
-            {
-                e.UsingDistributedCache = true;
-                e.UsingMemoryCache = true;
-                e.UsedSingleton = true;
-            }));
-            //entityManagerBuilder.ApplyEntityDataRepository(nameof(Producter), new ProducterRepository(e =>
-            //{
-            //    e.UsingDistributedCache = true;
-            //    e.UsingMemoryCache = true;
-            //    e.UsedSingleton = true;
-            //}));
-            //entityManagerBuilder.ApplyEntityDataRepository(nameof(ProductLand), new ProductLandRepository(e =>
-            //{
-            //    e.UsingDistributedCache = true;
-            //    e.UsingMemoryCache = true;
-            //    e.UsedSingleton = true;
-            //}));
+            throw new NotImplementedException();
+        }
+
+        protected override void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder)
+        {
+            throw new NotImplementedException();
         }
     }
 }
