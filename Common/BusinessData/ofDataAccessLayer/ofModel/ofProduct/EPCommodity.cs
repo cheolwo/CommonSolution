@@ -18,7 +18,6 @@ namespace BusinessData.ofDataAccessLayer.ofProduct.ofModel
         public EPCommodity()
 
         {
-            SetRelation(typeof(EPCommodity), "PLPE");
             PCommodity = new();
         }
     }

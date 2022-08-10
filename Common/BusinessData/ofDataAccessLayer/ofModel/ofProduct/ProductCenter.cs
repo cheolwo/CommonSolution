@@ -22,7 +22,6 @@ namespace BusinessData.ofDataAccessLayer.ofProduct.ofModel
 
         public ProductCenter()
         {
-            SetRelation(typeof(ProductCenter), "P");
             ProductLands = new();
             PCommodities = new();
         }

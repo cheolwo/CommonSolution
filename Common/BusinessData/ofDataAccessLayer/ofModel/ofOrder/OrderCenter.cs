@@ -27,7 +27,6 @@ namespace BusinessData.ofDataAccessLayer.ofOrder.ofModel
         public List<EOCommodity> EOCommodities {get; set;}
         public OrderCenter()
         {
-            SetRelation(typeof(OrderCenter), "C");
         }
     }
     /*

@@ -3,8 +3,7 @@ using BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory;
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage;
 using BusinessLogic.ofEntityManager.ofGeneric.ofFileFactory;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -72,27 +71,81 @@ namespace BusinessData.ofDataContext
 
         }
     }
-    public abstract class DataContext
+    public class DataContext
     {
-        protected EntityManagerBuilder entityManagerBuilder = new();
-        protected readonly IMemoryCache _MemoryCache;
-        protected readonly IDistributedCache _DistributedCache;
+        public EntityManagerBuilder entityManagerBuilder = new();
+        //protected readonly IMemoryCache _MemoryCache;
+        //protected readonly IDistributedCache _DistributedCache;
         protected readonly IServiceScopeFactory _ServiceScopeFactory;
-        public DataContext(DataContextOptions options)
-        { 
-
+        public DataContext(IServiceScopeFactory serviceScopeFactory)
+        {
+            _ServiceScopeFactory = serviceScopeFactory;
+            OnEntityIdBuilder(entityManagerBuilder);
+            OnEntityBlobStorageBuilder(entityManagerBuilder);
+            OnEntityExcelBuilder(entityManagerBuilder);
+            OnEntityPDFBuilder(entityManagerBuilder);
+            OnEntityRepositoryBuilder(entityManagerBuilder);
         }
-        protected abstract void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder);
-        protected abstract void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder);
-        protected abstract void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder);
-        protected abstract void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder);
-        protected abstract void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder);
-
-        public abstract Task<T> PostAsync<T>(T t) where T : Entity;
-        public abstract Task<T> PutAsync<T>(T t) where T : Entity;
-        public abstract Task<T> GetByIdAsync<T>(string id) where T : Entity;
-        public abstract Task DeleteByIdAsync<T>(string id) where T : Entity;
-        public abstract Task<IEnumerable<T>> GetsAsync<T>() where T : Entity;
+        protected virtual void OnEntityIdBuilder(EntityManagerBuilder entityManagerBuilder) { }
+        protected virtual void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder) { }
+        protected virtual void OnEntityRepositoryBuilder(EntityManagerBuilder entityManagerBuilder) { }
+        protected virtual void OnEntityExcelBuilder(EntityManagerBuilder entityManagerBuilder) { }
+        protected virtual void OnEntityPDFBuilder(EntityManagerBuilder entityManagerBuilder) { }
+        public async Task<T> PostAsync<T>(T t) where T : Entity
+        {
+            IEntityDataRepository repository = entityManagerBuilder.GetEntityDataRepository(typeof(T).Name);
+            IEntityIdFactory IdFactory = entityManagerBuilder.GetEntityIdFactory(typeof(T).Name);
+            using (var serviceScope = _ServiceScopeFactory.CreateScope())
+            {
+                var DbContextType = t.GetDbContextType(typeof(T));
+                DbContext dbContext = (DbContext)serviceScope.ServiceProvider.GetRequiredService(DbContextType);
+                await IdFactory.ConfigureIdAsync(t, dbContext, repository);
+                t = (T)await repository.AddAsync(t, dbContext);
+            }
+            return t;
+        }
+        public async Task<T> PutAsync<T>(T t) where T : Entity
+        {
+            IEntityDataRepository<T> repository = (IEntityDataRepository<T>)entityManagerBuilder.GetEntityDataRepository(typeof(T).Name);
+            using (var serviceScope = _ServiceScopeFactory.CreateScope())
+            {
+                var DbContextType = t.GetDbContextType(typeof(T));
+                DbContext dbContext = (DbContext)serviceScope.ServiceProvider.GetRequiredService(DbContextType);
+                repository.SetDbContext(dbContext);
+                await repository.UpdateAttachAsync(t);
+                t = await repository.GetByIdAsync(t.Id);
+            }
+            return t;
+        }
+        public Task<T> GetByIdAsync<T>(string id) where T : Entity
+        {
+            throw new NotImplementedException();
+        }
+        public async Task DeleteByIdAsync<T>(string id) where T : Entity, new()
+        {
+            IEntityDataRepository<T> repository = (IEntityDataRepository<T>)entityManagerBuilder.GetEntityDataRepository(typeof(T).Name);
+            using (var serviceScope = _ServiceScopeFactory.CreateScope())
+            {
+                T t = new();
+                var DbContextType = t.GetDbContextType(typeof(T));
+                DbContext dbContext = (DbContext)serviceScope.ServiceProvider.GetRequiredService(DbContextType);
+                repository.SetDbContext(dbContext);
+           
+                await repository.DeleteByIdAsync(id);
+            }
+        }
+        public async Task<IEnumerable<T>> GetsAsync<T>() where T : Entity, new()
+        {
+            IEntityDataRepository<T> repository = (IEntityDataRepository<T>)entityManagerBuilder.GetEntityDataRepository(typeof(T).Name);
+            using (var serviceScope = _ServiceScopeFactory.CreateScope())
+            {
+                T t = new();
+                var DbContextType = t.GetDbContextType(typeof(T));
+                DbContext dbContext = (DbContext)serviceScope.ServiceProvider.GetRequiredService(DbContextType);
+                repository.SetDbContext(dbContext);
+                return await repository.GetToListAsync();
+            }
+        }
     }
     public class EntityManagerBuilder
     {
@@ -100,7 +153,8 @@ namespace BusinessData.ofDataContext
         private Dictionary<string, IEntityDataRepository> DicEntityDataRepository = new();
         private Dictionary<string, IEntityIdFactory> DicEntityIdFactory = new();
         private Dictionary<string, IEntityBlobStorage> DicEntityBlobStorage = new();
-        private Dictionary<string, IEntityFileFactory> DicEntityFileFactory = new();
+        private Dictionary<string, IEntityPDFFileFactory> DicEntityPDFFileFactory = new();
+        private Dictionary<string, IEntityExcelFileFactory> DicEntityExcelFileFactory = new();
         public virtual void ApplyEntityDataRepository(string nameofEntityDataRepository, IEntityDataRepository entityDataRepository)
         {
             DicEntityDataRepository.Add(nameofEntityDataRepository, entityDataRepository);
@@ -109,9 +163,13 @@ namespace BusinessData.ofDataContext
         {
             DicEntityIdFactory.Add(nameofEntityIdFactory, entityIdFactory);
         }
-        public virtual void ApplyEntityFileFactory(string nameofEntityFileFactory, IEntityFileFactory entityFileFactory) 
+        public virtual void ApplyEntityPDFFileFactory(string nameofEntityPDFFileFactory, IEntityPDFFileFactory EntityPDFFileFactory) 
         {
-            DicEntityFileFactory.Add(nameofEntityFileFactory, entityFileFactory);
+            DicEntityPDFFileFactory.Add(nameofEntityPDFFileFactory, EntityPDFFileFactory);
+        }
+        public virtual void ApplyEntityExcelFileFactory(string nameofEntityExcelFileFactory, IEntityExcelFileFactory entityExcelFileFactory)
+        {
+            DicEntityExcelFileFactory.Add(nameofEntityExcelFileFactory, entityExcelFileFactory);
         }
         public virtual void ApplysEntityBlobStorage(string nameofEntityBlobStorage, IEntityBlobStorage entityBlobStorage)
         {
@@ -132,9 +190,14 @@ namespace BusinessData.ofDataContext
             return DicEntityBlobStorage[name]
                    ?? throw new ArgumentNullException("Not Included");
         }
-        public IEntityFileFactory GetEntityFileFactory(string name)
+        public IEntityPDFFileFactory GetEntityPDFFileFactory(string name)
         {
-            return DicEntityFileFactory[name]
+            return DicEntityPDFFileFactory[name]
+                   ?? throw new ArgumentNullException("Not Included");
+        }
+        public IEntityExcelFileFactory GetEntityExcelFileFactory(string name)
+        {
+            return DicEntityExcelFileFactory[name]
                    ?? throw new ArgumentNullException("Not Included");
         }
     }

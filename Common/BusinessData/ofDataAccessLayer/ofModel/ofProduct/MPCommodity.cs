@@ -20,7 +20,6 @@ namespace BusinessData.ofDataAccessLayer.ofProduct.ofModel
         public List<EPCommodity> EPCommodities { get; set; }
         public MPCommodity()
         {
-            SetRelation(typeof(MPCommodity), "PLPM");
             PCommodity = new();
         }
         public override bool Equals(object obj)

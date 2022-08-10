@@ -15,7 +15,6 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofModel
         public List<TCommodity> TCommodities {get; set;}
         public TradeCenter()
         {
-            SetRelation(typeof(TradeCenter), "T");
             TCommodities = new();
         }
     }

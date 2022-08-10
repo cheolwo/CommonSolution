@@ -22,7 +22,6 @@ namespace BusinessData.ofDataAccessLayer.ofProduct.ofModel
 
         public PCommodity()
         {
-            SetRelation(typeof(PCommodity), "PP");
             SPCommodities = new();
         }
     }

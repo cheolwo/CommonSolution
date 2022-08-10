@@ -292,10 +292,10 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
         }
         public Type GetDbContextType(Type t)
         {
-            DataContextAttribute dataContextAttribute = (DataContextAttribute)Attribute.GetCustomAttribute(t, typeof(DataContextAttribute));
-            if (dataContextAttribute != null)
+            DbContextAttribute DbContextAttribute = (DbContextAttribute)Attribute.GetCustomAttribute(t, typeof(DbContextAttribute));
+            if (DbContextAttribute != null)
             {
-                return dataContextAttribute.GetDbContextType();
+                return DbContextAttribute.t;
             }
             throw new ArgumentException("Not Defined Relation");
         }

@@ -10,7 +10,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory
 {
     public interface IEntityIdFactory
     {
-        Task<string> ConfigureIdAsync(Entity entity, DbContext dbConext, IEntityDataRepository entityDataRepository);
+        Task ConfigureIdAsync(Entity entity, DbContext dbConext, IEntityDataRepository entityDataRepository);
     }
     public interface IEntityIdFactory<TEntity> : IEntityIdFactory where TEntity : Entity
     {
@@ -90,7 +90,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory
             return entities;
         }
 
-        public virtual async Task<string> ConfigureIdAsync(Entity entity, DbContext dbContext, IEntityDataRepository entityDataRepository)
+        public virtual async Task ConfigureIdAsync(Entity entity, DbContext dbContext, IEntityDataRepository entityDataRepository)
         {
             StringBuilder stringBuilder = new();
             stringBuilder.Append(entity.GetRelationCode(typeof(TEntity)));
@@ -104,21 +104,11 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory
                 stringBuilder.Append(str);
             }
             stringBuilder.Append('-');
-            int Count = await _entityDataRepository.GetCountAsync();
-            stringBuilder.Append(Count);
-
-            // Chaining Code
+            stringBuilder.Append(entity.UserId);
             stringBuilder.Append('-');
-            stringBuilder.Append(ChainingCode);
-
-            var CurrentEntity = await entityDataRepository.GetByIdAsync(stringBuilder.ToString(), dbContext);
-            if (CurrentEntity != null)
-            {
-                ChainingCode++;
-                await ConfigureIdAsync(entity, dbContext, entityDataRepository);
-            }
-            ChainingCode = 0;
-            return stringBuilder.ToString();
+            int Count = await entityDataRepository.GetCountAsync(dbContext);
+            stringBuilder.Append(Count);
+            entity.Id = stringBuilder.ToString();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage.ofContainerFacto
         public static string Create(TEntity entity)
         {
             StringBuilder stringBuilder = new();
-            stringBuilder.Append(entity.GetRelationCode(typeof(TEntity))); // 1~4
+            stringBuilder.Append(entity.GetRelationCode(typeof(TEntity)));
             stringBuilder.Append('-');
             stringBuilder.Append(entity.UserId.ToLower());
             return stringBuilder.ToString();

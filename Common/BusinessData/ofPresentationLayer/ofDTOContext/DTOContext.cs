@@ -22,7 +22,7 @@ namespace BusinessData.ofPresentationLayer.ofDTOContext
             get => _dtoContextType;
         }
     }
-    public abstract class DTOContext
+    public class DTOContext
     {
         protected ServiceBuilder ServiceBuilder = new();
         protected StorageBuilder StorageBuilder = new();
@@ -36,15 +36,45 @@ namespace BusinessData.ofPresentationLayer.ofDTOContext
         protected virtual void OnServiceBuilder(ServiceBuilder serviceBuilder) { }
         protected virtual void OnStrorageBuilder(StorageBuilder storageBuilder) { }
         protected virtual void OnValidatorBuilder(ValidatorBuilder validatorBuilde) { }
-        public abstract Task<T> PostAsync<T>(T t, MultipartFormDataContent content) where T : EntityDTO, new();
-        public abstract Task<T> PostAsync<T>(T t) where T : EntityDTO, new();
-        public abstract Task<T> PutAsync<T>(T t) where T : EntityDTO, new();
-        public abstract Task<T> GetByIdAsync<T>(string id) where T : EntityDTO, new();
-        public abstract Task DeleteByIdAsync<T>(string id) where T : EntityDTO, new();
-        public abstract Task<IEnumerable<T>> GetsAsync<T>() where T : EntityDTO, new();
-        public abstract Task<IEnumerable<T>> GetsAsyncByUserId<T>(string userid) where T : EntityDTO, new();
-        public abstract IValidator<T> GetValidator<T>() where T : EntityDTO, new();
-        public abstract ITable<T> GetMemoryTable<T>() where T : EntityDTO, new();
-        public abstract DTOService GetDTOService<T>() where T : EntityDTO, new();
+        public Task<T> PostAsync<T>(T t, MultipartFormDataContent content) where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public Task<T> PostAsync<T>(T t) where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public Task<T> PutAsync<T>(T t) where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public Task<T> GetByIdAsync<T>(string id) where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public Task DeleteByIdAsync<T>(string id) where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public Task<IEnumerable<T>> GetsAsync<T>() where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public Task<IEnumerable<T>> GetsAsyncByUserId<T>(string userid) where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public IValidator<T> GetValidator<T>() where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public ITable<T> GetMemoryTable<T>() where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
+        public DTOService GetDTOService<T>() where T : EntityDTO, new()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

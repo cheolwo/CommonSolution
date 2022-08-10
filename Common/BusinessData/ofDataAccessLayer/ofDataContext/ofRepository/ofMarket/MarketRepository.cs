@@ -10,6 +10,10 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofRepository
     {
 
     }
+    public interface IPlatMarketRepository<TPlatMarket> : ICenterDataRepository<TPlatMarket> where TPlatMarket : PlatMarket, new()
+    {
+
+    }
     public interface IMCommodityRepository<TMCommodity> : ICommodityDataRepository<TMCommodity> where TMCommodity : MCommodity, new()
     {
 
@@ -25,6 +29,14 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofRepository
     public interface IEMCommodityRepository<TEMCommodity> : IEStatusDataRepository<TEMCommodity> where TEMCommodity : EMCommodity, new()
     {
 
+    }
+    public class PlatMarketRepository<TPlatMarket> : CenterDataRepository<TPlatMarket>, IPlatMarketRepository<TPlatMarket> where TPlatMarket : PlatMarket, new()
+    {
+        public PlatMarketRepository(DbContext DbContext)
+                : base(DbContext)
+        {
+
+        }
     }
     public class MarketRepository<TMarket> : CenterDataRepository<TMarket>, IMarketRepository<TMarket> where TMarket : Market, new()
     {

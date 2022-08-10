@@ -28,22 +28,25 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofDbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new MarketConfiguration<Market>());
+            modelBuilder.ApplyConfiguration(new PlatMarketConfiguation<PlatMarket>());
             modelBuilder.ApplyConfiguration(new MCommodityConfiguration<MCommodity>());
             modelBuilder.ApplyConfiguration(new SMCommodityConfiguration<SMCommodity>());
             modelBuilder.ApplyConfiguration(new MMCommodityConfiguration<MMCommodity>());
             modelBuilder.ApplyConfiguration(new EMCommodityConfiguration<EMCommodity>());
         }
-        public DbSet<PlatMarket> PlatMarkets {get; set;}
+    }
+    public class PlatMarketConfiguation<TPlatMarket> : CenterConfiguration<TPlatMarket> where TPlatMarket : PlatMarket
+    {
+        public override void Configure(EntityTypeBuilder<TPlatMarket> builder)
+        {
+            base.Configure(builder);
+        }
     }
     public class MCommodityConfiguration<TMCommodity> : CommodityConfiguration<TMCommodity> where TMCommodity : MCommodity
     {
         public override void Configure(EntityTypeBuilder<TMCommodity> builder)
         {
             base.Configure(builder);
-            builder.Property(c => c.Options).HasConversion(
-                 v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
-                 v => JsonConvert.DeserializeObject<List<Option>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }));
-            builder.ToTable("MCommodity"); 
         }
     }
     public class MarketConfiguration<TMarket> : CenterConfiguration<TMarket> where TMarket : Market
@@ -51,7 +54,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofDbContext
         public override void Configure(EntityTypeBuilder<TMarket> builder)
         {
             base.Configure(builder);
-            builder.ToTable("Market");
         }
     }
     public class SMCommodityConfiguration<TSMCommodity> : StatusConfiguration<TSMCommodity> where TSMCommodity : SMCommodity
@@ -59,7 +61,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofDbContext
         public override void Configure(EntityTypeBuilder<TSMCommodity> builder)
         {
             base.Configure(builder);
-            builder.ToTable("SPCommodity");
         }
     }
     public class MMCommodityConfiguration<TMMCommodity> : StatusConfiguration<TMMCommodity> where TMMCommodity : MMCommodity
@@ -67,7 +68,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofDbContext
         public override void Configure(EntityTypeBuilder<TMMCommodity> builder)
         {
             base.Configure(builder);
-            builder.ToTable("MMCommodity");
         }
     }
     public class EMCommodityConfiguration<TEMCommodity> : StatusConfiguration<TEMCommodity> where TEMCommodity : EMCommodity
@@ -75,7 +75,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofDbContext
         public override void Configure(EntityTypeBuilder<TEMCommodity> builder)
         {
             base.Configure(builder);
-            builder.ToTable("EMCommodity");
         }
     }
 }

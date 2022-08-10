@@ -1,47 +1,15 @@
-﻿using BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory;
-using BusinessData.ofDataAccessLayer.ofTrade.ofModel;
-using BusinessData.ofDataAccessLayer.ofTrade.ofRepository;
-using BusinessData.ofDataContext;
+﻿using BusinessData.ofDataContext;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
 {
     public class TradeDataContext : DataContext
     {
-        public TradeDataContext(DataContextOptions dataContextOptions)
-                :base(dataContextOptions)
+        public TradeDataContext(IServiceScopeFactory serviceScopeFactory)
+            : base(serviceScopeFactory)
         {
         }
-
-        public override Task DeleteByIdAsync<T>(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<T> GetByIdAsync<T>(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<IEnumerable<T>> GetsAsync<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<T> PostAsync<T>(T t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<T> PutAsync<T>(T t)
-        {
-            throw new NotImplementedException();
-        }
-
-
-      
         protected override void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder)
         {
             throw new NotImplementedException();

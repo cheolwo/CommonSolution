@@ -24,7 +24,6 @@ namespace BusinessData.ofDataAccessLayer.ofProduct.ofModel
         public List<MPCommodity> MPCommodities { get; set; }
         public SPCommodity()
         {
-            SetRelation(typeof(SPCommodity), "PLPS");
             PCommodity = new();
         }
     }

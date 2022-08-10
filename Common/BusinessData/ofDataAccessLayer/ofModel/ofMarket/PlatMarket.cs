@@ -20,11 +20,10 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
         public string VendorPassword {get; set;}
         public byte[] AccessKey { get; set; }
         public byte[] SecreatKey { get; set; }
-        public List<PMMCommodity> PMMCommodities {get; set;}
+        public List<MMCommodity> MMCommodities { get; set; }
 
         public PlatMarket()
         {
-            SetRelation(typeof(PlatMarket), "P");
         }
 
         public override bool Equals(object obj)
@@ -94,18 +93,13 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     public class MCommodity : Commodity,  IRelatedCenter
     {
         public Market Market {get; set;}
-        public DetailofMCommodity DetailofMCommodity { get; set; }  // Json 으로 처리한다.
-        public List<Option> Options { get; set; }
         public List<SMCommodity> SMCommodities {get; set;}
         public List<MMCommodity> MMCommodities {get; set;}
         public List<EMCommodity> EMCommodities {get; set;}
 
         public MCommodity()
         {
-            SetRelation(typeof(MCommodity), "MM");
             Market = new();
-            DetailofMCommodity = new();
-            Options = new();
             SMCommodities = new();
             MMCommodities = new();
             EMCommodities = new();
@@ -128,7 +122,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
         
         public SMCommodity()
         {
-            SetRelation(typeof(SMCommodity), "MMS");
             MCommodity = new();
             MMCommodities = new();
             Market = new();
@@ -163,12 +156,10 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
         public Market Market {get; set;}
         public MCommodity MCommodity {get; set;}
         public List<EMCommodity> EMCommodities {get; set;}
-        public PMMCommodity PMMCommodity {get; set;}
         public SMCommodity SMCommodity {get; set;}
 
         public MMCommodity()
         {
-            SetRelation(typeof(MMCommodity), "MMM");
             PlatMarket = new();
             MCommodity = new();
             EMCommodities = new();
@@ -195,7 +186,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
     [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
     [DataContext(typeof(MarketDataContext))]
-    [Relation(typeof(EMCommodity), "MME")]
     public class EMCommodity : EStatus,  IRelatedCenter
     {
         public MCommodity MCommodity {get; set;}
@@ -205,7 +195,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
 
         public EMCommodity()
         {
-            SetRelation(typeof(EMCommodity), "MME");
             MCommodity = new();
             MMCommodity = new();
             PlatMarket = new();

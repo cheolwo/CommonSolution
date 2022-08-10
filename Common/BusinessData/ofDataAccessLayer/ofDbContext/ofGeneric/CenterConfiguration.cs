@@ -33,7 +33,6 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofTypeConfiguration
                 new ValueComparer<List<CenterCard>>((c1, c2) => c1.SequenceEqual(c2),
                  c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
             c => c.ToList()));
-
         }
     }
 }

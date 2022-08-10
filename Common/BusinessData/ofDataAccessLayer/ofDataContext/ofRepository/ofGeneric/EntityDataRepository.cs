@@ -15,7 +15,10 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         Task<Entity> UpdateAsync(Entity tentity, DbContext dbContext);
         Task DeleteByIdAsync(string Id, DbContext dbContext);
         Task<Entity> GetByIdAsync(string Id, DbContext dbContext);
+        Task<int> GetCountAsync(DbContext dbContext);
         Task<Entity> GetByContainerAsync(string containerName, DbContext dbContext);
+
+        void SetDbContext(DbContext dbContext);
     }
     public abstract class EntityDataRepository : IEntityDataRepository
     {
@@ -25,6 +28,8 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         public abstract Task<List<Entity>> GetToListAsync(DbContext dbContext);
         public abstract Task<Entity> UpdateAsync(Entity tentity, DbContext dbContext);
         public abstract Task<Entity> GetByContainerAsync(string containerName, DbContext dbContext);
+        public abstract Task<int> GetCountAsync(DbContext dbContext);
+        public abstract void SetDbContext(DbContext dbContext);
     }
 
     public interface IEntityDataRepository<TEntity> : IEntityDataRepository where TEntity : Entity
@@ -82,6 +87,11 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
     public class EntityDataRepository<TEntity> : IEntityDataRepository<TEntity> where TEntity : Entity, new()
     {
         protected DbContext _DbContext;
+        public DbContext dbContext
+        {
+            get => _DbContext;
+            set => _DbContext = value;
+        }
         protected DbContext _InMemoryDbContext;
         protected RepositoryOptions _RepositoryOptions = new();
         public EntityDataRepository(DbContext DbContext)
@@ -106,7 +116,19 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         }
         public EntityDataRepository()
         {
-            _DbContext = (DbContext)Activator.CreateInstance(entity.GetDbContextType(typeof(TEntity)), entity.GetDbConnetionString(typeof(TEntity)));
+
+        }
+        public void SetDbContext(DbContext dbContext)
+        {
+            if(dbContext is not null)
+            {
+                _DbContext = dbContext;
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(DbContext) + "Is Null");
+            }
+            
         }
         public virtual async Task<TEntity> AddAsync(TEntity tentity)
         {
@@ -121,12 +143,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         }
         public async Task<TEntity> GetByIdAsync(string Id)
         {
-            TEntity InMemoryEntity = await _InMemoryDbContext.FindAsync<TEntity>(Id);
-            if (InMemoryEntity != null)
-            {
-                return InMemoryEntity;
-            }
-            var DbEntity = await _DbContext.FindAsync<TEntity>(Id);
+            var DbEntity = await _DbContext.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.Equals(Id));
             if (DbEntity != null)
             {
                 return DbEntity;
@@ -143,8 +160,12 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
 
 
         public async Task<int> GetCountAsync()
-        {
+        {   
             return await _DbContext.Set<TEntity>().CountAsync();
+        }
+        public async Task<int> GetCountAsync(DbContext dbContext)
+        {
+            return await dbContext.Set<TEntity>().CountAsync();
         }
 
         public async Task<List<TEntity>> GetToListAsync()

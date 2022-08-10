@@ -10,6 +10,14 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofFileFactory
     {
 
     }
+    public interface IEntityPDFFileFactory
+    {
+
+    }
+    public interface IEntityExcelFileFactory
+    {
+
+    }
     public interface IEntityFileFactory<TEntity> : IEntityFileFactory where TEntity : Entity
     {
         object[,] InitExcelData(string fileconnection);

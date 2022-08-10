@@ -18,9 +18,9 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory
         }
         public StatusIdFactory() { }
 
-        public override Task<string> ConfigureIdAsync(Entity entity, DbContext dbContext, IEntityDataRepository entityDataRepository)
+        public override async Task ConfigureIdAsync(Entity entity, DbContext dbContext, IEntityDataRepository entityDataRepository)
         {
-            return base.ConfigureIdAsync(entity, dbContext, entityDataRepository);
+            await base.ConfigureIdAsync(entity, dbContext, entityDataRepository);
         }
 
         public override async Task<string> CreateIdByRelationEntity(TEntity entity)

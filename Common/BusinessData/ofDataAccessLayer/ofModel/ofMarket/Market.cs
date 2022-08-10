@@ -5,7 +5,6 @@ using BusinessData.ofDataAccessLayer.ofCommon.ofAttribute;
 using BusinessData.ofDataAccessLayer.ofCommon.ofInterface;
 using BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness;
 using BusinessData.ofDataAccessLayer.ofMarket.ofDbContext;
-using Microsoft.AspNetCore.Authorization;
 
 namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
 {
@@ -36,7 +35,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
 
         public Market()    
         {
-            SetRelation(typeof(Market), "M");
             PlatMarkets = new();
             MCommodities = new();
             SMCommodities = new();

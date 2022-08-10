@@ -32,7 +32,6 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
         [Detail][Many(ViewNameofDeliveryCenter.SDCommodity)] public List<SDCommodity> SDCommodities { get; set; }
         public DeliveryCenter()        
         {
-            SetRelation(typeof(DeliveryCenter), "D");
             DCommodities = new();
             EDCommodities = new();
             MDCommodities = new();
@@ -75,7 +74,6 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
         [Detail][Many(ViewNameofDeliveryCenter.SDCommodity)] public List<SDCommodity> SDCommodities { get; set; }
         public DCommodity()
         {
-            SetRelation(typeof(DCommodity), "DD");
             DeliveryCenter = new();
         }
         
@@ -107,7 +105,6 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
         
         public SDCommodity()
         {
-            SetRelation(typeof(SDCommodity), "DDS");
             DeliveryCenter = new();
         }
 
@@ -139,7 +136,6 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
         [Detail]public string DeliveryCenterId {get; set;}
         public MDCommodity()
         {
-            SetRelation(typeof(MDCommodity), "DDM");
             DeliveryCenter = new();
         }
     }
@@ -156,7 +152,6 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
         [Detail]public string MDCommodidtyId {get; set;}
         public EDCommodity()
         {
-            SetRelation(typeof(EDCommodity), "DDE");
             DeliveryCenter = new();
         }
 

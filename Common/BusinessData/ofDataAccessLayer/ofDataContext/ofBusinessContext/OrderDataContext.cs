@@ -1,4 +1,5 @@
 ﻿using BusinessData.ofDataContext;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,34 +8,9 @@ namespace BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness
 {
     public class OrderDataContext : DataContext
     {
-        public OrderDataContext(DataContextOptions dataContextOptions)
-            : base(dataContextOptions)
+        public OrderDataContext(IServiceScopeFactory serviceScopeFactory)
+            :base(serviceScopeFactory)
         {
-        }
-
-        public override Task DeleteByIdAsync<T>(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<T> GetByIdAsync<T>(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<IEnumerable<T>> GetsAsync<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<T> PostAsync<T>(T t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<T> PutAsync<T>(T t)
-        {
-            throw new NotImplementedException();
         }
 
         protected override void OnEntityBlobStorageBuilder(EntityManagerBuilder entityManagerBuilder)

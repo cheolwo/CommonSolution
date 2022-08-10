@@ -28,8 +28,8 @@ namespace BusinessLogic.ofEntityManager.ofMarket.ofBlobStorage
     }
     public class MarketBlobContainerFactory : EntityContainerFactory<Market>, IMarketBlobContainerFactory
     {
-        private readonly IMarketRepository _MarketRepository;
-        public MarketBlobContainerFactory(IMarketRepository MarketRepository)
+        private readonly IMarketRepository<Market> _MarketRepository;
+        public MarketBlobContainerFactory(IMarketRepository<Market> MarketRepository)
                 :base(MarketRepository)
         {
             _MarketRepository = MarketRepository;

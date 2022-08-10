@@ -109,7 +109,7 @@ namespace BusinessData.ofPresentationLayer.ofDTO.ofCommon
     {
         [Query(QueryCode.ForeignKey)]public string CommodityId {get; set;}
         [Query(QueryCode.ForeignKey)]public string CenterId {get; set;}
-        [Query(QueryCode.Int)]public string Quantity { get; set; }
+        [Query(QueryCode.Int)]public int Quantity { get; set; }
         [Query(QueryCode.With)] public string Commodity { get; set; }
         [Query(QueryCode.With)] public string Center {get; set;}
     }
