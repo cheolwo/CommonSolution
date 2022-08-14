@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Seller\SellerSolution\SellerCommon\SellerData\SellerData.csproj" />
     <ProjectReference Include="..\BusinessData\BusinessData.csproj" />
   </ItemGroup>
 

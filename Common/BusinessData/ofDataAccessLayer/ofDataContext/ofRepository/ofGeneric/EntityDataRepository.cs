@@ -10,6 +10,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
 {
     public interface IEntityDataRepository
     {
+        Task<Entity> InsertOrUpdate(Entity entity, DbContext dbContext);
         Task<List<Entity>> GetToListAsync(DbContext dbContext);
         Task<Entity> AddAsync(Entity tentity, DbContext dbContext);
         Task<Entity> UpdateAsync(Entity tentity, DbContext dbContext);
@@ -30,6 +31,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         public abstract Task<Entity> GetByContainerAsync(string containerName, DbContext dbContext);
         public abstract Task<int> GetCountAsync(DbContext dbContext);
         public abstract void SetDbContext(DbContext dbContext);
+        public abstract Task<Entity> InsertOrUpdate(Entity entity, DbContext dbContext);
     }
 
     public interface IEntityDataRepository<TEntity> : IEntityDataRepository where TEntity : Entity
@@ -120,7 +122,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         }
         public void SetDbContext(DbContext dbContext)
         {
-            if(dbContext is not null)
+            if (dbContext is not null)
             {
                 _DbContext = dbContext;
             }
@@ -128,7 +130,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
             {
                 throw new ArgumentNullException(nameof(DbContext) + "Is Null");
             }
-            
+
         }
         public virtual async Task<TEntity> AddAsync(TEntity tentity)
         {
@@ -160,7 +162,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
 
 
         public async Task<int> GetCountAsync()
-        {   
+        {
             return await _DbContext.Set<TEntity>().CountAsync();
         }
         public async Task<int> GetCountAsync(DbContext dbContext)
@@ -179,9 +181,15 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
 
         public async Task<TEntity> UpdateAsync(TEntity tentity)
         {
-            _DbContext.Entry(tentity).CurrentValues.SetValues(tentity);
+            _DbContext.Update(tentity);
             await _DbContext.SaveChangesAsync();
             return await GetByIdAsync(tentity.Id);
+        }
+        public async Task UpdateAttachAsync(TEntity entity)
+        {
+            var attach = _DbContext.Attach(entity);
+            attach.State = EntityState.Modified;
+            await _DbContext.SaveChangesAsync();
         }
         public async Task<TEntity> GetByContainerAsync(string containerName)
         {
@@ -244,12 +252,6 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
             }
         }
 
-        public async Task UpdateAttachAsync(TEntity entity)
-        {
-            var attach = _DbContext.Attach(entity);
-            attach.State = EntityState.Modified;
-            await _DbContext.SaveChangesAsync();
-        }
 
         public async Task<TEntity> GetByUserIdAsync(string UserId)
         {
@@ -326,6 +328,21 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         public async Task<Entity> GetByContainerAsync(string containerName, DbContext dbContext)
         {
             return await dbContext.Set<TEntity>().FirstOrDefaultAsync(e => e.Container.Equals(containerName));
+        }
+
+        public async Task<Entity> InsertOrUpdate(Entity entity, DbContext dbContext)
+        {
+            var existing = await dbContext.Set<TEntity>().FindAsync(entity.Id);
+            if (existing == null)
+            {
+                dbContext.Add((TEntity)entity);
+            }
+            else
+            {
+                dbContext.Entry(existing).CurrentValues.SetValues((TEntity)entity);
+            }
+            await dbContext.SaveChangesAsync();
+            return await GetByIdAsync(entity.Id, dbContext);
         }
     }
 }

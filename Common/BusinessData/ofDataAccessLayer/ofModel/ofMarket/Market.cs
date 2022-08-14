@@ -27,7 +27,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     public class Market : Center, IRelatedCenter
     {
         public string NameofMarket { get; set; }
-        public List<PlatMarket> PlatMarkets { get; set; }
         public List<MCommodity> MCommodities {get; set;}
         public List<SMCommodity> SMCommodities {get; set; }
         public List<MMCommodity> MMCommodities {get; set;}
@@ -35,7 +34,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
 
         public Market()    
         {
-            PlatMarkets = new();
             MCommodities = new();
             SMCommodities = new();
             MMCommodities = new();
@@ -49,8 +47,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
 
                    EqualityComparer<IList<ImageofInfo>>.Default.Equals(ImageofInfos, market.ImageofInfos) &&
                    Name == market.Name &&
-                   UserId == market.UserId &&
-                   EqualityComparer<List<PlatMarket>>.Default.Equals(PlatMarkets, market.PlatMarkets);
+                   UserId == market.UserId;
         }
         public override int GetHashCode()
         {

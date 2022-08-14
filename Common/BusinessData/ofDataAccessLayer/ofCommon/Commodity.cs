@@ -2,9 +2,11 @@ using BusinessData.ofDataAccessLayer.ofCommon.ofInterface;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessData.ofDataAccessLayer.ofCommon
 {
+    [NotMapped]
     public class Commodity : Entity, IRelatedCenter
     {
         public string HsCode {get; set;}

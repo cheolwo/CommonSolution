@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessData.ofDataAccessLayer.ofCommon
 {
+    [NotMapped]
     public class Center : Entity
     {
         public string LoginId { get; set; }

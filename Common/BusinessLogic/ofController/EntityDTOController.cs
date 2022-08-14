@@ -3,8 +3,10 @@ using BusinessData.ofDataAccessLayer.ofModelExtenstions;
 using BusinessData.ofDataContext;
 using BusinessData.ofPresentationLayer.ofCommon;
 using BusinessData.ofPresentationLayer.ofDTO.ofCommon;
+using BusinessLogic.ofMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
 namespace BusienssLogic.ofController.ofGeneric
 {
@@ -12,10 +14,9 @@ namespace BusienssLogic.ofController.ofGeneric
     // Rouing은 구체적인 이름이 붙어야 돼.
     public interface IEntityDTOController<DTO, Model> where DTO : EntityDTO, new() where Model : Entity, new()
     {
-        Task<ActionResult<DTO>> Post([FromBody] DTO dto);
-        Task<ActionResult<DTO>> Put([FromBody] DTO dto);
-        Task Delete(DTO dtO);
-        Task<IEnumerable<DTO>> GetAlls();
+        Task<ActionResult> Post([FromBody] DTO dto);
+        Task<ActionResult> Put([FromBody] DTO dto);
+        Task<ActionResult> Delete(DTO dtO);
     }
 
     public class EntityDTOController<DTO, Model> : ControllerBase, IEntityDTOController<DTO, Model> where DTO : EntityDTO, new() where Model : Entity, new()
@@ -47,19 +48,19 @@ namespace BusienssLogic.ofController.ofGeneric
             return dtos;
         }
         [HttpPost]
-        public virtual async Task<ActionResult<DTO>> Post([FromBody] DTO dto)
+        public virtual async Task<ActionResult> Post([FromBody] DTO dto)
         {
             _logger.LogInformation(nameof(EntityDTOController<DTO, Model>.Post));
             var model = dto.ConvertToModel<Model, DTO>();
             var newModel = await model.PostAsync(_dataContext);
-            if (newModel != null)
+            if (newModel == null)
             {
-                return newModel.ConvertToDTO<DTO, Model>();
+                BadRequest();
             }
-            throw new ArgumentException("Post Failed");
+            return StatusCode(200);
         }
         [HttpPut]
-        public virtual async Task<ActionResult<DTO>> Put([FromBody] DTO dto)
+        public virtual async Task<ActionResult> Put([FromBody] DTO dto)
         {
             _logger.LogInformation(nameof(EntityDTOController<DTO, Model>.Put));
             var model = dto.ConvertToModel<Model, DTO>();
@@ -68,11 +69,10 @@ namespace BusienssLogic.ofController.ofGeneric
             {
                 return BadRequest();
             }
-            // 중간 저장소에 같은 Id를 가지는 값이 있다면 삭제하고 삽입
-            return updatedModel.ConvertToDTO<DTO, Model>();
+            return StatusCode(200);
         }
         [HttpDelete]
-        public virtual async Task Delete(DTO dto)
+        public virtual async Task<ActionResult> Delete(DTO dto)
         {
             _logger.LogInformation(nameof(EntityDTOController<DTO, Model>.Delete));
             var model = dto.ConvertToModel<Model, DTO>();
@@ -82,8 +82,10 @@ namespace BusienssLogic.ofController.ofGeneric
             }
             else
             {
-                throw new ArgumentException("Delete");
+
+                return BadRequest();
             }
+            return StatusCode(200);
         }
     }
 }

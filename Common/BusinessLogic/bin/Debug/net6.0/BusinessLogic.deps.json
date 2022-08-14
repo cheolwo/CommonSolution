@@ -9,7 +9,8 @@
       "BusinessLogic/1.0.0": {
         "dependencies": {
           "BusinessData": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.Core": "2.2.5"
+          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
+          "SellerData": "1.0.0"
         },
         "runtime": {
           "BusinessLogic.dll": {}
@@ -68,11 +69,27 @@
           }
         }
       },
+      "CommunityToolkit.Mvvm/7.1.2": {
+        "runtime": {
+          "lib/net5.0/CommunityToolkit.Mvvm.dll": {
+            "assemblyVersion": "7.1.0.0",
+            "fileVersion": "7.1.2.1"
+          }
+        }
+      },
       "FluentValidation/11.0.1": {
         "runtime": {
           "lib/net6.0/FluentValidation.dll": {
             "assemblyVersion": "11.0.0.0",
             "fileVersion": "11.0.1.0"
+          }
+        }
+      },
+      "HtmlAgilityPack/1.11.43": {
+        "runtime": {
+          "lib/netstandard2.0/HtmlAgilityPack.dll": {
+            "assemblyVersion": "1.11.43.0",
+            "fileVersion": "1.11.43.0"
           }
         }
       },
@@ -1448,6 +1465,16 @@
         "runtime": {
           "BusinessData.dll": {}
         }
+      },
+      "SellerData/1.0.0": {
+        "dependencies": {
+          "BusinessData": "1.0.0",
+          "CommunityToolkit.Mvvm": "7.1.2",
+          "HtmlAgilityPack": "1.11.43"
+        },
+        "runtime": {
+          "SellerData.dll": {}
+        }
       }
     }
   },
@@ -1485,12 +1512,26 @@
       "path": "azure.storage.common/12.9.0",
       "hashPath": "azure.storage.common.12.9.0.nupkg.sha512"
     },
+    "CommunityToolkit.Mvvm/7.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/zEpNH3FIBFY2iZRBi+S3Sia3q2yJgy1IQHnWRW7MdhQIe3IGcA1TGqJdbtjiJBmNy4v7kkPdNzgYlvvNDjXZg==",
+      "path": "communitytoolkit.mvvm/7.1.2",
+      "hashPath": "communitytoolkit.mvvm.7.1.2.nupkg.sha512"
+    },
     "FluentValidation/11.0.1": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-fcL5zF/glDwskUtpL0IfBupVWTChxOOvVs+dAA7Gme5NjIeJBiFKWq3eZV1O+AigucnBTr8SWG7wRRn+PgFnTw==",
       "path": "fluentvalidation/11.0.1",
       "hashPath": "fluentvalidation.11.0.1.nupkg.sha512"
+    },
+    "HtmlAgilityPack/1.11.43": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-C2gpt+S2tdFlQMOC3DK7rHZ8iv6EpDuIo4v0UTUSGX1F1bZ+NAQ3gp77HK8/JfCDszUm3Y2rHoyTp/TpO4KOIA==",
+      "path": "htmlagilitypack/1.11.43",
+      "hashPath": "htmlagilitypack.1.11.43.nupkg.sha512"
     },
     "Linkhub/1.4.1": {
       "type": "package",
@@ -2403,6 +2444,11 @@
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
     "BusinessData/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SellerData/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

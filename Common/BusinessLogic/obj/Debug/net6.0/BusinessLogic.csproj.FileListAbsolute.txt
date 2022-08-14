@@ -13,3 +13,5 @@ C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessLogic\obj\Deb
 C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessLogic\bin\Debug\net6.0\BusinessData.dll
 C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessLogic\bin\Debug\net6.0\BusinessData.pdb
 C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessLogic\obj\Debug\net6.0\BusinessLogic.csproj.CopyComplete
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessLogic\bin\Debug\net6.0\SellerData.dll
+C:\Users\user\Desktop\CommonSolution\CommonSolution\Common\BusinessLogic\bin\Debug\net6.0\SellerData.pdb

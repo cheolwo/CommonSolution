@@ -100,7 +100,7 @@ namespace BusinessData.ofDataContext
                 var DbContextType = t.GetDbContextType(typeof(T));
                 DbContext dbContext = (DbContext)serviceScope.ServiceProvider.GetRequiredService(DbContextType);
                 await IdFactory.ConfigureIdAsync(t, dbContext, repository);
-                t = (T)await repository.AddAsync(t, dbContext);
+                t = (T)await repository.InsertOrUpdate(t, dbContext);
             }
             return t;
         }
@@ -117,9 +117,18 @@ namespace BusinessData.ofDataContext
             }
             return t;
         }
-        public Task<T> GetByIdAsync<T>(string id) where T : Entity
+        public async Task<T> GetByIdAsync<T>(string id) where T : Entity, new()
         {
-            throw new NotImplementedException();
+            IEntityDataRepository<T> repository = (IEntityDataRepository<T>)entityManagerBuilder.GetEntityDataRepository(typeof(T).Name);
+            using (var serviceScope = _ServiceScopeFactory.CreateScope())
+            {
+                T t = new();
+                var DbContextType = t.GetDbContextType(typeof(T));
+                DbContext dbContext = (DbContext)serviceScope.ServiceProvider.GetRequiredService(DbContextType);
+                repository.SetDbContext(dbContext);
+
+                return await repository.GetByIdAsync(id);
+            }
         }
         public async Task DeleteByIdAsync<T>(string id) where T : Entity, new()
         {

@@ -59,7 +59,7 @@ namespace BusinessData.ofPresentationLayer.ofCommon
                     }
                     if (prop.PropertyType == typeof(string))
                     {   
-                        // ModelValue 가 없는 상태에서 Model to DTO 하는 것임.
+
                         var Many = dtoprop.GetCustomAttribute<ManyAttribute>();
                         var One = dtoprop.GetCustomAttribute<OneAttribute>();
                         var Generic = dtoprop.GetCustomAttribute<GenericAttribute>();

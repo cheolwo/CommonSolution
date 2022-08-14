@@ -28,18 +28,10 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofDbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new MarketConfiguration<Market>());
-            modelBuilder.ApplyConfiguration(new PlatMarketConfiguation<PlatMarket>());
             modelBuilder.ApplyConfiguration(new MCommodityConfiguration<MCommodity>());
             modelBuilder.ApplyConfiguration(new SMCommodityConfiguration<SMCommodity>());
             modelBuilder.ApplyConfiguration(new MMCommodityConfiguration<MMCommodity>());
             modelBuilder.ApplyConfiguration(new EMCommodityConfiguration<EMCommodity>());
-        }
-    }
-    public class PlatMarketConfiguation<TPlatMarket> : CenterConfiguration<TPlatMarket> where TPlatMarket : PlatMarket
-    {
-        public override void Configure(EntityTypeBuilder<TPlatMarket> builder)
-        {
-            base.Configure(builder);
         }
     }
     public class MCommodityConfiguration<TMCommodity> : CommodityConfiguration<TMCommodity> where TMCommodity : MCommodity

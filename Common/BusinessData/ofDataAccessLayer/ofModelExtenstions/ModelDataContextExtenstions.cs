@@ -44,6 +44,13 @@ namespace BusinessData.ofDataAccessLayer.ofModelExtenstions
                 throw new ArgumentNullException(nameof(ModelDataContextExtenstions.DeleteAsync) + "Id Is Null");
             }
         }
+        public static async Task<Model> GetByIdAsync<Model>(this Model model, DataContext dataContext) where Model : Entity, new()
+        {
+            if (model.Id != null)
+            {
+                return await dataContext.GetByIdAsync<Model>(model.Id);
+            }
+            throw new ArgumentNullException(nameof(ModelDataContextExtenstions.GetByIdAsync) + "Id Is Null");
+        }
     }
-    
 }

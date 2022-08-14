@@ -152,7 +152,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [Relation(typeof(MMCommodity), "MMM")]
     public class MMCommodity : MStatus, IRelatedCenter
     {
-        public PlatMarket PlatMarket {get; set;}
         public Market Market {get; set;}
         public MCommodity MCommodity {get; set;}
         public List<EMCommodity> EMCommodities {get; set;}
@@ -160,7 +159,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
 
         public MMCommodity()
         {
-            PlatMarket = new();
             MCommodity = new();
             EMCommodities = new();
             SMCommodity = new();
@@ -173,7 +171,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
                    Id == commodity.Id &&
                    CreateTime == commodity.CreateTime &&
                    EqualityComparer<IList<ImageofInfo>>.Default.Equals(ImageofInfos, commodity.ImageofInfos) &&
-                   EqualityComparer<PlatMarket>.Default.Equals(PlatMarket, commodity.PlatMarket) &&
                    EqualityComparer<MCommodity>.Default.Equals(MCommodity, commodity.MCommodity) &&
                    EqualityComparer<List<EMCommodity>>.Default.Equals(EMCommodities, commodity.EMCommodities) &&
                    EqualityComparer<SMCommodity>.Default.Equals(SMCommodity, commodity.SMCommodity);

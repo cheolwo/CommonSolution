@@ -423,6 +423,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
         public const string MD = "MD";
         public const string ED = "ED";
     }
+    [NotMapped]
     public class Status : Entity, IRelatedCenter
     {
         public string CommodityId { get; set; }
@@ -436,15 +437,18 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
             return Center;
         }
     }
+    [NotMapped]
     public class SStatus : Status
     {
         public List<MStatus> MStatuses { get; set; }
     }
+    [NotMapped]
     public class MStatus : Status
     {
         public SStatus SStatus { get; set; }
         public List<EStatus> EStatuses { get; set; }
     }
+    [NotMapped]
     public class EStatus : Status
     {
         public string MStatusId { get; set; }
