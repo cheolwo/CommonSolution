@@ -3,10 +3,8 @@ using BusinessData.ofDataAccessLayer.ofModelExtenstions;
 using BusinessData.ofDataContext;
 using BusinessData.ofPresentationLayer.ofCommon;
 using BusinessData.ofPresentationLayer.ofDTO.ofCommon;
-using BusinessLogic.ofMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
 
 namespace BusienssLogic.ofController.ofGeneric
 {

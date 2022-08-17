@@ -130,6 +130,20 @@ namespace BusinessData.ofDataContext
                 return await repository.GetByIdAsync(id);
             }
         }
+        public async Task<T> GetByNameAsync<T>(string name) where T : Entity, new()
+        {
+            IEntityDataRepository<T> repository = (IEntityDataRepository<T>)entityManagerBuilder.GetEntityDataRepository(typeof(T).Name);
+            using (var serviceScope = _ServiceScopeFactory.CreateScope())
+            {
+                T t = new();
+                var DbContextType = t.GetDbContextType(typeof(T));
+                DbContext dbContext = (DbContext)serviceScope.ServiceProvider.GetRequiredService(DbContextType);
+                repository.SetDbContext(dbContext);
+
+                return await repository.GetByNameAsync(name);
+            }
+        }
+
         public async Task DeleteByIdAsync<T>(string id) where T : Entity, new()
         {
             IEntityDataRepository<T> repository = (IEntityDataRepository<T>)entityManagerBuilder.GetEntityDataRepository(typeof(T).Name);
@@ -143,7 +157,7 @@ namespace BusinessData.ofDataContext
                 await repository.DeleteByIdAsync(id);
             }
         }
-        public async Task<IEnumerable<T>> GetsAsync<T>() where T : Entity, new()
+        public async Task<List<T>> GetsAsync<T>() where T : Entity, new()
         {
             IEntityDataRepository<T> repository = (IEntityDataRepository<T>)entityManagerBuilder.GetEntityDataRepository(typeof(T).Name);
             using (var serviceScope = _ServiceScopeFactory.CreateScope())

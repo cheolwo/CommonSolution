@@ -55,7 +55,6 @@ namespace BusinessData.ofPresentationLayer.ofDTOServices
         public DTOService(DTOServiceOptions options)
         {
             _DTOServiceOptions = options;
-            
         }
         public virtual async Task<T> PostAsync<T>(T t, MultipartFormDataContent content) where T : new()
         {

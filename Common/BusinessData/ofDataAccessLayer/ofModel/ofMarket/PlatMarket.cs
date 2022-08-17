@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using BusinessData.ofDataAccessLayer.ofCommon;
 using BusinessData.ofDataAccessLayer.ofCommon.ofAttribute;
 using BusinessData.ofDataAccessLayer.ofCommon.ofInterface;
@@ -12,7 +13,8 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
     [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
     [DataContext(typeof(MarketDataContext))]
-    [Relation(typeof(PlatMarket), "P")]   
+    [Relation(typeof(PlatMarket), "P")]
+    [NotMapped]
     public class PlatMarket : Center, IRelatedRoles
     {
         public string NameofPlatForm {get; set;}
@@ -48,6 +50,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(Market), "PMM")]
+    [NotMapped]
     public class PMMCommodity : Entity, IRelatedRoles
     {
         [Get]public string JsonInfoPMMCommodity {get; set;}
@@ -90,6 +93,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(MCommodity), "MM")]
+    [NotMapped]
     public class MCommodity : Commodity,  IRelatedCenter
     {
         public Market Market {get; set;}
@@ -113,6 +117,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(SMCommodity), "MMS")]
+    [NotMapped]
     public class SMCommodity : SStatus, IRelatedCenter
     {
         public MCommodity MCommodity {get; set;}
@@ -150,6 +155,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(MMCommodity), "MMM")]
+    [NotMapped]
     public class MMCommodity : MStatus, IRelatedCenter
     {
         public Market Market {get; set;}
@@ -183,18 +189,17 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
     [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
     [DataContext(typeof(MarketDataContext))]
+    [NotMapped]
     public class EMCommodity : EStatus,  IRelatedCenter
     {
         public MCommodity MCommodity {get; set;}
         public MMCommodity MMCommodity {get; set;}
-        public PlatMarket PlatMarket {get; set;}
         public Market Market {get; set;}
 
         public EMCommodity()
         {
             MCommodity = new();
             MMCommodity = new();
-            PlatMarket = new();
             Market = new();
         }
 
@@ -204,8 +209,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
                    Id == commodity.Id &&
                    CreateTime == commodity.CreateTime &&
                    EqualityComparer<IList<ImageofInfo>>.Default.Equals(ImageofInfos, commodity.ImageofInfos) &&
-                   EqualityComparer<MCommodity>.Default.Equals(MCommodity, commodity.MCommodity) &&
-                   EqualityComparer<PlatMarket>.Default.Equals(PlatMarket, commodity.PlatMarket);
+                   EqualityComparer<MCommodity>.Default.Equals(MCommodity, commodity.MCommodity);
         }
         public override int GetHashCode()
         {

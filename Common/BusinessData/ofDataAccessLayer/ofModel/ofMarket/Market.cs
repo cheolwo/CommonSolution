@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using BusinessData.ofDataAccessLayer.ofCommon;
 using BusinessData.ofDataAccessLayer.ofCommon.ofAttribute;
 using BusinessData.ofDataAccessLayer.ofCommon.ofInterface;
@@ -24,6 +25,7 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
     [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(Market), "M")]
+    [NotMapped]
     public class Market : Center, IRelatedCenter
     {
         public string NameofMarket { get; set; }

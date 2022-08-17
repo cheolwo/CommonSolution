@@ -332,7 +332,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
 
         public async Task<Entity> InsertOrUpdate(Entity entity, DbContext dbContext)
         {
-            var existing = await dbContext.Set<TEntity>().FindAsync(entity.Id);
+            var existing = await dbContext.Set<TEntity>().FirstOrDefaultAsync(e => e.Equals(entity));
             if (existing == null)
             {
                 dbContext.Add((TEntity)entity);

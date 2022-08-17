@@ -226,9 +226,9 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
     public class Entity : IComparable<Entity>, IComparable, IEquatable<Entity>, IComparer
     {
         [Key] public string Id { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public string Container { get; set; }
+        [AllowNull] public string Code { get; set; }
+        [AllowNull] public string Name { get; set; }
+        [AllowNull]  public string Container { get; set; }
         public DateTime CreateTime { get; set; }
         public string UserId { get; set; } // 이 부분은 인덱스로 만들어도 괜찮겠다.
         public List<ChangeUser> ChangedUsers { get; set; }
@@ -426,7 +426,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
     [NotMapped]
     public class Status : Entity, IRelatedCenter
     {
-        public string CommodityId { get; set; }
+        public string CommodityId { get;  set; }
         public string CenterId { get; set; }
         public int Quantity { get; set; }
         public Commodity Commodity { get; set; }
@@ -451,7 +451,6 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
     [NotMapped]
     public class EStatus : Status
     {
-        public string MStatusId { get; set; }
         public MStatus MStatus { get; set; }
     }
     public class RelationAttribute : Attribute
