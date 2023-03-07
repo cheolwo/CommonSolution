@@ -2,6 +2,7 @@
 using BusinessData.ofDataContext;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BusinessData.ofDataAccessLayer.ofModelExtenstions
@@ -10,25 +11,21 @@ namespace BusinessData.ofDataAccessLayer.ofModelExtenstions
     {
         public static async Task<Model> PostAsync<Model>(this Model model, DataContext dataContext) where Model : Entity
         {
-            var value = await dataContext.PostAsync(model);
-            if (value != null)
+            model = await dataContext.PostAsync(model);
+            if (model != null)
             {
-                return value;
+                return model;
             }
             throw new ArgumentNullException(nameof(model));
         }
         public static async Task<Model> PutAsync<Model>(this Model model, DataContext dataContext) where Model : Entity
         {
-            if (model.Name != null)
+            model = await dataContext.PutAsync(model);
+            if (model != null)
             {
-                var value = await dataContext.PutAsync(model);
-                if (value != null)
-                {
-                    return value;
-                }
-                throw new ArgumentNullException(nameof(model));
+                return model;
             }
-            throw new ArgumentNullException(nameof(ModelDataContextExtenstions.PostAsync) + "Name Is Null"); ;
+            throw new ArgumentNullException(nameof(model));
         }
         public static async Task DeleteAsync<Model>(this Model model, DataContext dataContext) where Model : Entity, new()
         {
@@ -40,6 +37,23 @@ namespace BusinessData.ofDataAccessLayer.ofModelExtenstions
             {
                 throw new ArgumentNullException(nameof(ModelDataContextExtenstions.DeleteAsync) + "Id Is Null");
             }
+        }
+        public static async Task UploadImageAsync<Model>(this Model model, DataContext dataContext, string connectionString) where Model : Entity, new()
+        {
+            if(model.ImageofInfos.Count > 0)
+            {
+                await dataContext.BlobUploadAsync(model, connectionString);
+            }
+        }
+        public static async Task UploadDistintImageAsnyc<Model>(this Model model, List<ImageofInfo> imageofInfos, DataContext dataContext, string connectionString) where Model : Entity, new()
+        {
+            await dataContext.BlobUploadAsync<Model>(model, imageofInfos, connectionString);  
+        }
+
+        public static async Task<FileStream> ConvertToFileStream<Model>(this Model model, DataContext dataContext, string nameofFile) where Model : Entity, new()
+        {
+            FileStream file = await dataContext.ConvertToExcelFileStream(model, nameofFile);
+            return file;
         }
         public static async Task<Model> GetByIdAsync<Model>(this Model model, DataContext dataContext) where Model : Entity, new()
         {
@@ -56,6 +70,14 @@ namespace BusinessData.ofDataAccessLayer.ofModelExtenstions
                 return await dataContext.GetByNameAsync<Model>(model.Name);
             }
             throw new ArgumentNullException(nameof(ModelDataContextExtenstions.GetByNameAsync) + "Name Is Null");
+        }
+        public static async Task<List<string>> GetBlobItemsAsync<Model>(this Model model, DataContext dataContext, string connectionString) where Model : Entity, new()
+        {
+            if(model.Container != null)
+            {
+                return await dataContext.GetBlobItemsAsync(model, connectionString);
+            }
+            throw new ArgumentNullException(nameof(model.Container) + "is null");
         }
     }
 }

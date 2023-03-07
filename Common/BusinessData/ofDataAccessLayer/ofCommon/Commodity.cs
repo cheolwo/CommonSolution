@@ -12,7 +12,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
         public string? HsCode {get; set;}
         public string? Barcode {get; set;}
         public string? CenterId {get; set;}
-        public Center Center { get; set; }
+        public Center? Center { get; set; }
         public List<EStatus> EStatuses { get; set; }
         public List<MStatus> MStatuses { get; set; }
         public List<SStatus> SStatuses { get; set; } 

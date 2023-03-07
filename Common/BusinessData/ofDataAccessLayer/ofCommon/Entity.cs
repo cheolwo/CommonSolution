@@ -226,11 +226,11 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
     public class Entity : IComparable<Entity>, IComparable, IEquatable<Entity>, IComparer
     {
         [Key] public string Id { get; set; }
-        [AllowNull] public string Code { get; set; }
-        [AllowNull] public string Name { get; set; }
+        [AllowNull] public string? Code { get; set; }
+        [AllowNull] [MaxLength(500)] public string? Name { get; set; }
         [AllowNull]  public string Container { get; set; }
         public DateTime CreateTime { get; set; }
-        public string UserId { get; set; } // 이 부분은 인덱스로 만들어도 괜찮겠다.
+        public string? UserId { get; set; } // 이 부분은 인덱스로 만들어도 괜찮겠다.
         public List<ChangeUser> ChangedUsers { get; set; }
         public List<ImageofInfo> ImageofInfos { get; set; }
         public List<Doc> Docs { get; set; }
@@ -239,6 +239,11 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
             ImageofInfos = new();
             ChangedUsers = new();
             Docs = new();
+        }
+        public string GetBasicCode()
+        {
+            var Splitvalues = Id.Split("-");
+            return Splitvalues[0] + "-" + Splitvalues[Splitvalues.Length - 1];
         }
         public void SetRelation(Type type, string Code)
         {
@@ -426,11 +431,11 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
     [NotMapped]
     public class Status : Entity, IRelatedCenter
     {
-        public string CommodityId { get;  set; }
-        public string CenterId { get; set; }
+        public string? CommodityId { get;  set; }
+        public string? CenterId { get; set; }
         public int Quantity { get; set; }
-        public Commodity Commodity { get; set; }
-        public Center Center { get; set; }
+        public Commodity? Commodity { get; set; }
+        public Center? Center { get; set; }
 
         public virtual Center GetRelatedCenter()
         {
@@ -445,13 +450,13 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
     [NotMapped]
     public class MStatus : Status
     {
-        public SStatus SStatus { get; set; }
+        public SStatus? SStatus { get; set; }
         public List<EStatus> EStatuses { get; set; }
     }
     [NotMapped]
     public class EStatus : Status
     {
-        public MStatus MStatus { get; set; }
+        public MStatus? MStatus { get; set; }
     }
     public class RelationAttribute : Attribute
     {

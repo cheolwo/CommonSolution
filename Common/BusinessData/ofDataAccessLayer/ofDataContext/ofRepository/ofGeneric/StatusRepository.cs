@@ -40,10 +40,6 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
             }
             else { _DbContext = (DbContext)Activator.CreateInstance(entity.GetDbContextType(typeof(TEntity)), entity.GetDbConnetionString(typeof(TEntity))); }
         }
-        public StatusDataRepository()
-        {
-            _DbContext = (DbContext)Activator.CreateInstance(entity.GetDbContextType(typeof(TEntity)), entity.GetDbConnetionString(typeof(TEntity)));
-        }
         public StatusDataRepository(Action<RepositoryOptions> options)
             : base(options)
         {

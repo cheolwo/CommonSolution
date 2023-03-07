@@ -1,7 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Flurl;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
@@ -9,6 +13,8 @@ using BusinessData.ofDataAccessLayer.ofCommon;
 using BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage.ofContainerFactory;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage
 {
@@ -37,15 +43,22 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage
         Task<TEntity> UploadAsync(TEntity entity, List<IFormFile> files, string connectionString);
         Task<TEntity> UploadAsync(TEntity entity, List<IBrowserFile> files, string connectionString);
         Task DownLoadAsync(TEntity entity, string downloadPath);
-        Task<List<BlobItem>> GetToListByContainerName(string containerName);
+        Task<List<string>> GetToListBlobUrlByContainerName(string containerName, string connectionString);
         void CreateBlobContainer(TEntity entity, string connectionString);
+        Task<TEntity> UploadImageAsync(TEntity entity, string connectionString);
+        Task<TEntity> UploadImageAsync(TEntity entity, List<ImageofInfo> imageofInfos, string connectionString);
+        Task DeleteBlobAsync(TEntity entity, string connectionString);
+        Task ChangeAccessLevelToPublic(TEntity entity, string connectionString);
     }
     public class EntityBlobStorage<TEntity> : IEntityBlobStorage<TEntity> where TEntity : Entity
     {
-        private readonly IEntityContainerFactory<TEntity> _entityBlobContainerFactory;
-        public EntityBlobStorage(IEntityContainerFactory<TEntity> entityBlobContainerFactory)
+        public EntityBlobStorage(IEntityContainerFactory<TEntity> entity)
         {
-            _entityBlobContainerFactory = entityBlobContainerFactory;
+
+        }
+        public EntityBlobStorage()
+        {
+
         }
         public void CreateBlobContainer(TEntity entity, string connectionString)
         {
@@ -53,7 +66,7 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage
             if (entity.Container == null)
             {
                 BlobServiceClient blobServiceClient = new(connectionString);
-                entity.Container = IEntityContainerFactory<TEntity>.Create(entity);
+                entity.Container = entity.Code.ToLower();
                 var Containers = blobServiceClient.GetBlobContainers();
                 foreach (var container in Containers)
                 {
@@ -64,7 +77,8 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage
                 }
                 if (IsCreateContainer)
                 {
-                    blobServiceClient.CreateBlobContainer(entity.Container);
+                    blobServiceClient.CreateBlobContainer(entity.Container, PublicAccessType.BlobContainer);
+                    
                 }
             }
         }
@@ -90,6 +104,77 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage
             }
             return entity;
         }
+        public async Task<TEntity> UploadImageAsync(TEntity entity, string connectionString)
+        {
+            BlobServiceClient blobServiceClient = new(connectionString);
+            if(entity.Container == null)
+            {
+                CreateBlobContainer(entity, connectionString);
+            }
+            BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(entity.Container);
+            var blobItems = blobContainerClient.GetBlobs();
+            
+            foreach (var image in entity.ImageofInfos)
+            {
+                var blobImageValue = blobItems.Where(e => e.Name == image.fileName).FirstOrDefault();
+                var blob = blobContainerClient.GetBlobClient(image.fileName);
+                var blobHttpHeader = new BlobHttpHeaders();
+                blobHttpHeader.ContentType = "image/png";
+
+                var FileStream = File.Open(image.Info, FileMode.Open);
+                await blob.UploadAsync(FileStream, blobHttpHeader);
+                Console.WriteLine(image.fileName);
+                Console.Write(image.Info);
+            }
+            return entity;
+        }
+        /// <summary>
+        /// 새로운 이미지인 ImageofInfos를 업로드하고 entity에 그에 대한 정보를 저장하는 단계
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="imageofInfos"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public async Task<TEntity> UploadImageAsync(TEntity entity, List<ImageofInfo> imageofInfos, string connectionString)
+        {
+            BlobServiceClient blobServiceClient = new(connectionString);
+            if (entity.Container == null)
+            {
+                CreateBlobContainer(entity, connectionString);
+            }
+            BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(entity.Container);
+            var blobItems = blobContainerClient.GetBlobs();
+            foreach(var image in imageofInfos)
+            {
+                Console.WriteLine(image.fileName);
+                var blobImageValue = blobItems.Where(e => e.Name == image.fileName).FirstOrDefault();
+                var blob = blobContainerClient.GetBlobClient(image.fileName);
+                var blobHttpHeader = new BlobHttpHeaders();
+                blobHttpHeader.ContentType = "image/png";
+
+                using (Image imagesharp = Image.Load(image.Info))
+                {
+                    if (imagesharp.Height != 1000 || imagesharp.Width != 1000)
+                    {
+                        imagesharp.Mutate(e => e.Resize(1000, 1000));
+                        imagesharp.Save(image.Info);
+                    }
+                }
+                using (var FileStream = File.Open(image.Info, FileMode.Open, FileAccess.Read))
+                {
+                    await blob.UploadAsync(FileStream, blobHttpHeader);
+                    Console.WriteLine(image.fileName);
+                    Console.Write(image.Info);
+                }
+            }
+            return entity;
+        }
+        public async Task DeleteBlobAsync(TEntity entity, string connectionString)
+        {
+            BlobServiceClient blobServiceClient = new(connectionString);
+            BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(entity.Container);
+            await blobContainerClient.DeleteAsync();
+        }
         public async Task<TEntity> UploadAsync(TEntity entity, List<IFormFile> files, string connectionString)
         {
             BlobServiceClient blobServiceClient = new(connectionString);
@@ -99,6 +184,7 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage
 
             // BlobStorage에서 컨테이너를 Load
             BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(entity.Container);
+           
             // 해당 컨테이너에 파일을 저장.
             foreach (var file in files)
             {
@@ -117,9 +203,24 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage
             throw new System.NotImplementedException();
         }
 
-        public Task<List<BlobItem>> GetToListByContainerName(string containerName)
+        public async Task<List<string>> GetToListBlobUrlByContainerName(string containerName, string connectionString)
         {
-            throw new System.NotImplementedException();
+            var containerClient = new BlobContainerClient(connectionString, containerName);
+            var containerUri = containerClient.Uri.AbsoluteUri;
+            List<string> results = new List<string>();
+            await foreach (var blob in containerClient.GetBlobsAsync())
+            {
+                Console.WriteLine(blob.Name);
+                results.Add(containerClient.Uri.AbsoluteUri + "/" + blob.Name);
+            }
+            return results;
+        }
+
+        public async Task ChangeAccessLevelToPublic(TEntity entity, string connectionString)
+        {
+            BlobServiceClient blobServiceClient = new(connectionString);
+            BlobContainerClient blobContainerClient = blobServiceClient.GetBlobContainerClient(entity.Container);
+            await blobContainerClient.SetAccessPolicyAsync(PublicAccessType.BlobContainer);
         }
 
     }

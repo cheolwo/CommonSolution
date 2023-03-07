@@ -9,13 +9,12 @@ using System.Linq;
 
 namespace BusinessData.ofDataAccessLayer.ofGeneric.ofTypeConfiguration
 {
-    public enum ConstraintLength { Id = 30 , Name = 50, Barcode = 30, Address = 30}
+    public enum ConstraintLength { Id = 30 , Name = 300, Barcode = 30, Address = 30}
     
     public class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : Entity
     {
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(c => c.Id).HasMaxLength((int)ConstraintLength.Id);
             builder.Property(c => c.ChangedUsers).HasConversion(
                  v => JsonConvert.SerializeObject(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),
                  v => JsonConvert.DeserializeObject<List<ChangeUser>>(v, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }),

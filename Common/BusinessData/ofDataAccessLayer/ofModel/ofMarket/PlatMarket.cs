@@ -141,7 +141,6 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
                    EqualityComparer<MCommodity>.Default.Equals(MCommodity, commodity.MCommodity) &&
                    EqualityComparer<List<MMCommodity>>.Default.Equals(MMCommodities, commodity.MMCommodities);
         }
-
         public override int GetHashCode()
         {
             return HashCode.Combine(Id);

@@ -2,7 +2,9 @@ using BusinessData.ofDataAccessLayer.ofCommon;
 using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.ofEntityManager.ofGeneric.ofFileFactory
 {
@@ -16,12 +18,15 @@ namespace BusinessLogic.ofEntityManager.ofGeneric.ofFileFactory
     }
     public interface IEntityExcelFileFactory
     {
-
     }
     public interface IEntityFileFactory<TEntity> : IEntityFileFactory where TEntity : Entity
     {
         object[,] InitExcelData(string fileconnection);
         List<TEntity> SetExcelEntities(object[,] datas, Dictionary<PropertyInfo, int> Target);
+    }
+    public interface IEntityExcelFileFactory<TEntity> : IEntityExcelFileFactory where TEntity : Entity
+    {
+        Task<FileStream> ConvertToFileStream(TEntity entity, string nameofFile);
     }
     public interface ICenterFileFactory<TEntity> : IEntityFileFactory<TEntity> where TEntity : Center
     {

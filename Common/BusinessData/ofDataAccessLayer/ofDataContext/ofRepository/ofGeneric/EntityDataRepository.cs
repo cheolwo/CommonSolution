@@ -94,7 +94,6 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
             get => _DbContext;
             set => _DbContext = value;
         }
-        protected DbContext _InMemoryDbContext;
         protected RepositoryOptions _RepositoryOptions = new();
         public EntityDataRepository(DbContext DbContext)
         {
@@ -118,7 +117,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
         }
         public EntityDataRepository()
         {
-
+            //_DbContext = (DbContext)Activator.CreateInstance(entity.GetDbContextType(typeof(TEntity)), entity.GetDbConnetionString(typeof(TEntity)));
         }
         public void SetDbContext(DbContext dbContext)
         {
@@ -137,10 +136,6 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofRepository
             await _DbContext.AddAsync(tentity);
             await _DbContext.SaveChangesAsync();
             TEntity entity = await _DbContext.FindAsync<TEntity>(tentity.Id);
-            if (entity != null)
-            {
-                await _InMemoryDbContext.AddAsync(entity);
-            }
             return entity;
         }
         public async Task<TEntity> GetByIdAsync(string Id)

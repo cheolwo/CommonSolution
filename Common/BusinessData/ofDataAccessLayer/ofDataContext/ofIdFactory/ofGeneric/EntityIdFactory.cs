@@ -96,7 +96,7 @@ namespace BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory
             stringBuilder.Append(entity.GetRelationCode(typeof(TEntity)));
             stringBuilder.Append('-');
 
-            string dateTime = DateTime.Now.ToString("YY//MM/dd");
+            string dateTime = DateTime.Now.ToString("MM");
             string[] strs = dateTime.Split('-');
 
             foreach (var str in strs)

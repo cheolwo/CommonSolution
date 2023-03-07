@@ -1,4 +1,5 @@
-﻿using BusinessData.ofDataAccessLayer.ofCommon;
+﻿using Azure.Storage.Blobs.Models;
+using BusinessData.ofDataAccessLayer.ofCommon;
 using BusinessData.ofDataAccessLayer.ofGeneric.ofIdFactory;
 using BusinessData.ofDataAccessLayer.ofGeneric.ofRepository;
 using BusinessLogic.ofEntityManager.ofGeneric.ofBlobStorage;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BusinessData.ofDataContext
@@ -99,7 +101,10 @@ namespace BusinessData.ofDataContext
             {
                 var DbContextType = t.GetDbContextType(typeof(T));
                 DbContext dbContext = (DbContext)serviceScope.ServiceProvider.GetRequiredService(DbContextType);
-                await IdFactory.ConfigureIdAsync(t, dbContext, repository);
+                if(t.Id == null)
+                {
+                    await IdFactory.ConfigureIdAsync(t, dbContext, repository);
+                }
                 t = (T)await repository.InsertOrUpdate(t, dbContext);
             }
             return t;
@@ -169,6 +174,40 @@ namespace BusinessData.ofDataContext
                 return await repository.GetToListAsync();
             }
         }
+        public async Task<List<string>> GetBlobItemsAsync<T>(T t, string connectionString) where T : Entity, new()
+        {
+            IEntityBlobStorage<T> blobStorage = (IEntityBlobStorage<T>)entityManagerBuilder.GetEntityBlobStorage(typeof(T).Name);
+            var updatvalue = await blobStorage.GetToListBlobUrlByContainerName(t.Container, connectionString);
+            return updatvalue;
+        }
+        public async Task BlobUploadAsync<T>(T t, string connectionString) where T : Entity, new()
+        {
+            IEntityBlobStorage<T> blobStorage = (IEntityBlobStorage<T>)entityManagerBuilder.GetEntityBlobStorage(typeof(T).Name);
+            var updatvalue = await blobStorage.UploadImageAsync(t, connectionString);
+            await PutAsync(updatvalue);
+        }
+        public async Task BlobUploadAsync<T>(T t, List<ImageofInfo> imageofInfos, string connectionString) where T : Entity, new()
+        {
+            IEntityBlobStorage<T> blobStorage = (IEntityBlobStorage<T>)entityManagerBuilder.GetEntityBlobStorage(typeof(T).Name);
+            var updatevalue = await blobStorage.UploadImageAsync(t, imageofInfos, connectionString);
+            await PutAsync(updatevalue);
+        }
+        public async Task DeleteBlobContainer<T>(T t, string connectionString) where T : Entity, new()
+        {
+            IEntityBlobStorage<T> blobStorage = (IEntityBlobStorage<T>)entityManagerBuilder.GetEntityBlobStorage(typeof(T).Name);
+            await blobStorage.DeleteBlobAsync(t, connectionString);
+        }
+        public async Task ChangeContainerAccessLevelToPublic<T>(T t, string connetionString) where T : Entity, new()
+        {
+            IEntityBlobStorage<T> blobStorage = (IEntityBlobStorage<T>)entityManagerBuilder.GetEntityBlobStorage(typeof(T).Name);
+            await blobStorage.ChangeAccessLevelToPublic(t, connetionString);
+        }
+        public async Task<FileStream> ConvertToExcelFileStream<T>(T t, string FileName) where T : Entity, new()
+        {
+            IEntityExcelFileFactory<T> entityExcelFileFactory = (IEntityExcelFileFactory<T>)entityManagerBuilder.GetEntityExcelFileFactory(typeof(T).Name);
+            var filestream = await entityExcelFileFactory.ConvertToFileStream(t, FileName);
+            return filestream;
+        }
     }
     public class EntityManagerBuilder
     {
@@ -194,7 +233,7 @@ namespace BusinessData.ofDataContext
         {
             DicEntityExcelFileFactory.Add(nameofEntityExcelFileFactory, entityExcelFileFactory);
         }
-        public virtual void ApplysEntityBlobStorage(string nameofEntityBlobStorage, IEntityBlobStorage entityBlobStorage)
+        public virtual void ApplyEntityBlobStorage(string nameofEntityBlobStorage, IEntityBlobStorage entityBlobStorage)
         {
             DicEntityBlobStorage.Add(nameofEntityBlobStorage, entityBlobStorage);
         }

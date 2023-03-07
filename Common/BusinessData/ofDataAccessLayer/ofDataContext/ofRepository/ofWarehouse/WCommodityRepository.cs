@@ -18,6 +18,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofRepository
 
         }
         public WCommodityRepository(Action<RepositoryOptions> options)
+            :base(options)
         {
            
         }
