@@ -4,7 +4,7 @@ using BusinessData.ofDataAccessLayer.ofCommon.ofAttribute;
 
 namespace BusinessData.ofDataAccessLayer.ofCommon.ofHsCode
 {
-    [DataContext(typeof(HsDbContext), DbConnectionString.HsDbConnection)]
+    [DataContext(typeof(HsDbContext))]
     [Relation(typeof(Country), "Country")] 
     public class Country : Entity
     {

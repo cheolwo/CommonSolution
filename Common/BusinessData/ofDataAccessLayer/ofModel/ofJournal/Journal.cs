@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace BusinessData.ofDataAccessLayer.ofJournal.Model
 {
-    [BackUpDbContext(typeof(BackUpJournalDbContext), DbConnectionString.BackUpJournalDbConnection)]
-    [DbContext(typeof(JournalDbContext), DbConnectionString.JournalDbConnection)]
+    [BackUpDbContext(typeof(BackUpJournalDbContext))]
+    [DbContext(typeof(JournalDbContext))]
     [DataContext(typeof(JournalDataContext))]
     public class UserSettingJournal : Entity
     {
@@ -90,8 +90,8 @@ namespace BusinessData.ofDataAccessLayer.ofJournal.Model
         public JournalCenter JournalCenter {get; set;}
     }
     [Relation(typeof(JournalCenter), "JournalCenter")]
-    [BackUpDbContext(typeof(BackUpJournalDbContext), DbConnectionString.BackUpJournalDbConnection)]
-    [DbContext(typeof(JournalDbContext), DbConnectionString.JournalDbConnection)]
+    [BackUpDbContext(typeof(BackUpJournalDbContext))]
+    [DbContext(typeof(JournalDbContext))]
     [DataContext(typeof(JournalDataContext))]
     public class JournalCenter : Center
     {
@@ -148,8 +148,8 @@ namespace BusinessData.ofDataAccessLayer.ofJournal.Model
         }
     }
 
-    [BackUpDbContext(typeof(BackUpJournalDbContext), DbConnectionString.BackUpJournalDbConnection)]
-    [DbContext(typeof(JournalDbContext), DbConnectionString.JournalDbConnection)]
+    [BackUpDbContext(typeof(BackUpJournalDbContext))]
+    [DbContext(typeof(JournalDbContext))]
     [DataContext(typeof(JournalDataContext))]
     public class JCommodity : Commodity
     {
@@ -162,8 +162,8 @@ namespace BusinessData.ofDataAccessLayer.ofJournal.Model
             JournalCenter = new();
         }
     }
-    [BackUpDbContext(typeof(BackUpJournalDbContext), DbConnectionString.BackUpJournalDbConnection)]
-    [DbContext(typeof(JournalDbContext), DbConnectionString.JournalDbConnection)]
+    [BackUpDbContext(typeof(BackUpJournalDbContext))]
+    [DbContext(typeof(JournalDbContext))]
     [DataContext(typeof(JournalDataContext))]
     public class Journal : Entity
     {

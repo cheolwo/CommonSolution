@@ -12,8 +12,8 @@ namespace BusinessData.ofDataAccessLayer.ofHumanResource.ofModel
     
     [Authorize(Roles ="Admin_HR, Employee_HR")]
     [Relation(typeof(HRCenter), "HR")]
-    [BackUpDbContext(typeof(BackUpHRDbContext), DbConnectionString.BackUpHRDbConnection)]
-    [DbContext(typeof(HRDbContext), DbConnectionString.HRDbConnection)]
+    [BackUpDbContext(typeof(BackUpHRDbContext))]
+    [DbContext(typeof(HRDbContext))]
     [DataContext(typeof(HRDataContext))]
     public class HRCenter : Center, IRelatedCenter, IRelatedRoles, IComparable
     {
@@ -51,8 +51,8 @@ namespace BusinessData.ofDataAccessLayer.ofHumanResource.ofModel
         public bool Delete {get; set;}
         public bool Get {get; set;}
     }
-    [BackUpDbContext(typeof(BackUpHRDbContext), DbConnectionString.BackUpHRDbConnection)]
-    [DbContext(typeof(HRDbContext), DbConnectionString.HRDbConnection)]
+    [BackUpDbContext(typeof(BackUpHRDbContext))]
+    [DbContext(typeof(HRDbContext))]
     [DataContext(typeof(HRDataContext))]
     [Relation(typeof(HRBusinessPart), "HRE")]
     public class HRBusinessPart : Entity
@@ -61,8 +61,8 @@ namespace BusinessData.ofDataAccessLayer.ofHumanResource.ofModel
         public HRCenter HRCenter {get; set;}
        
     }
-    [BackUpDbContext(typeof(BackUpHRDbContext), DbConnectionString.BackUpHRDbConnection)]
-    [DbContext(typeof(HRDbContext), DbConnectionString.HRDbConnection)]
+    [BackUpDbContext(typeof(BackUpHRDbContext))]
+    [DbContext(typeof(HRDbContext))]
     [DataContext(typeof(HRDataContext))]
     [Relation(typeof(HREmployee), "HRE")]
     public class HREmployee : Entity, IRelatedCenter, IRelatedRoles, IComparable
@@ -81,8 +81,8 @@ namespace BusinessData.ofDataAccessLayer.ofHumanResource.ofModel
         }
        
     }
-    [BackUpDbContext(typeof(BackUpHRDbContext), DbConnectionString.BackUpHRDbConnection)]
-    [DbContext(typeof(HRDbContext), DbConnectionString.HRDbConnection)]
+    [BackUpDbContext(typeof(BackUpHRDbContext))]
+    [DbContext(typeof(HRDbContext))]
     [DataContext(typeof(HRDataContext))]
     [Relation(typeof(HRCenter), "HRR")]
     public class HRRole : Entity, IRelatedCenter, IRelatedRoles, IComparable
@@ -99,8 +99,8 @@ namespace BusinessData.ofDataAccessLayer.ofHumanResource.ofModel
         }
        
     }
-    [BackUpDbContext(typeof(BackUpHRDbContext), DbConnectionString.BackUpHRDbConnection)]
-    [DbContext(typeof(HRDbContext), DbConnectionString.HRDbConnection)]
+    [BackUpDbContext(typeof(BackUpHRDbContext))]
+    [DbContext(typeof(HRDbContext))]
     [DataContext(typeof(HRDataContext))]
     [Relation(typeof(HRCenter), "HRER")]
     public class EmployeeRole : Entity, IRelatedCenter, IRelatedRoles, IComparable

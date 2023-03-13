@@ -7,7 +7,7 @@ using BusinessData.ofDataAccessLayer.ofWarehouse.ofDbContext;
 
 namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
 {
-    [DataContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection, typeof(WarehouseDataContext))]
+    [DataContext(typeof(WarehouseDbContext))]
     public class Transaction
    {
        [Key] public int Id {get; set;}

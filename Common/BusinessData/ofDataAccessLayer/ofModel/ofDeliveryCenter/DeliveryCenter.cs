@@ -21,7 +21,7 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
         public const string DividedTag = "분할태그";
         public const string DotBarcode ="도트태그";
     }
-    [DataContext(typeof(DeliveryDbContext), DbConnectionString.DeliveryDbConnection, typeof(DeliveryDataContext))]
+    [DataContext(typeof(DeliveryDbContext))]
     [Authorize(Roles = "Admin_DeliverCenter")]
     [Relation(typeof(DeliveryCenter), "D")]
     public class DeliveryCenter : Center, IRelatedCenter, IRelatedRoles
@@ -60,7 +60,7 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
             return this;
         }
     }
-    [DataContext(typeof(DeliveryDbContext), DbConnectionString.DeliveryDbConnection, typeof(DeliveryDataContext))]
+    [DataContext(typeof(DeliveryDbContext))]
     [Authorize(Roles ="Admin_DeliveryCenter, Employee_DeliveryCenter")]
     [Relation(typeof(DCommodity), "DD")]
     public class DCommodity : Commodity, IRelatedCenter, IRelatedRoles
@@ -92,7 +92,7 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
         }
     }
 
-    [DataContext(typeof(DeliveryDbContext), DbConnectionString.DeliveryDbConnection, typeof(DeliveryDataContext))]
+    [DataContext(typeof(DeliveryDbContext))]
     [Authorize(Roles ="Admin_DeliveryCenter, Employee_DeliveryCenter")]
     [Relation(typeof(SDCommodity), "DDS")]
     public class SDCommodity : SStatus, IRelatedCenter, IRelatedRoles
@@ -122,7 +122,7 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
             return HashCode.Combine(Id);
         }
     }
-    [DataContext(typeof(DeliveryDbContext), DbConnectionString.DeliveryDbConnection, typeof(DeliveryDataContext))]
+    [DataContext(typeof(DeliveryDbContext))]
     [Authorize(Roles ="Admin_DeliveryCenter, Employee_DeliveryCenter")]
     [Relation(typeof(MDCommodity), "DDM")] 
     public class MDCommodity : MStatus, IRelatedRoles
@@ -139,7 +139,7 @@ namespace BusinessData.ofDataAccessLayer.ofDeliveryCenter.ofModel
             DeliveryCenter = new();
         }
     }
-    [DataContext(typeof(DeliveryDbContext), DbConnectionString.DeliveryDbConnection, typeof(DeliveryDataContext))]
+    [DataContext(typeof(DeliveryDbContext))]
     [Authorize(Roles ="Admin_DeliveryCenter, Employee_DeliveryCenter")]
     [Relation(typeof(EDCommodity), "DDE")]
     public class EDCommodity : EStatus,  IRelatedRoles

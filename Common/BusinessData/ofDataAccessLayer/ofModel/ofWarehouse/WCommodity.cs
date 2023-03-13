@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
 {
 
-    [BackUpDbContext(typeof(BackUpWarehouseDbContext), DbConnectionString.BackUpWarehouseDbConnection)]
-    [DbContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection)]
+    [BackUpDbContext(typeof(BackUpWarehouseDbContext))]
+    [DbContext(typeof(WarehouseDbContext))]
     [DataContext(typeof(WarehouseDataContext))]
     [Authorize(Roles ="Admin_Warehouse, Employee_Warehouse")]
     [Relation(typeof(Warehouse), "WW")] 
@@ -45,7 +45,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
         }
     }
 
-    [DataContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection)]
+    [DataContext(typeof(WarehouseDbContext))]
     [Authorize(Roles ="Admin_Warehouse, Employee_Warehouse")]
     [Relation(typeof(Warehouse), "WWS")] 
     public class SWCommodity : SStatus, IRelatedCenter, IRelatedRoles
@@ -70,7 +70,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
         }
     }
 
-    [DataContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection)]
+    [DataContext(typeof(WarehouseDbContext))]
     [Authorize(Roles ="Admin_Warehouse, Employee_Warehouse")]
     [Relation(typeof(Warehouse), "WWM")] 
     public class MWCommodity : MStatus, IRelatedCenter, IRelatedRoles
@@ -94,7 +94,7 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
         }
     }
 
-    [DataContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection)]
+    [DataContext(typeof(WarehouseDbContext))]
     [Authorize(Roles ="Admin_Warehouse, Employee_Warehouse")]
     [Relation(typeof(Warehouse), "WWE")] 
     public class EWCommodity : EStatus, IRelatedCenter, IRelatedRoles

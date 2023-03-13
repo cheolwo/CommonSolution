@@ -6,8 +6,8 @@ using BusinessData.ofDataAccessLayer.ofDataContext.ofBusiness;
 
 namespace BusinessData.ofDataAccessLayer.ofTrade.ofModel
 {
-    [BackUpDbContext(typeof(BackUpTradeDbContext), DbConnectionString.BackUpTradeDbConnection)]
-    [DbContext(typeof(TradeDbContext), DbConnectionString.TradeDbConnection)]
+    [BackUpDbContext(typeof(BackUpTradeDbContext))]
+    [DbContext(typeof(TradeDbContext))]
     [DataContext(typeof(TradeDataContext))]
     [Relation(typeof(TradeCenter), nameof(TradeCenter))] 
     public class TradeCenter : Center
@@ -18,8 +18,8 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofModel
             TCommodities = new();
         }
     }
-    [BackUpDbContext(typeof(BackUpTradeDbContext), DbConnectionString.BackUpTradeDbConnection)]
-    [DbContext(typeof(TradeDbContext), DbConnectionString.TradeDbConnection)]
+    [BackUpDbContext(typeof(BackUpTradeDbContext))]
+    [DbContext(typeof(TradeDbContext))]
     [DataContext(typeof(TradeDataContext))]
     [Relation(typeof(TCommodity), nameof(TCommodity))] 
     public class TCommodity : Commodity
@@ -39,8 +39,8 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofModel
             TradeCenter = new();
         }
     }
-    [BackUpDbContext(typeof(BackUpTradeDbContext), DbConnectionString.BackUpTradeDbConnection)]
-    [DbContext(typeof(TradeDbContext), DbConnectionString.TradeDbConnection)]
+    [BackUpDbContext(typeof(BackUpTradeDbContext))]
+    [DbContext(typeof(TradeDbContext))]
     [DataContext(typeof(TradeDataContext))]
     [Relation(typeof(STCommodity), nameof(STCommodity))] 
     public class STCommodity : SStatus
@@ -58,8 +58,8 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofModel
             TCommoditiy = new();
         }
     }
-    [BackUpDbContext(typeof(BackUpTradeDbContext), DbConnectionString.BackUpTradeDbConnection)]
-    [DbContext(typeof(TradeDbContext), DbConnectionString.TradeDbConnection)]
+    [BackUpDbContext(typeof(BackUpTradeDbContext))]
+    [DbContext(typeof(TradeDbContext))]
     [DataContext(typeof(TradeDataContext))]
     [Relation(typeof(MTCommodity), nameof(MTCommodity))] 
     public class MTCommodity  : MStatus
@@ -75,8 +75,8 @@ namespace BusinessData.ofDataAccessLayer.ofTrade.ofModel
             TCommodity = new();
         }
     }
-    [BackUpDbContext(typeof(BackUpTradeDbContext), DbConnectionString.BackUpTradeDbConnection)]
-    [DbContext(typeof(TradeDbContext), DbConnectionString.TradeDbConnection)]
+    [BackUpDbContext(typeof(BackUpTradeDbContext))]
+    [DbContext(typeof(TradeDbContext))]
     [DataContext(typeof(TradeDataContext))]
     [Relation(typeof(ETCommodity), nameof(ETCommodity))] 
     public class ETCommodity  : EStatus

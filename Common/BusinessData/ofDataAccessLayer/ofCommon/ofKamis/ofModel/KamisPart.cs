@@ -9,7 +9,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofKamis.ofModel
 
     }
 
-    [DataContext(typeof(KamisDbContext), DbConnectionString.KamisDbConnection)]
+    [DataContext(typeof(KamisDbContext))]
     [Relation(typeof(KamisPart), nameof(KamisPart))]
     public class KamisPart : KamisEntity
     {
@@ -17,7 +17,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofKamis.ofModel
         public List<KamisKindofCommodity> KamisKindsofCommodities { get; set; }
     }
 
-    [DataContext(typeof(KamisDbContext), DbConnectionString.KamisDbConnection)]
+    [DataContext(typeof(KamisDbContext))]
     [Relation(typeof(KamisCommodity), nameof(KamisCommodity))]
     public class KamisCommodity : KamisEntity
     {
@@ -26,7 +26,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofKamis.ofModel
         public List<KamisKindofCommodity> KamisKindsofCommodity { get; set; }
     }
 
-    [DataContext(typeof(KamisDbContext), DbConnectionString.KamisDbConnection)]
+    [DataContext(typeof(KamisDbContext))]
     [Relation(typeof(KamisKindofCommodity), nameof(KamisKindofCommodity))]
     public class KamisKindofCommodity : KamisEntity
     {
@@ -47,20 +47,20 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofKamis.ofModel
         public string KamisCommodityId { get; set; } // 품목코드 1
     }
 
-    [DataContext(typeof(KamisDbContext), DbConnectionString.KamisDbConnection)]
+    [DataContext(typeof(KamisDbContext))]
     [Relation(typeof(KamisGrade), nameof(KamisGrade))]
     public class KamisGrade : KamisEntity
     {
     }
 
-    [DataContext(typeof(KamisDbContext), DbConnectionString.KamisDbConnection)]
+    [DataContext(typeof(KamisDbContext))]
     [Relation(typeof(KamisCountryAdministrationPart), nameof(KamisCountryAdministrationPart))]
     public class KamisCountryAdministrationPart : KamisEntity
     {
         public List<KamisMarket> KamisMakrets { get; set; }
     }
 
-    [DataContext(typeof(KamisDbContext), DbConnectionString.KamisDbConnection)]
+    [DataContext(typeof(KamisDbContext))]
     [Relation(typeof(KamisMarket), nameof(KamisMarket))]
     public class KamisMarket : KamisEntity
     {
@@ -70,7 +70,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofKamis.ofModel
         public List<KamisRetailPrice> KamisRetailPrices { get; set; }
     }
 
-    [DataContext(typeof(KamisDbContext), DbConnectionString.KamisDbConnection)]
+    [DataContext(typeof(KamisDbContext))]
     [Relation(typeof(KamisRetailPrice), nameof(KamisRetailPrice))]
     public class KamisRetailPrice : KamisEntity
     {
@@ -83,7 +83,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofKamis.ofModel
         public KamisMarket KamisMarket { get; set; }
         public KamisKindofCommodity KamisKindofCommodity { get; set; }
     }
-    [DataContext(typeof(KamisDbContext), DbConnectionString.KamisDbConnection)]
+    [DataContext(typeof(KamisDbContext))]
     [Relation(typeof(KamisWholeSalePrice), nameof(KamisWholeSalePrice))]
     public class KamisWholeSalePrice : KamisEntity
     {

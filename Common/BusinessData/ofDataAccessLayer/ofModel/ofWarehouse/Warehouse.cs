@@ -25,8 +25,8 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.Model
         }
     }
 
-    [BackUpDbContext(typeof(BackUpWarehouseDbContext), DbConnectionString.BackUpWarehouseDbConnection)]
-    [DbContext(typeof(WarehouseDbContext), DbConnectionString.WarehouseDbConnection)]
+    [BackUpDbContext(typeof(BackUpWarehouseDbContext))]
+    [DbContext(typeof(WarehouseDbContext))]
     [DataContext(typeof(WarehouseDataContext))]
     [Authorize(Roles ="Admin_Warehouse")]
     [Relation(typeof(Warehouse), "W")] 

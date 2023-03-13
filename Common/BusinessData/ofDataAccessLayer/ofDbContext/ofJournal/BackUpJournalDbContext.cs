@@ -17,7 +17,6 @@ namespace BusinessData.ofDataAccessLayer.ofJournal
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (_connectionstring is null) { _connectionstring = DevelopmentDbConnetionString.JournalDbConnection; }
             optionsBuilder.UseSqlServer(_connectionstring);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

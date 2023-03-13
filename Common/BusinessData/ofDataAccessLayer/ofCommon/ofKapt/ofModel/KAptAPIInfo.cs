@@ -4,7 +4,7 @@ using BusinessData.ofDataAccessLayer.ofCommon.ofKApt.ofDbContext;
 
 namespace BusinessData.ofCommon.ofKapt
 {
-    [DataContext(typeof(KAptDbContext), DbConnectionString.KAptDbConnection)]
+    [DataContext(typeof(KAptDbContext))]
 	[Relation(typeof(KAptBasicInfo), nameof(KAptBasicInfo))]
     public class KAptBasicInfo : Entity
     {

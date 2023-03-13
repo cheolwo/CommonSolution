@@ -18,7 +18,6 @@ namespace BusinessData.ofDataAccessLayer.ofWarehouse.ofDbContext
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (_connectionstring is null) { _connectionstring = DevelopmentDbConnetionString.WarehouseDbConnection; }
             optionsBuilder.UseSqlServer(_connectionstring);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

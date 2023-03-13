@@ -6,8 +6,8 @@ using BusinessData.ofDataAccessLayer.ofOrder.ofDbContext;
 namespace BusinessData.ofDataAccessLayer.ofOrder.ofModel
 {
     [Relation(typeof(EOCommodity), nameof(EOCommodity))]
-    [BackUpDbContext(typeof(BackUpOrderDbContext), DbConnectionString.BackUpOrderDbConnection)]
-    [DbContext(typeof(OrderDbContext), DbConnectionString.OrderDbConnection)]
+    [BackUpDbContext(typeof(BackUpOrderDbContext))]
+    [DbContext(typeof(OrderDbContext))]
     [DataContext(typeof(OrderDataContext))]
     public class EOCommodity : EStatus
     {

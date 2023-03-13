@@ -10,8 +10,8 @@ namespace BusinessData.ofDataAccessLayer.ofGroupOrder.ofModel
     // DbContext
     // BakcUpDbContext
     [Relation(typeof(GOC), nameof(GOC))]
-    [BackUpDbContext(typeof(BackUpGroupOrderDbContext), DbConnectionString.BackUpGroupOrderDbConnection)]
-    [DbContext(typeof(GroupOrderDbContext), DbConnectionString.GroupOrderDbConnection)]
+    [BackUpDbContext(typeof(BackUpGroupOrderDbContext))]
+    [DbContext(typeof(GroupOrderDbContext))]
     [DataContext(typeof(GroupOrderDataContext))]
     public class GOC : Center
     {
@@ -19,31 +19,31 @@ namespace BusinessData.ofDataAccessLayer.ofGroupOrder.ofModel
         public string WarehouseId { get; set; }
     }
     [Relation(typeof(GOCC), nameof(GOCC))]
-    [BackUpDbContext(typeof(BackUpGroupOrderDbContext), DbConnectionString.BackUpGroupOrderDbConnection)]
-    [DbContext(typeof(GroupOrderDbContext), DbConnectionString.GroupOrderDbConnection)]
+    [BackUpDbContext(typeof(BackUpGroupOrderDbContext))]
+    [DbContext(typeof(GroupOrderDbContext))]
     [DataContext(typeof(GroupOrderDataContext))]
     public class GOCC : Commodity
     {
     }
     [Relation(typeof(SGOC), nameof(SGOC))]
-    [BackUpDbContext(typeof(BackUpGroupOrderDbContext), DbConnectionString.BackUpGroupOrderDbConnection)]
-    [DbContext(typeof(GroupOrderDbContext), DbConnectionString.GroupOrderDbConnection)]
+    [BackUpDbContext(typeof(BackUpGroupOrderDbContext))]
+    [DbContext(typeof(GroupOrderDbContext))]
     [DataContext(typeof(GroupOrderDataContext))]
     public class SGOC : SStatus
     {
         
     }
     [Relation(typeof(MGOC), nameof(MGOC))]
-    [BackUpDbContext(typeof(BackUpGroupOrderDbContext), DbConnectionString.BackUpGroupOrderDbConnection)]
-    [DbContext(typeof(GroupOrderDbContext), DbConnectionString.GroupOrderDbConnection)]
+    [BackUpDbContext(typeof(BackUpGroupOrderDbContext))]
+    [DbContext(typeof(GroupOrderDbContext))]
     [DataContext(typeof(GroupOrderDataContext))]
     public class MGOC : MStatus
     {
        
     }
     [Relation(typeof(EGOC), nameof(EGOC))]
-    [BackUpDbContext(typeof(BackUpGroupOrderDbContext), DbConnectionString.BackUpGroupOrderDbConnection)]
-    [DbContext(typeof(GroupOrderDbContext), DbConnectionString.GroupOrderDbConnection)]
+    [BackUpDbContext(typeof(BackUpGroupOrderDbContext))]
+    [DbContext(typeof(GroupOrderDbContext))]
     [DataContext(typeof(GroupOrderDataContext))]
     public class EGOC : EStatus
     {

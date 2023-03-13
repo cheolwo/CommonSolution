@@ -3,7 +3,7 @@ using BusinessData.ofDataAccessLayer.ofCommon.ofAttribute;
 
 namespace BusinessData.ofDataAccessLayer.ofCommon.ofHsCode
 {
-    [DataContext(typeof(HsDbContext), DbConnectionString.HsDbConnection)]
+    [DataContext(typeof(HsDbContext))]
     [Relation(typeof(DetailPracticalHsCode), "DetailPracticalHsCode")]
     public class DetailPracticalHsCode : Entity
     {

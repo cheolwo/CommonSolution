@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
 {
-    [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
-    [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
+    [BackUpDbContext(typeof(BackUpMarketDbContext))]
+    [DbContext(typeof(MarketDbContext))]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(PlatMarket), "P")]
     [NotMapped]
@@ -46,8 +46,8 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
             return HashCode.Combine(Id);
         }
     }
-    [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
-    [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
+    [BackUpDbContext(typeof(BackUpMarketDbContext))]
+    [DbContext(typeof(MarketDbContext))]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(Market), "PMM")]
     [NotMapped]
@@ -89,8 +89,8 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
             return hash.ToHashCode();
         }
     }
-    [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
-    [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
+    [BackUpDbContext(typeof(BackUpMarketDbContext))]
+    [DbContext(typeof(MarketDbContext))]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(MCommodity), "MM")]
     [NotMapped]
@@ -113,8 +113,8 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
             return Market;
         }
     }
-    [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
-    [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
+    [BackUpDbContext(typeof(BackUpMarketDbContext))]
+    [DbContext(typeof(MarketDbContext))]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(SMCommodity), "MMS")]
     [NotMapped]
@@ -150,8 +150,8 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
             return Market;
         }
     }
-    [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
-    [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
+    [BackUpDbContext(typeof(BackUpMarketDbContext))]
+    [DbContext(typeof(MarketDbContext))]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(MMCommodity), "MMM")]
     [NotMapped]
@@ -185,8 +185,8 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
             return HashCode.Combine(Id);
         }
     }
-    [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
-    [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
+    [BackUpDbContext(typeof(BackUpMarketDbContext))]
+    [DbContext(typeof(MarketDbContext))]
     [DataContext(typeof(MarketDataContext))]
     [NotMapped]
     public class EMCommodity : EStatus,  IRelatedCenter

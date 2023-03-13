@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BusinessData.ofDataAccessLayer.ofCommon.ofHsCode
 {
-    [DataContext(typeof(HsDbContext), DbConnectionString.HsDbConnection)]
+    [DataContext(typeof(HsDbContext))]
     [Relation(typeof(SubPracticalHsCode), "SubPracticalHsCode")]
     // 소호
     public class SubPracticalHsCode : Entity

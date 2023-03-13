@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessData.ofDataAccessLayer.ofCommon.ofHsCode
 {
-    [DataContext(typeof(HsDbContext), DbConnectionString.HsDbConnection)]
+    [DataContext(typeof(HsDbContext))]
     [Relation(typeof(ConfirmationByTheCustomsOfficer), "ConfirmationByTheCustomsOfficer")]
     public class ConfirmationByTheCustomsOfficer : Entity
     {

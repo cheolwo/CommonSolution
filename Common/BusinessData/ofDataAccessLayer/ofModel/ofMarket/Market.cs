@@ -21,8 +21,8 @@ namespace BusinessData.ofDataAccessLayer.ofMarket.ofModel
         public const string DetailofMCommodity = "DetailofMCommodity";
         public const string Option = "Option";
     }
-    [BackUpDbContext(typeof(BackUpMarketDbContext), DbConnectionString.BackUpMarketDbConnection)]
-    [DbContext(typeof(MarketDbContext), DbConnectionString.MarketDbConnection)]
+    [BackUpDbContext(typeof(BackUpMarketDbContext))]
+    [DbContext(typeof(MarketDbContext))]
     [DataContext(typeof(MarketDataContext))]
     [Relation(typeof(Market), "M")]
     [NotMapped]

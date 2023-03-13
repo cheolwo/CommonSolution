@@ -7,8 +7,8 @@ using BusinessData.ofDataAccessLayer.ofOrder.ofDbContext;
 namespace BusinessData.ofDataAccessLayer.ofOrder.ofModel
 {
     [Relation(typeof(SOCommodity), nameof(SOCommodity))]
-    [BackUpDbContext(typeof(BackUpOrderDbContext), DbConnectionString.BackUpOrderDbConnection)]
-    [DbContext(typeof(OrderDbContext), DbConnectionString.OrderDbConnection)]
+    [BackUpDbContext(typeof(BackUpOrderDbContext))]
+    [DbContext(typeof(OrderDbContext))]
     [DataContext(typeof(OrderDataContext))]
     public class SOCommodity : SStatus
     {

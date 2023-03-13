@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BusinessData.ofDataAccessLayer.ofCommon.ofFisheries.ofModel
 {
-    [DataContext(typeof(FisheriesDbContext), DbConnectionString.FisheriesDbConnection)]
+    [DataContext(typeof(FisheriesDbContext))]
     [Relation(typeof(Fisheries), nameof(Fisheries))]
     public class Fisheries : Center
     { 

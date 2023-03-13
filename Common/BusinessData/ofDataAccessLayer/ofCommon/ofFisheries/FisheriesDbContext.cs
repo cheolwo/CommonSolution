@@ -24,7 +24,6 @@ namespace BusinessData.ofDataAccessLayer.ofCommon
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if(_connectionstring is null) { _connectionstring = DbConnectionString.FisheriesDbConnection; }
             optionsBuilder.UseSqlServer(_connectionstring);
         }
         // 이 부분에서 DotBaroce 같은 게 테이블로서 만들어지는지를 잘 모르겠어.

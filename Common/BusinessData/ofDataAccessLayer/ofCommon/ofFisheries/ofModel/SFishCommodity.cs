@@ -2,7 +2,7 @@
 
 namespace BusinessData.ofDataAccessLayer.ofCommon.ofFisheries.ofModel
 {
-    [DataContext(typeof(FisheriesDbContext), DbConnectionString.FisheriesDbConnection)]
+    [DataContext(typeof(FisheriesDbContext))]
     [Relation(typeof(SFishCommodity), nameof(SFishCommodity))]
     public class SFishCommodity : SStatus
     {

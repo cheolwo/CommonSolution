@@ -23,7 +23,6 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofHsCode.ofDbContext
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (_connectionstring is null) { _connectionstring = DbConnectionString.HsDbConnection; }
             optionsBuilder.UseSqlServer(_connectionstring);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

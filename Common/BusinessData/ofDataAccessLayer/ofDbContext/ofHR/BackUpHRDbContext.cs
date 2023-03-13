@@ -21,7 +21,6 @@ namespace BusinessData.ofDataAccessLayer.ofHR.ofDbContext
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (_connectionstring is null) { _connectionstring = DevelopmentDbConnetionString.HRDbConnection; }
             optionsBuilder.UseSqlServer(_connectionstring);
         }
         protected override void OnModelCreating(ModelBuilder builder)

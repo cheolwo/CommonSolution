@@ -7,8 +7,8 @@ using BusinessData.ofProduct.ofDbContext;
 namespace BusinessData.ofDataAccessLayer.ofProduct.ofModel
 {
     [Relation(typeof(ProductCenter), "PLP")]
-    [BackUpDbContext(typeof(BackUpProductDbContext), DbConnectionString.BackUpProductDbConnection)]
-    [DbContext(typeof(ProductDbContext), DbConnectionString.ProductDbConnection)]
+    [BackUpDbContext(typeof(BackUpProductDbContext))]
+    [DbContext(typeof(ProductDbContext))]
     [DataContext(typeof(ProductDataContext))]
     public class PCommodity : Commodity
     {

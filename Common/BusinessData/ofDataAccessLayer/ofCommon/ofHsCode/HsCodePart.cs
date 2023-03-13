@@ -6,7 +6,7 @@ namespace BusinessData.ofDataAccessLayer.ofCommon.ofHsCode
 {
     public enum KindsofAgreetMent { FTA, CustomsUnion, CommonMarket, EconomicUnion, CompleteEconomicUnion}
     //부
-    [DataContext(typeof(HsDbContext), DbConnectionString.HsDbConnection)]
+    [DataContext(typeof(HsDbContext))]
     [Relation(typeof(HsCodePart), "HsCodePart")]
     public class HsCodePart : Entity
     {
